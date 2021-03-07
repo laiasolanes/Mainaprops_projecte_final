@@ -7,7 +7,7 @@ const useStyles = makeStyles((theme) => ({
     position: 'absolute',
     width: 400,
     backgroundColor: 'white',
-
+    boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3, 4),
     // cada unitat son 8px
     top: '50%',
@@ -55,7 +55,15 @@ function ModalView() {
   return (
     <div className={styles.container}>
       <h1>Hola</h1>
-      <Button className={styles.button} onClick={() => abrirCerrarModal()}>Obrir modal</Button>
+      <Button
+        className={styles.button}
+        variant="contained"
+        disableElevation
+        onClick={() => abrirCerrarModal()}
+      >
+        Obrir modal
+
+      </Button>
       <Modal
         open={modal}
         onClose={abrirCerrarModal}
