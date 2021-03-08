@@ -6,6 +6,21 @@ const userSchema = new Schema({
     age: Number,
     image: String,
   },
+  challenges: [
+    {
+      challenge_start_date: Date,
+      challenge_end_date: Date,
+      challenge_reward: {
+        type: Schema.Types.ObjectId, ref: 'Reward',
+      },
+      challenge_tasks: [
+        {
+          type: Schema.Types.ObjectId, ref: 'Task',
+        },
+      ],
+    },
+
+  ],
 });
 
 module.exports = model('User', userSchema);
