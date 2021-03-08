@@ -7,7 +7,13 @@ function UsersRouter() {
   router
     .route('/')
     .post(usersController.createUser)
-    .get(usersController.getUsers);
+    .get(usersController.getUsers)
+    .put(usersController.updateUser)
+    .delete(usersController.deleteUser);
+
+  router
+    .route('/:userId')
+    .get(usersController.getUserByParam);
 
   return router;
 }
