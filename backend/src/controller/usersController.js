@@ -16,8 +16,8 @@ async function createUser(req, res) {
 
 async function getUsers(req, res) {
   const allUsers = await User
-    .find({})
-    .populate('reward', 'task');
+    .find({});
+    // .populate('reward', 'task');
 
   res.json(allUsers);
 }
