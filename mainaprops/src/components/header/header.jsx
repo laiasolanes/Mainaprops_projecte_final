@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './header.css';
 import AppsIcon from '@material-ui/icons/Apps';
 import PeopleAltRoundedIcon from '@material-ui/icons/PeopleAltRounded';
@@ -11,10 +12,10 @@ export default function Header() {
       <nav className="flex nav">
         <img src="https://firebasestorage.googleapis.com/v0/b/mainaprops.appspot.com/o/logo_reptes.png?alt=media&token=52774db4-c4f5-4f61-9e34-e5461f862e19" alt="Logo Mainaprops" className="logo__nav" />
         <ul className="flex ul__nav">
-          <li><AppsIcon color="action" style={{ fontSize: 35 }} /></li>
-          <li><PeopleAltRoundedIcon color="action" style={{ fontSize: 35 }} /></li>
-          <li><PersonRoundedIcon color="action" style={{ fontSize: 35 }} /></li>
-          <li><ExitToAppRoundedIcon color="action" style={{ fontSize: 35 }} /></li>
+          <Link to="/"><li><AppsIcon color="action" style={{ fontSize: 35 }} /></li></Link>
+          <Link to="/users"><li><PeopleAltRoundedIcon color="action" style={{ fontSize: 35 }} /></li></Link>
+          <Link to="/admin"><li><PersonRoundedIcon color="action" style={{ fontSize: 35 }} /></li></Link>
+          <Link to="/login"><li><ExitToAppRoundedIcon color="action" style={{ fontSize: 35 }} /></li></Link>
         </ul>
       </nav>
     </header>
