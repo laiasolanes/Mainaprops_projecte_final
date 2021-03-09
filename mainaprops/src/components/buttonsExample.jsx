@@ -1,6 +1,6 @@
 import { ThemeProvider, Button } from '@material-ui/core';
 import React from 'react';
-import theme from '../theme';
+import theme from '../styles/theme';
 
 function ButtonsExample() {
   return (

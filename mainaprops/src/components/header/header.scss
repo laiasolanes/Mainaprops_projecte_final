@@ -1,0 +1,28 @@
+@import '../../styles/colors';
+
+
+.header {
+    background: $color_turquoise;
+    position: fixed;
+    width: 100%;
+    padding: 30px 30px 10px 30px;
+    box-shadow: 0px 4px 6px -2px rgba(0, 0, 0, 0.2);
+
+    .nav{
+        justify-content: space-between;
+        align-items: flex-end;
+        
+    }
+    .logo__nav {
+        width: 70px
+    }
+    .ul__nav {
+        list-style: none;
+        
+        li {
+            padding: 0 5px;
+        }
+
+
+    }
+}
