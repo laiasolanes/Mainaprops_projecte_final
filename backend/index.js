@@ -11,6 +11,9 @@ const app = express();
 const port = process.env.PORT;
 const database = process.env.DB;
 
+// IMPORT ROUTES
+const usersRouter = require('./src/router/usersRouter');
+
 // MIDDLEWARES
 app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: true }));
@@ -21,9 +24,7 @@ connect(database,
   { useNewUrlParser: true, useUnifiedTopology: true });
 
 // ROUTES
-app.use('/', (req, res) => {
-  res.send('El servidor està funcionant, ja puc començar a atreballar amb  Mainaprops');
-});
+app.use('/api/users', usersRouter);
 
 // STARTING THE SERVER
 app.listen(port, () => debug(`Server is running in port ${port}`));
