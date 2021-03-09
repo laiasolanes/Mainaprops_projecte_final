@@ -1,17 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-// import App from './App';
-// import ModalView from './components/modalView';
-// import ButtonsExample from './components/buttonsExample';
 import Header from './components/header/header';
+import UsersList from './components/usersList/usersList';
 
 ReactDOM.render(
   <React.StrictMode>
     <Header />
-    {/* <App />
-    <ButtonsExample />
-    <ModalView /> */}
+    <UsersList />
   </React.StrictMode>,
   document.getElementById('root'),
 );
