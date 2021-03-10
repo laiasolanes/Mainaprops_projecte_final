@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import axios from 'axios';
 import actionTypes from './actionTypes';
 
@@ -22,6 +23,28 @@ export function insertUser(newUser) {
     dispatch({
       type: actionTypes.UPDATE_USER,
       newUserData,
+    });
+  };
+}
+
+export function deleteUser(user) {
+  return async function dispatchdeletedUser(dispatch) {
+    const deletedUser = await axios.delete(url, user);
+
+    dispatch({
+      type: actionTypes.DELETE_USER,
+      deletedUser,
+    });
+  };
+}
+
+export function updateUser(updatedUser) {
+  return async function dispatchUpdatedUser(dispatch) {
+    const udatedUserData = await axios.put(url, { user_profile: updatedUser });
+
+    dispatch({
+      type: actionTypes.UPDATE_USER,
+      udatedUserData,
     });
   };
 }
