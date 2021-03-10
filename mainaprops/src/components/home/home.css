@@ -1,0 +1,49 @@
+@import url("https://fonts.googleapis.com/css2?family=Itim&family=Unica+One&family=Montserrat:wght@400;600;800&display=swap");
+.home {
+  text-align: center;
+  padding: 110px 30px 30px 30px;
+}
+
+.home img {
+  display: block;
+  margin: auto;
+}
+
+.home p {
+  margin: 60px;
+}
+
+.home .button--violet {
+  background: #3D2563;
+  border-radius: 50px;
+  width: 100%;
+  padding: 16px;
+  margin: 10px 0;
+  text-transform: none;
+  font-size: 18px;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.home .button--violet:hover {
+  background: #4d2d80;
+}
+
+.home .button--outlined {
+  background: rgba(0, 0, 0, 0);
+  border-radius: 50px;
+  width: 100%;
+  padding: 13px;
+  margin: 10px 0;
+  text-transform: none;
+  border: 3px solid #ffffff;
+  font-size: 18px;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.home .button--outlined:hover {
+  color: #6CC3C6;
+  background: #ffffff;
+}
+/*# sourceMappingURL=home.css.map */

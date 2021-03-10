@@ -1,0 +1,46 @@
+@import '../../styles/colors';
+@import '../../styles/texts';
+
+.login {
+    padding: 150px 30px 30px 30px;
+    text-align: center;
+
+    img {
+        width: 50%;
+        display: block;
+        margin: auto;
+    }
+
+    .app-name {
+        font-family: $text_logo;
+        color: $color_violet;
+        font-size: 40px;
+    }
+
+    p{
+        margin: 0 30px 30px 30px;
+    }
+
+    .button--violet {
+        background: $color_violet;
+        border-radius: 50px;
+        width: 100%;
+        padding:16px;
+        margin: 50px 0;
+        text-transform: none;
+        font-size: 18px;
+        color: #ffffff;
+        font-weight: 600;
+    }
+    .button--violet:hover{
+        background: $color_violet_light;
+       }
+
+    h3 {
+        color: #ffffff;
+        margin: 30px 60px;
+        font-weight: 300;
+        font-family: $text_title;
+        font-size: 24px;
+    }
+}

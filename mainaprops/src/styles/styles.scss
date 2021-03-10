@@ -1,0 +1,44 @@
+@import '../src/styles/texts';
+@import '../src/styles/colors';
+
+*, *:after, *:before{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: $text_main;
+    
+}
+
+body {
+
+    background: rgba(108, 195, 198, 0.5);
+}
+
+#root{
+    background: $color_turquoise;
+
+}
+
+.flex {
+    display: flex;
+}
+
+h2 {
+    font-family: $text_title;
+    font-size: 2.5em;
+    color: #ffffff;
+    font-weight: 300;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+h4 {
+    font-family: $text_main;
+    font-weight: 600;
+    font-size: 18px;
+    letter-spacing: 1px;
+}
+
+a:link, a:visited, a:active {
+    text-decoration:none;
+}

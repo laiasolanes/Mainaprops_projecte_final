@@ -1,0 +1,43 @@
+@import url("https://fonts.googleapis.com/css2?family=Itim&family=Unica+One&family=Montserrat:wght@400;600;800&display=swap");
+*, *:after, *:before {
+  margin: 0px;
+  padding: 0px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: "Montserrat", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+}
+
+body {
+  background: rgba(108, 195, 198, 0.5);
+}
+
+#root {
+  background: #6CC3C6;
+}
+
+.flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+h2 {
+  font-family: "Itim", "Helvetica Neue", sans-serif;
+  font-size: 2.5em;
+  color: #ffffff;
+  font-weight: 300;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+h4 {
+  font-family: "Montserrat", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  letter-spacing: 1px;
+}
+
+a:link, a:visited, a:active {
+  text-decoration: none;
+}
+/*# sourceMappingURL=index.css.map */

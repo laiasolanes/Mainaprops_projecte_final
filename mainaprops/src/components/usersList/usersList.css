@@ -1,0 +1,51 @@
+@import url("https://fonts.googleapis.com/css2?family=Itim&family=Unica+One&family=Montserrat:wght@400;600;800&display=swap");
+.users-list {
+  padding: 110px 30px 30px 30px;
+}
+
+.users-list .list__row {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.users-list .list__row .list__avatar {
+  width: 25%;
+}
+
+.users-list .list__row .list__avatar img {
+  width: 100%;
+}
+
+.users-list .list__row .list__name {
+  width: 50%;
+  padding: 0 0 0 5%;
+}
+
+.users-list .list__row .list__icons {
+  width: 25%;
+}
+
+.users-list .list__row .list__icons div {
+  width: 50%;
+  text-align: right;
+}
+
+.users-list .button--outlined {
+  background: rgba(0, 0, 0, 0);
+  border-radius: 50px;
+  width: 100%;
+  padding: 16px;
+  margin: 20px 0;
+  text-transform: none;
+  border: 3px solid #ffffff;
+  font-size: 18px;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.users-list .button--outlined:hover {
+  color: #6CC3C6;
+  background: #ffffff;
+}
+/*# sourceMappingURL=usersList.css.map */

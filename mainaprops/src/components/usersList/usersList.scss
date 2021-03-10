@@ -1,0 +1,53 @@
+@import '../../styles/colors';
+@import '../../styles/texts';
+
+.users-list {
+   padding: 110px 30px 30px 30px;
+
+
+   .list__row{
+
+    align-items: center;
+
+       .list__avatar {
+           width: 25%;
+           
+           img{
+               width: 100%
+           }
+       }
+   
+       .list__name {
+           width: 50%;
+           padding:0 0 0 5%;
+       }
+   
+       .list__icons {
+           width: 25%;
+   
+           div {
+               width: 50%;
+               text-align: right;
+           }
+   
+       }
+   }
+
+   .button--outlined {
+       background: rgba(0,0,0,0,);
+       border-radius: 50px;
+       width: 100%;
+       padding:16px;
+       margin: 20px 0;
+       text-transform: none;
+       border: 3px solid #ffffff;
+       font-size: 18px;
+       color: #ffffff;
+       font-weight: 600;
+   }
+
+   .button--outlined:hover{
+    color: $color_turquoise;
+    background: #ffffff;
+   }
+}
