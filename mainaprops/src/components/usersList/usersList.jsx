@@ -80,6 +80,7 @@ function UsersList({ users, actions }) {
   const [userNameInput, setUserNameInput] = useState('');
   const [userAgeInput, setUserAgeInput] = useState('');
   const [userImageInput, setUserImageInput] = useState('');
+  console.log(userSelected);
 
   const openCloseModalInsert = () => {
     setModalInsert(!modalInsert);
@@ -135,6 +136,23 @@ function UsersList({ users, actions }) {
     openCloseModalEdit();
   }
 
+  function setSrc(src) {
+    const element = document.getElementById('avatarInput');
+    element.value = src;
+  }
+
+  const avatarCohet = 'https://firebasestorage.googleapis.com/v0/b/mainaprops.appspot.com/o/avatar_cohet.png?alt=media&token=f0c34668-0142-47a0-8fbe-d889e229509a';
+
+  const avatarBici = 'https://firebasestorage.googleapis.com/v0/b/mainaprops.appspot.com/o/avatar_bici.png?alt=media&token=d7a1b930-c413-49b5-b43c-004811d800b5';
+
+  const avatarDiana = 'https://firebasestorage.googleapis.com/v0/b/mainaprops.appspot.com/o/avatar_diana.png?alt=media&token=b8ac4fb6-678c-4f2f-8d04-20e8d8131741';
+
+  const avatarNena = 'https://firebasestorage.googleapis.com/v0/b/mainaprops.appspot.com/o/avatar_nena.png?alt=media&token=b7c2b1dd-06c5-4da8-8064-377297d98d07';
+
+  const avatarNen = 'https://firebasestorage.googleapis.com/v0/b/mainaprops.appspot.com/o/avatar_nen.png?alt=media&token=226bec1e-77a8-4e8e-a5cd-e54102c85326';
+
+  const avatarUnicorn = 'https://firebasestorage.googleapis.com/v0/b/mainaprops.appspot.com/o/avatar_unicorn.png?alt=media&token=0eae72d9-6e07-4a11-a149-1f0f1eb780d9';
+
   const bodyInsertar = (
     <div className={styles.modal}>
       <h2>Alta usuari</h2>
@@ -157,20 +175,18 @@ function UsersList({ users, actions }) {
         className={styles.inputMaterial}
         label="Avatar"
         onChange={handelChange}
+        id="avatarInput"
       />
 
       <section className="avatar__section">
         <div>
-          <img src="https://firebasestorage.googleapis.com/v0/b/mainaprops.appspot.com/o/avatar_cohet.png?alt=media&token=f0c34668-0142-47a0-8fbe-d889e229509a" alt="Cohet" />
-          <img src="https://firebasestorage.googleapis.com/v0/b/mainaprops.appspot.com/o/avatar_bici.png?alt=media&token=d7a1b930-c413-49b5-b43c-004811d800b5" alt="Bici" />
-          <img src="https://firebasestorage.googleapis.com/v0/b/mainaprops.appspot.com/o/avatar_diana.png?alt=media&token=b8ac4fb6-678c-4f2f-8d04-20e8d8131741" alt="Diana" />
-        </div>
-        <div>
-          <div>
-            <img src="https://firebasestorage.googleapis.com/v0/b/mainaprops.appspot.com/o/avatar_nena.png?alt=media&token=b7c2b1dd-06c5-4da8-8064-377297d98d07" alt="Nena" />
-            <img src="https://firebasestorage.googleapis.com/v0/b/mainaprops.appspot.com/o/avatar_nen.png?alt=media&token=226bec1e-77a8-4e8e-a5cd-e54102c85326" alt="Nen" />
-            <img src="https://firebasestorage.googleapis.com/v0/b/mainaprops.appspot.com/o/avatar_unicorn.png?alt=media&token=0eae72d9-6e07-4a11-a149-1f0f1eb780d9" alt="Unicorn" />
-          </div>
+          <Button onClick={() => setSrc(avatarCohet)} className="avatar__button" id="primer" />
+          <Button onClick={() => setSrc(avatarBici)} className="avatar__button" />
+          <Button onClick={() => setSrc(avatarDiana)} className="avatar__button" />
+
+          <Button onClick={() => setSrc(avatarNena)} className="avatar__button" />
+          <Button onClick={() => setSrc(avatarNen)} className="avatar__button" />
+          <Button onClick={() => setSrc(avatarUnicorn)} className="avatar__button" />
         </div>
       </section>
 

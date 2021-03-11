@@ -55,16 +55,54 @@
   background: #ffffff;
 }
 
-.avatar__section img {
-  width: 31%;
-  margin: 1%;
-  opacity: 0.6;
-  border: 3px solid rgba(255, 255, 255, 0);
-  border-radius: 5px;
-  background-color: rgba(255, 255, 255, 0.2);
+.avatar__section button:nth-child(1) {
+  background: url("https://firebasestorage.googleapis.com/v0/b/mainaprops.appspot.com/o/avatar_cohet.png?alt=media&token=f0c34668-0142-47a0-8fbe-d889e229509a");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-.avatar__section img:hover {
+.avatar__section button:nth-child(2) {
+  background: url("https://firebasestorage.googleapis.com/v0/b/mainaprops.appspot.com/o/avatar_bici.png?alt=media&token=d7a1b930-c413-49b5-b43c-004811d800b5");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.avatar__section button:nth-child(3) {
+  background: url("https://firebasestorage.googleapis.com/v0/b/mainaprops.appspot.com/o/avatar_diana.png?alt=media&token=b8ac4fb6-678c-4f2f-8d04-20e8d8131741");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.avatar__section button:nth-child(4) {
+  background: url("https://firebasestorage.googleapis.com/v0/b/mainaprops.appspot.com/o/avatar_nena.png?alt=media&token=b7c2b1dd-06c5-4da8-8064-377297d98d07");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.avatar__section button:nth-child(5) {
+  background: url("https://firebasestorage.googleapis.com/v0/b/mainaprops.appspot.com/o/avatar_nen.png?alt=media&token=226bec1e-77a8-4e8e-a5cd-e54102c85326");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.avatar__section button:nth-child(6) {
+  background: url("https://firebasestorage.googleapis.com/v0/b/mainaprops.appspot.com/o/avatar_unicorn.png?alt=media&token=0eae72d9-6e07-4a11-a149-1f0f1eb780d9");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.avatar__section .avatar__button {
+  width: 150px;
+  height: 150px;
+  margin: 2%;
+  opacity: 0.6;
+  border: 3px solid rgba(255, 255, 255, 0);
+  border-radius: 15px;
+  background-color: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+}
+
+.avatar__section .avatar__button:focus {
   opacity: 1;
   border: 3px solid #ffffff;
 }
