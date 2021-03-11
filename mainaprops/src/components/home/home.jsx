@@ -26,7 +26,7 @@ function Home({ users, actions }) {
       <Button
         variant="contained"
         className="button--outlined"
-        href="/"
+        href="/users"
       >
         + usuaris
 

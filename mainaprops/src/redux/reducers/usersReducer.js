@@ -8,13 +8,13 @@ export default function usersReducer(state = [], action) {
       return action.dataUsers;
 
     case actionTypes.INSERT_USER:
-      return action.newUserData;
+      return [...state, action.newUserData];
 
     case actionTypes.UPDATE_USER:
-      return { ...state, ...action.udatedUserData };
+      return [...state, action.udatedUserData];
 
     case actionTypes.DELETE_USER:
-      return action.deletedUser;
+      return action.payload;
 
     default:
       return state;

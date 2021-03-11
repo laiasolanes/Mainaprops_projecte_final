@@ -108,11 +108,17 @@ function UsersList({ users, actions }) {
 
   useEffect(() => {
     actions.loadUsers();
+    console.log(users);
   }, [users.length]);
 
   function clickAddUser() {
     actions.insertUser(userSelected);
     openCloseModalInsert();
+  }
+
+  function clickDelete() {
+    actions.deleteUser(userSelected);
+    openCloseModalDelete();
   }
 
   const bodyInsertar = (
@@ -169,7 +175,7 @@ function UsersList({ users, actions }) {
 
       <Button
         className={styles.button_violet}
-        onClick={() => actions.deleteUser()}
+        onClick={() => clickDelete()}
       >
         Eliminar
       </Button>

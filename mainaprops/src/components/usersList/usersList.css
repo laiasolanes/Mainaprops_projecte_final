@@ -29,6 +29,12 @@
 .users-list .list__row .list__icons div {
   width: 50%;
   text-align: right;
+  cursor: pointer;
+  opacity: 0.6;
+}
+
+.users-list .list__row .list__icons div:hover {
+  opacity: 1;
 }
 
 .users-list .button--outlined {
