@@ -31,27 +31,31 @@ export function insertUser(newUser) {
 
 export function deleteUser(user) {
   return async function dispatchdeletedUser(dispatch) {
-    const newUserData = await axios.delete(url, {
-
+    const confirmMessage = await axios.delete(url, {
       data: {
         user,
       },
     });
-    console.log('USEEEER', user._id);
-    dispatch({
-      type: actionTypes.DELETE_USER,
-      payload: newUserData.data,
-    });
+
+    if (confirmMessage.data === 'Deleted Ok') {
+      dispatch({
+        type: actionTypes.DELETE_USER,
+        payload: user._id,
+      });
+    }
   };
 }
 
-export function updateUser(updatedUser) {
+export function updateUser(nameInput, ageInput, imageInput, userId) {
   return async function dispatchUpdatedUser(dispatch) {
-    const udatedUserData = await axios.put(url, { user_profile: updatedUser });
+    const updatedUserData = await axios.put(url,
+      { user_profile: { name: nameInput, age: ageInput, image: imageInput }, _id: userId });
+    debugger;
+    console.log(updatedUserData.data);
 
     dispatch({
       type: actionTypes.UPDATE_USER,
-      udatedUserData,
+      payload: updatedUserData.data,
     });
   };
 }

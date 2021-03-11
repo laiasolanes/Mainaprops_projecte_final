@@ -10,7 +10,9 @@ import EditRoundedIcon from '@material-ui/icons/EditRounded';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import { Modal, TextField } from '@material-ui/core';
-import { loadUsers, insertUser, deleteUser } from '../../redux/actions/actionCreators';
+import {
+  loadUsers, insertUser, deleteUser, updateUser,
+} from '../../redux/actions/actionCreators';
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -77,7 +79,9 @@ function UsersList({ users, actions }) {
     image: '',
   });
 
-  // const [nameChange, setNameChange] = useState('');
+  const [userNameInput, setUserNameInput] = useState('');
+  const [userAgeInput, setUserAgeInput] = useState('');
+  const [userImageInput, setUserImageInput] = useState('');
 
   const openCloseModalInsert = () => {
     setModalInsert(!modalInsert);
@@ -92,13 +96,13 @@ function UsersList({ users, actions }) {
   };
 
   const selectUser = (user, type) => {
-    console.log(user);
     setUserSelected(user);
+
     (type === 'Edit') ? openCloseModalEdit() : openCloseModalDelete();
   };
 
-  const handelChange = (event) => {
-    const { name, value } = event.target;
+  const handelChange = (e) => {
+    const { name, value } = e.target;
     setUserSelected((prevState) => ({
       ...prevState,
       [name]: value,
@@ -107,9 +111,16 @@ function UsersList({ users, actions }) {
   };
 
   useEffect(() => {
-    actions.loadUsers();
-    console.log(users);
-  }, [users.length]);
+    if (!users || !users.length) {
+      actions.loadUsers();
+    }
+  }, [users]);
+
+  useEffect(() => {
+    setUserNameInput(userSelected?.user_profile?.name);
+    setUserAgeInput(userSelected?.user_profile?.age);
+    setUserImageInput(userSelected?.user_profile?.image);
+  }, [userSelected]);
 
   function clickAddUser() {
     actions.insertUser(userSelected);
@@ -121,12 +132,36 @@ function UsersList({ users, actions }) {
     openCloseModalDelete();
   }
 
+  function clickUpdate() {
+    actions.updateUser(
+      userNameInput, userAgeInput, userImageInput, userSelected._id,
+    );
+    console.log(userSelected);
+    openCloseModalEdit();
+  }
+
   const bodyInsertar = (
     <div className={styles.modal}>
       <h2>Alta usuari</h2>
-      <TextField name="name" className={styles.inputMaterial} label="Nom" onChange={handelChange} />
-      <TextField name="age" className={styles.inputMaterial} label="Edat" onChange={handelChange} />
-      <TextField name="image" className={styles.inputMaterial} label="Avatar" onChange={handelChange} />
+      <TextField
+        name="name"
+        className={styles.inputMaterial}
+        label="Nom"
+        onChange={handelChange}
+      />
+      <TextField
+        name="age"
+        type="number"
+        className={styles.inputMaterial}
+        label="Edat"
+        onChange={handelChange}
+      />
+      <TextField
+        name="image"
+        className={styles.inputMaterial}
+        label="Avatar"
+        onChange={handelChange}
+      />
 
       <Button
         className={styles.button_violet}
@@ -140,17 +175,47 @@ function UsersList({ users, actions }) {
       <Button className={styles.button_outlined} onClick={openCloseModalInsert}>Cancelar</Button>
     </div>
   );
+  console.log(userNameInput);
 
   const bodyEdit = (
     <div className={styles.modal}>
-      <h2>Editar usuari</h2>
-      <TextField name="name" className={styles.inputMaterial} label="Nom" onChange={handelChange} value={userSelected.user_profile && userSelected.user_profile.name} />
-      <TextField name="age" className={styles.inputMaterial} label="Edat" onChange={handelChange} value={userSelected.user_profile && userSelected.user_profile.age} />
-      <TextField name="image" className={styles.inputMaterial} label="Avatar" onChange={handelChange} value={userSelected.user_profile && userSelected.user_profile.image} />
+      <h2>
+        Editar usuari
+        <br />
+        {userSelected.user_profile && userSelected.user_profile.name}
+        <br />
+        <img src={userSelected.user_profile && userSelected.user_profile.image} alt="Avatar" />
+
+      </h2>
+      <TextField
+        name="name"
+        className={styles.inputMaterial}
+        label="Nom"
+        onChange={(event) => setUserNameInput(event.target.value)}
+        value={userNameInput}
+        placeholder={userSelected.user_profile && userSelected.user_profile.name}
+      />
+      <TextField
+        name="age"
+        className={styles.inputMaterial}
+        label="Edat"
+        type="number"
+        onChange={(event) => setUserAgeInput(event.target.value)}
+        value={userAgeInput}
+        placeholder={userSelected.user_profile && userSelected.user_profile.age}
+      />
+      <TextField
+        name="image"
+        className={styles.inputMaterial}
+        label="Avatar"
+        onChange={(event) => setUserImageInput(event.target.value)}
+        value={userImageInput}
+        placeholder={userSelected.user_profile && userSelected.user_profile.image}
+      />
 
       <Button
         className={styles.button_violet}
-        onClick={(openCloseModalEdit)}
+        onClick={() => clickUpdate()}
       >
         Modificar
       </Button>
@@ -170,7 +235,6 @@ function UsersList({ users, actions }) {
         ?
         <br />
         <img src={userSelected.user_profile && userSelected.user_profile.image} alt="Avatar" />
-
       </h2>
 
       <Button
@@ -248,6 +312,7 @@ UsersList.propTypes = {
     loadUsers: PropTypes.func,
     insertUser: PropTypes.func,
     deleteUser: PropTypes.func,
+    updateUser: PropTypes.func,
   }).isRequired,
 };
 function mapStateToProps(state) {
@@ -255,6 +320,10 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return { actions: bindActionCreators({ loadUsers, insertUser, deleteUser }, dispatch) };
+  return {
+    actions: bindActionCreators({
+      loadUsers, insertUser, deleteUser, updateUser,
+    }, dispatch),
+  };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(UsersList);
