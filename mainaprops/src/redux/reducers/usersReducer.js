@@ -3,18 +3,22 @@ import actionTypes from '../actions/actionTypes';
 
 export default function usersReducer(state = [], action) {
   debugger;
+  let newState;
+
   switch (action.type) {
     case actionTypes.LOAD_USERS:
       return action.dataUsers;
 
     case actionTypes.INSERT_USER:
-      return action.newUserData;
+      return [...state, action.newUserData];
 
     case actionTypes.UPDATE_USER:
-      return { ...state, ...action.udatedUserData };
+      newState = state.filter((user) => user._id !== action.payload._id);
+      return [...newState, action.payload];
 
     case actionTypes.DELETE_USER:
-      return action.deletedUser;
+
+      return state.filter((user) => user._id !== action.payload);
 
     default:
       return state;

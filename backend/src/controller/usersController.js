@@ -24,11 +24,12 @@ async function getUsers(req, res) {
 
 async function updateUser(req, res) {
   const id = req.body._id;
-
   try {
     const updatedUser = await User
       .findByIdAndUpdate(id, req.body, { new: true });
     res.json(updatedUser);
+
+    console.log(updatedUser);
   } catch (error) {
     res.status(500);
     res.send('There was an error updating');
@@ -36,10 +37,15 @@ async function updateUser(req, res) {
 }
 
 async function deleteUser(req, res) {
-  const id = req.body._id;
+  const id = req.body.user._id;
 
-  const deletedUser = await User.findByIdAndDelete(id);
-  res.json(deletedUser);
+  try {
+    await User.findByIdAndDelete(id);
+    res.send('Deleted Ok');
+  } catch (error) {
+    res.status(500);
+    res.send('There was an error deleting');
+  }
 }
 
 async function getUserByParam(req, res) {
