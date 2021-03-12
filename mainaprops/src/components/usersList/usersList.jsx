@@ -178,8 +178,8 @@ function UsersList({ users, actions }) {
         id="avatarInput"
       />
 
-      <section className="avatar__section">
-        <div>
+      <section className="flex avatar__section">
+        <div className="flex avatar__row">
           <Button onClick={() => setSrc('avatarInput', avatarCohet)} className="avatar__button" id="primer" />
           <Button onClick={() => setSrc('avatarInput', avatarBici)} className="avatar__button" />
           <Button onClick={() => setSrc('avatarInput', avatarDiana)} className="avatar__button" />
