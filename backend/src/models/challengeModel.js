@@ -1,12 +1,13 @@
 const { model, Schema } = require('mongoose');
 
 const challengeSchema = new Schema({
-  start_date: Date,
+  user_id: String,
   end_date: Date,
-  challenge_reward: {
+  completed: false,
+  reward: {
     type: Schema.Types.ObjectId, ref: 'Reward',
   },
-  challenge_tasks: [
+  tasks: [
     {
       type: Schema.Types.ObjectId, ref: 'Task',
     },
