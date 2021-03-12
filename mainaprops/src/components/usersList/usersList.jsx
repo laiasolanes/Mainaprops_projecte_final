@@ -136,8 +136,8 @@ function UsersList({ users, actions }) {
     openCloseModalEdit();
   }
 
-  function setSrc(src) {
-    const element = document.getElementById('avatarInput');
+  function setSrc(elementId, src) {
+    const element = document.getElementById(elementId);
     element.value = src;
   }
 
@@ -180,13 +180,13 @@ function UsersList({ users, actions }) {
 
       <section className="avatar__section">
         <div>
-          <Button onClick={() => setSrc(avatarCohet)} className="avatar__button" id="primer" />
-          <Button onClick={() => setSrc(avatarBici)} className="avatar__button" />
-          <Button onClick={() => setSrc(avatarDiana)} className="avatar__button" />
+          <Button onClick={() => setSrc('avatarInput', avatarCohet)} className="avatar__button" id="primer" />
+          <Button onClick={() => setSrc('avatarInput', avatarBici)} className="avatar__button" />
+          <Button onClick={() => setSrc('avatarInput', avatarDiana)} className="avatar__button" />
 
-          <Button onClick={() => setSrc(avatarNena)} className="avatar__button" />
-          <Button onClick={() => setSrc(avatarNen)} className="avatar__button" />
-          <Button onClick={() => setSrc(avatarUnicorn)} className="avatar__button" />
+          <Button onClick={() => setSrc('avatarInput', avatarNena)} className="avatar__button" />
+          <Button onClick={() => setSrc('avatarInput', avatarNen)} className="avatar__button" />
+          <Button onClick={() => setSrc('avatarInput', avatarUnicorn)} className="avatar__button" />
         </div>
       </section>
 
@@ -237,7 +237,20 @@ function UsersList({ users, actions }) {
         onChange={(event) => setUserImageInput(event.target.value)}
         value={userImageInput}
         placeholder={userSelected.user_profile && userSelected.user_profile.image}
+        id="avatarInputEdit"
       />
+
+      <section className="flex avatar__section">
+        <div className="flex avatar__row">
+          <Button onClick={() => setSrc('avatarInputEdit', avatarCohet)} className="avatar__button" />
+          <Button onClick={() => setSrc('avatarInputEdit', avatarBici)} className="avatar__button" />
+          <Button onClick={() => setSrc('avatarInputEdit', avatarDiana)} className="avatar__button" />
+
+          <Button onClick={() => setSrc('avatarInputEdit', avatarNena)} className="avatar__button" />
+          <Button onClick={() => setSrc('avatarInputEdit', avatarNen)} className="avatar__button" />
+          <Button onClick={() => setSrc('avatarInputEdit', avatarUnicorn)} className="avatar__button" />
+        </div>
+      </section>
 
       <Button
         className={styles.button_violet}

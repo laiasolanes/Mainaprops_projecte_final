@@ -57,6 +57,15 @@
 
 .avatar__section {
   padding: 20px 0;
+  margin: auto;
+}
+
+.avatar__section .avatar__row {
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .avatar__section button:nth-child(1) {
