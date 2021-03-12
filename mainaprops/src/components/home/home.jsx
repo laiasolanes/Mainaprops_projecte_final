@@ -20,7 +20,16 @@ export function HomeComponent({ users, actions }) {
       <img src="https://firebasestorage.googleapis.com/v0/b/mainaprops.appspot.com/o/avatar_diana.png?alt=media&token=b8ac4fb6-678c-4f2f-8d04-20e8d8131741" alt="Diana" />
 
       {
-          users && users.map((user) => <Button variant="contained" className="button--violet" key={user.user_profile.name}>{user.user_profile.name}</Button>)
+          users && users.map((user) => (
+            <Button
+              variant="contained"
+              className="button--violet"
+              key={user.user_profile.name}
+              href={`/users/${user._id}`}
+            >
+              {user.user_profile.name}
+            </Button>
+          ))
       }
 
       <Button

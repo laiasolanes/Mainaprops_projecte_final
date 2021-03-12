@@ -6,17 +6,14 @@
     padding: 0px;
     box-sizing: border-box;
     font-family: $text_main;
-    
 }
 
 body {
-
     background: rgba(108, 195, 198, 0.5);
 }
 
 #root{
     background: $color_turquoise;
-
 }
 
 .flex {
@@ -32,6 +29,15 @@ h2 {
     letter-spacing: 1px;
 }
 
+h3 {
+    font-family: $text_title;
+    font-size: 2.5em;
+    font-weight: 300;
+    text-align: center;
+    letter-spacing: 1px; 
+    line-height: 1em;
+}
+
 h4 {
     font-family: $text_main;
     font-weight: 600;
@@ -42,3 +48,9 @@ h4 {
 a:link, a:visited, a:active {
     text-decoration:none;
 }
+
+p {
+    color: #706f6f;
+    font-weight: 300;
+}
+

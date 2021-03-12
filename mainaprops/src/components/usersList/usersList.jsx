@@ -290,7 +290,7 @@ function UsersList({ users, actions }) {
   );
 
   return (
-    <section className="users-list">
+    <section className="users__list">
       <h2>Fills</h2>
 
       {

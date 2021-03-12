@@ -1,0 +1,120 @@
+@import '../../styles/colors';
+@import '../../styles/texts';
+
+.user__detail {
+    padding: 110px 30px 30px 30px;
+
+    .user__header {
+        background: #ffffff;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 20px;
+        padding: 50px;
+        text-align: center;
+
+        h3 {
+            color: $color_violet;
+        }
+
+        p {
+            margin-top: 20px;
+        }
+
+        img {
+            position: absolute;
+            width: 100px;
+            top: 120px;
+            left: 40px;
+        }
+
+        .button--violet {
+            background: $color_violet;
+            border-radius: 50px;
+            width: 100%;
+            padding:10px;
+            margin: 10px 0;
+            text-transform: none;
+            color: #ffffff;
+            font-weight: 600;
+        }
+        .button--violet:hover{
+            background: $color_violet_light;
+        }
+
+        .challenges__resume {
+            justify-content: space-between;
+            padding: 20px 0;
+            .resume__detail{
+                border-radius: 10px;
+                padding: 10px 0;
+                width: 100px;
+                cursor: pointer;
+
+                span {
+                    font-weight: 900;
+                    font-size: 1.2em;
+                }
+            }
+
+            .resume__detail:hover {
+                box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+                transform: translateY(-3px);
+            }
+
+        }
+    }
+
+    .user__challenge {
+        margin-top: 20px;
+        background: $color_violet;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 20px;
+        padding: 50px;
+        text-align: center;
+        position: relative;
+        
+            img {
+                position: absolute;
+                width: 100px;
+                top: 100px;
+                left: 10px;
+            }
+        
+            h3 {
+                color: #ffffff;
+            }
+        
+            .challenge__resume {
+                border-radius: 10px;
+                padding: 10px 0;
+                width: 100px;
+                margin: 20px auto;
+                color:  #e2e2e2;
+                cursor: pointer;
+        
+                span {
+                    font-weight: 900;
+                    font-size: 1.2em;
+                }
+            }
+
+            .challenge__resume:hover {
+                box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
+                transform: translateY(-3px);
+            }
+
+            .button--turquoise {
+                background: $color_turquoise;
+                border-radius: 50px;
+                width: 100%;
+                padding:10px;
+                margin: 10px 0;
+                text-transform: none;
+                color: $color_violet;
+                font-weight: 600;
+            }
+            .button--turquoise:hover{
+                background: $color_turquoise_dark;
+            }
+    }
+
+}
