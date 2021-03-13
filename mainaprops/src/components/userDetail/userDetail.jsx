@@ -4,13 +4,19 @@ import { makeStyles } from '@material-ui/core/styles';
 import './userDetail.css';
 import userData from '../../constants/usersData';
 
-// console.log(userData);
-
 const pageURL = window.location.href;
 const idUser = pageURL.substr(pageURL.lastIndexOf('/') + 1);
 
-const userDetail = userData.filter((element) => element._id === idUser);
-console.log(userDetail[0]?.user_profile.challenges);
+const userProfile = userData.filter((element) => element._id === idUser);
+
+const challengesUser = userProfile[0]?.user_profile?.challenges;
+
+const challengesCompleted = challengesUser.filter((challenge) => challenge.completed === true);
+const challengesActives = challengesUser.filter((challenge) => challenge.completed === false);
+console.log(challengesActives.length);
+
+// const challengesActives = () => challengesUser.length - challengesCompleted.length;
+// console.log(challengesActives);
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -71,7 +77,7 @@ export default function UserDetailComponent() {
         <h3>
           Hola
           <br />
-          {userDetail[0]?.user_profile.name}
+          {userProfile[0]?.user_profile.name}
         </h3>
 
         <p>Estàs apunt d’aconseguir els teus propòsits</p>
@@ -79,13 +85,13 @@ export default function UserDetailComponent() {
         <div className="flex challenges__resume">
 
           <div className="resume__detail">
-            <span>1</span>
+            <span>{challengesCompleted.length}</span>
             <br />
             reptes completats
           </div>
 
           <div className="resume__detail">
-            <span>2</span>
+            <span>{challengesActives.length}</span>
             <br />
             reptes actius
           </div>
@@ -100,28 +106,32 @@ export default function UserDetailComponent() {
         </Button>
       </article>
 
-      <article className="user__challenge">
+      {
+          challengesActives.map((challenge) => (
+            <article className="user__challenge">
 
-        <img src="https://firebasestorage.googleapis.com/v0/b/mainaprops.appspot.com/o/reward_escapada.png?alt=media&token=3a5ab181-d941-48e2-99a2-d8537e83c3e2" alt="Recompensa" />
+              <img src={challenge.reward.image} alt="Recompensa" />
 
-        <h3>
-          Espectacle en familia
-        </h3>
+              <h3>
+                {challenge.reward.name}
+              </h3>
 
-        <div className="challenge__resume">
-          <span>5</span>
-          <br />
-          tasques pendents
-        </div>
+              <div className="challenge__resume">
+                <span>{challenge.tasks.length}</span>
+                <br />
+                tasques pendents
+              </div>
 
-        <Button
-          variant="contained"
-          className="button--turquoise"
-          onClick={openCloseModalChallenge}
-        >
-          Veure repte
-        </Button>
-      </article>
+              <Button
+                variant="contained"
+                className="button--turquoise"
+                onClick={openCloseModalChallenge}
+              >
+                Veure repte
+              </Button>
+            </article>
+          ))
+      }
 
       <Modal
         open={modalChallenge}
