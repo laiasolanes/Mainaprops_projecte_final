@@ -23,7 +23,7 @@ export function HomeComponent({ users, actions }) {
           users && users.map((user) => (
             <Button
               variant="contained"
-              className="button--violet"
+              className="button--violet-big"
               key={user.user_profile.name}
               href={`/users/${user._id}`}
             >
@@ -34,7 +34,7 @@ export function HomeComponent({ users, actions }) {
 
       <Button
         variant="contained"
-        className="button--outlined"
+        className="button--outlined-big"
         href="/users"
       >
         + usuaris

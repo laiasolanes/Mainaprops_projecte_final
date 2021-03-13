@@ -54,3 +54,24 @@ p {
     font-weight: 300;
 }
 
+@mixin buttonBig{
+    border-radius: 50px;
+    width: 100%;
+    padding:16px;
+    margin: 10px 0;
+    text-transform: none;
+    font-size: 18px;
+    font-weight: 600;
+}
+@mixin buttonSmall{
+    border-radius: 50px;
+    width: 100%;
+    padding:10px;
+    margin: 10px 0;
+    text-transform: none;
+    font-weight: 600;
+}
+
+
+
+

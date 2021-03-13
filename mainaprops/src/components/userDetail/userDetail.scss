@@ -1,5 +1,6 @@
 @import '../../styles/colors';
 @import '../../styles/texts';
+@import '../../styles/styles.scss';
 
 .user__detail {
     padding: 110px 30px 30px 30px;
@@ -26,17 +27,14 @@
             left: 40px;
         }
 
-        .button--violet {
+        .button--violet-small {
+            @include buttonSmall;
             background: $color_violet;
-            border-radius: 50px;
-            width: 100%;
-            padding:10px;
-            margin: 10px 0;
             text-transform: none;
             color: #ffffff;
-            font-weight: 600;
+
         }
-        .button--violet:hover{
+        .button--violet-small:hover{
             background: $color_violet_light;
         }
 
@@ -107,17 +105,12 @@
                 transform: translateY(-3px);
             }
 
-            .button--turquoise {
+            .button--turquoise-small {
+                @include buttonSmall;
                 background: $color_turquoise;
-                border-radius: 50px;
-                width: 100%;
-                padding:10px;
-                margin: 10px 0;
-                text-transform: none;
                 color: $color_violet;
-                font-weight: 600;
             }
-            .button--turquoise:hover{
+            .button--turquoise-small:hover{
                 background: $color_turquoise_dark;
             }
     }

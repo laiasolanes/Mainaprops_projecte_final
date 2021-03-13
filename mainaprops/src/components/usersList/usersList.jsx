@@ -21,12 +21,13 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: '#6CC3C6',
     border: '3px solid #ffffff',
     color: '#ffffff',
-    borderRadius: '10px',
+    borderRadius: '50px',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(8, 4, 8, 4),
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
+    outlineStyle: 'none',
   },
   textfield: {
     width: '100%',
@@ -318,7 +319,7 @@ function UsersList({ users, actions }) {
           ))
       }
 
-      <Button variant="contained" className="button--outlined" onClick={openCloseModalInsert}>+ usuaris</Button>
+      <Button variant="contained" className="button--outlined-big" onClick={openCloseModalInsert}>+ usuaris</Button>
 
       <Modal
         open={modalInsert}

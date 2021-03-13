@@ -11,9 +11,9 @@ const userProfile = userData.filter((element) => element._id === idUser);
 
 const challengesUser = userProfile[0]?.user_profile?.challenges;
 
-const challengesCompleted = challengesUser.filter((challenge) => challenge.completed === true);
-const challengesActives = challengesUser.filter((challenge) => challenge.completed === false);
-console.log(challengesActives.length);
+const challengesCompleted = challengesUser?.filter((challenge) => challenge.completed === true);
+const challengesActives = challengesUser?.filter((challenge) => challenge.completed === false);
+console.log(challengesActives?.length);
 
 // const challengesActives = () => challengesUser.length - challengesCompleted.length;
 // console.log(challengesActives);
@@ -22,15 +22,16 @@ const useStyles = makeStyles((theme) => ({
   modal: {
     position: 'absolute',
     width: '98%',
-    backgroundColor: '#6CC3C6',
+    backgroundColor: '#ffffff',
     border: '3px solid #ffffff',
-    color: '#ffffff',
-    borderRadius: '10px',
+    color: '#3D2563',
+    borderRadius: '20px',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(8, 4, 8, 4),
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
+    outlineStyle: 'none',
   },
 
   button_violet: {
@@ -100,7 +101,7 @@ export default function UserDetailComponent() {
 
         <Button
           variant="contained"
-          className="button--violet"
+          className="button--violet-small"
         >
           Crear repte
         </Button>
@@ -117,14 +118,14 @@ export default function UserDetailComponent() {
               </h3>
 
               <div className="challenge__resume">
-                <span>{challenge.tasks.length}</span>
+                <span>{challenge.tasks.times}</span>
                 <br />
                 tasques pendents
               </div>
 
               <Button
                 variant="contained"
-                className="button--turquoise"
+                className="button--turquoise-small"
                 onClick={openCloseModalChallenge}
               >
                 Veure repte
