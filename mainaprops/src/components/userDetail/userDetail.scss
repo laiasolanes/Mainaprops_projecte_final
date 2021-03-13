@@ -116,3 +116,27 @@
     }
 
 }
+
+.reward__image {
+    position: absolute;
+    width: 100px;
+    top: 70px;
+    left: 20px;
+    z-index: 0;
+}
+
+.reward__title {
+    position: relative;
+    z-index: 10;
+}
+
+.reward__text {
+    margin: 30px 0;
+}
+
+.check__tasks {
+    margin-bottom: 50px;
+    img {
+        cursor: pointer;
+    }
+}

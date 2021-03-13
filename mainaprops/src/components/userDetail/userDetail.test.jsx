@@ -2,12 +2,12 @@ import React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
 import { act } from 'react-dom/test-utils';
 import { BrowserRouter } from 'react-router-dom';
-import { HomeComponent } from './home';
+import { UserDetailComponent } from './userDetail';
 
 jest.mock('../../redux/actions/actionCreators');
 
-describe('Given a component Home', () => {
-  let container = null;
+describe('Given a component UserDetail', () => {
+    let container = null;
 
   beforeEach(() => {
     container = document.createElement('main');
@@ -20,9 +20,9 @@ describe('Given a component Home', () => {
     container = null;
   });
 
-  describe('When HomeComponent is rendered', () => {
-    test('Then it should display an h2 with text Hola Familia', () => {
-      const users = [{ user_profile: { name: '' } }];
+  describe('When UserDetail is rendered', () => {
+    test('Then it should display an h2 with text Hola Guerau', () => {
+      const users = [{ user_profile: { name: Guerau' } }];
 
       const actions = {
         loadUsers: jest.fn(),
@@ -43,4 +43,5 @@ describe('Given a component Home', () => {
       expect(h2[0].innerHTML).toBe('Hola Familia');
     });
   });
-});
+
+})

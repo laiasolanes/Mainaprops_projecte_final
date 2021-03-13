@@ -47,6 +47,12 @@ h4 {
   letter-spacing: 1px;
 }
 
+h5 {
+  font-family: "Itim", "Helvetica Neue", sans-serif;
+  font-size: 20px;
+  margin: 10px 0;
+}
+
 a:link, a:visited, a:active {
   text-decoration: none;
 }
@@ -189,5 +195,30 @@ p {
 
 .user__detail .user__challenge .button--turquoise-small:hover {
   background: #58a2a5;
+}
+
+.reward__image {
+  position: absolute;
+  width: 100px;
+  top: 70px;
+  left: 20px;
+  z-index: 0;
+}
+
+.reward__title {
+  position: relative;
+  z-index: 10;
+}
+
+.reward__text {
+  margin: 30px 0;
+}
+
+.check__tasks {
+  margin-bottom: 50px;
+}
+
+.check__tasks img {
+  cursor: pointer;
 }
 /*# sourceMappingURL=userDetail.css.map */
