@@ -59,3 +59,15 @@ export function updateUser(nameInput, ageInput, imageInput, userId) {
     });
   };
 }
+
+export function userByParam(paramId) {
+  return async function dispatchUsersByParam(dispatch) {
+    const response = await axios.get(`${url}/${paramId}`);
+    const dataUser = response.data;
+
+    dispatch({
+      type: actionTypes.LOAD_USER,
+      dataUser,
+    });
+  };
+}

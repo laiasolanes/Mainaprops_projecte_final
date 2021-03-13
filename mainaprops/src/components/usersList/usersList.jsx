@@ -8,67 +8,22 @@ import { bindActionCreators } from 'redux';
 import DeleteRoundedIcon from '@material-ui/icons/DeleteRounded';
 import EditRoundedIcon from '@material-ui/icons/EditRounded';
 import Button from '@material-ui/core/Button';
-import { makeStyles } from '@material-ui/core/styles';
 import { Modal, TextField } from '@material-ui/core';
 import {
   loadUsers, insertUser, deleteUser, updateUser,
 } from '../../redux/actions/actionCreators';
+import useStylesList from '../../constants/useStylesList';
+import {
+  avatarCohet,
+  avatarBici,
+  avatarDiana,
+  avatarNena,
+  avatarNen,
+  avatarUnicorn,
+} from '../../constants/avatarImages';
 
-const useStyles = makeStyles((theme) => ({
-  modal: {
-    position: 'absolute',
-    width: '98%',
-    backgroundColor: '#6CC3C6',
-    border: '3px solid #ffffff',
-    color: '#ffffff',
-    borderRadius: '50px',
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(8, 4, 8, 4),
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    outlineStyle: 'none',
-  },
-  textfield: {
-    width: '100%',
-  },
-  inputMaterial: {
-    width: '100%',
-  },
-  button_violet: {
-    width: '100%',
-    backgroundColor: '#3D2563',
-    color: '#ffffff',
-    fontWeight: '600',
-    textTransform: 'none',
-    margin: '10px 0',
-    padding: '10px 0',
-    borderRadius: '50px',
-    boxShadow: theme.shadows[2],
-    '&:hover': {
-      backgroundColor: '#4d2d80',
-    },
-  },
-  button_outlined: {
-    width: '100%',
-    backgroundColor: '#6CC3C6',
-    color: '#ffffff',
-    fontWeight: '600',
-    textTransform: 'none',
-    margin: '10px 0',
-    padding: '8px 0',
-    borderRadius: '50px',
-    border: '3px solid #ffffff',
-    boxShadow: theme.shadows[2],
-    '&:hover': {
-      backgroundColor: '#ffffff',
-      color: '#6CC3C6',
-    },
-  },
-
-}));
 function UsersList({ users, actions }) {
-  const styles = useStyles();
+  const styles = useStylesList();
 
   const [modalInsert, setModalInsert] = useState(false);
   const [modalEdit, setModalEdit] = useState(false);
@@ -141,18 +96,6 @@ function UsersList({ users, actions }) {
     const element = document.getElementById(elementId);
     element.value = src;
   }
-
-  const avatarCohet = 'https://firebasestorage.googleapis.com/v0/b/mainaprops.appspot.com/o/avatar_cohet.png?alt=media&token=f0c34668-0142-47a0-8fbe-d889e229509a';
-
-  const avatarBici = 'https://firebasestorage.googleapis.com/v0/b/mainaprops.appspot.com/o/avatar_bici.png?alt=media&token=d7a1b930-c413-49b5-b43c-004811d800b5';
-
-  const avatarDiana = 'https://firebasestorage.googleapis.com/v0/b/mainaprops.appspot.com/o/avatar_diana.png?alt=media&token=b8ac4fb6-678c-4f2f-8d04-20e8d8131741';
-
-  const avatarNena = 'https://firebasestorage.googleapis.com/v0/b/mainaprops.appspot.com/o/avatar_nena.png?alt=media&token=b7c2b1dd-06c5-4da8-8064-377297d98d07';
-
-  const avatarNen = 'https://firebasestorage.googleapis.com/v0/b/mainaprops.appspot.com/o/avatar_nen.png?alt=media&token=226bec1e-77a8-4e8e-a5cd-e54102c85326';
-
-  const avatarUnicorn = 'https://firebasestorage.googleapis.com/v0/b/mainaprops.appspot.com/o/avatar_unicorn.png?alt=media&token=0eae72d9-6e07-4a11-a149-1f0f1eb780d9';
 
   const bodyInsertar = (
     <div className={styles.modal}>

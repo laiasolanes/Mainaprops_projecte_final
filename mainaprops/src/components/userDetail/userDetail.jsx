@@ -1,10 +1,14 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import { PropTypes } from 'prop-types';
+import { bindActionCreators } from 'redux';
 import { Modal, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import './userDetail.css';
 import userData from '../../constants/usersData';
+import { userByParam } from '../../redux/actions/actionCreators';
 
 const pageURL = window.location.href;
 const idUser = pageURL.substr(pageURL.lastIndexOf('/') + 1);
@@ -65,10 +69,16 @@ const useStyles = makeStyles((theme) => ({
 }));
 const estrella = 'https://firebasestorage.googleapis.com/v0/b/mainaprops.appspot.com/o/estrella_perfil_50.png?alt=media&token=c929198f-4414-4aae-8e70-fccca09e23a0';
 
-export default function UserDetailComponent() {
+function UserDetailComponent({ user, actions }) {
   const styles = useStyles();
 
   const [modalChallenge, setModalChallenge] = useState(false);
+
+  useEffect(() => {
+    if (!user) {
+      actions.userByParam(idUser);
+    }
+  }, [user]);
 
   function openCloseModalChallenge() {
     setModalChallenge(!modalChallenge);
@@ -117,7 +127,7 @@ export default function UserDetailComponent() {
         <h3>
           Hola
           <br />
-          {userProfile[0]?.user_profile.name}
+          {user?.user_profile?.challenges?.reward}
         </h3>
 
         <p>Estàs apunt d’aconseguir els teus propòsits</p>
@@ -182,3 +192,24 @@ export default function UserDetailComponent() {
     </section>
   );
 }
+
+UserDetailComponent.propTypes = {
+  user: PropTypes.shape([]).isRequired,
+  actions: PropTypes.shape({
+    userByParam: PropTypes.func,
+  }).isRequired,
+};
+
+function mapStateToProps(state) {
+  return { user: state.users.user_profile };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators({
+      userByParam,
+    }, dispatch),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserDetailComponent);
