@@ -50,7 +50,7 @@ export function updateUser(nameInput, ageInput, imageInput, userId) {
   return async function dispatchUpdatedUser(dispatch) {
     const updatedUserData = await axios.put(url,
       { user_profile: { name: nameInput, age: ageInput, image: imageInput }, _id: userId });
-    debugger;
+
     console.log(updatedUserData.data);
 
     dispatch({
@@ -62,6 +62,7 @@ export function updateUser(nameInput, ageInput, imageInput, userId) {
 
 export function userByParam(paramId) {
   return async function dispatchUsersByParam(dispatch) {
+    debugger;
     const response = await axios.get(`${url}/${paramId}`);
     const dataUser = response.data;
 

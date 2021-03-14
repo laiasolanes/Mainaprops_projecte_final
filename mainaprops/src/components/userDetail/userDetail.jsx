@@ -5,10 +5,10 @@ import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { Modal, Button } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
 import './userDetail.css';
 import userData from '../../constants/usersData';
 import { userByParam } from '../../redux/actions/actionCreators';
+import useStylesDetail from '../../constants/useStylesDetail';
 
 const pageURL = window.location.href;
 const idUser = pageURL.substr(pageURL.lastIndexOf('/') + 1);
@@ -21,67 +21,31 @@ const challengesCompleted = challengesUser?.filter((challenge) => challenge.comp
 const challengesActives = challengesUser?.filter((challenge) => challenge.completed === false);
 console.log(challengesActives?.length);
 
-const useStyles = makeStyles((theme) => ({
-  modal: {
-    position: 'absolute',
-    width: '98%',
-    backgroundColor: '#ffffff',
-    border: '3px solid #ffffff',
-    color: '#3D2563',
-    borderRadius: '20px',
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(8, 4, 8, 4),
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    outlineStyle: 'none',
-  },
+const emptyStar = 'https://firebasestorage.googleapis.com/v0/b/mainaprops.appspot.com/o/estrella_perfil_50.png?alt=media&token=c929198f-4414-4aae-8e70-fccca09e23a0';
+const fillStar = 'https://firebasestorage.googleapis.com/v0/b/mainaprops.appspot.com/o/estrella_50.png?alt=media&token=c67c7b3f-ca4d-411d-a776-bdf1639489bc';
 
-  button_violet: {
-    width: '100%',
-    backgroundColor: '#3D2563',
-    color: '#ffffff',
-    fontWeight: '600',
-    textTransform: 'none',
-    margin: '10px 0',
-    padding: '10px 0',
-    borderRadius: '50px',
-    boxShadow: theme.shadows[2],
-    '&:hover': {
-      backgroundColor: '#4d2d80',
-    },
-  },
-  button_turquoise: {
-    width: '100%',
-    backgroundColor: '#6CC3C6',
-    color: '#ffffff',
-    fontWeight: '600',
-    textTransform: 'none',
-    margin: '10px 0',
-    padding: '10px 0',
-    borderRadius: '50px',
-    boxShadow: theme.shadows[2],
-    '&:hover': {
-      backgroundColor: '#58a2a5',
-    },
-  },
-
-}));
-const estrella = 'https://firebasestorage.googleapis.com/v0/b/mainaprops.appspot.com/o/estrella_perfil_50.png?alt=media&token=c929198f-4414-4aae-8e70-fccca09e23a0';
-
-function UserDetailComponent({ user, actions }) {
-  const styles = useStyles();
+function UserDetailComponent({ users, actions }) {
+  const styles = useStylesDetail();
 
   const [modalChallenge, setModalChallenge] = useState(false);
 
   useEffect(() => {
-    if (!user) {
+    if (!users || !users.length) {
       actions.userByParam(idUser);
     }
-  }, [user]);
+  }, [users]);
 
   function openCloseModalChallenge() {
     setModalChallenge(!modalChallenge);
+  }
+
+  function markCompleted(elementId) {
+    const element = document.getElementById(elementId);
+    if (element.src === emptyStar) {
+      element.src = fillStar;
+    } else {
+      element.src = emptyStar;
+    }
   }
 
   const body = (
@@ -92,13 +56,13 @@ function UserDetailComponent({ user, actions }) {
 
       <h5>Parar la taula</h5>
       <div className="flex check__tasks">
-        <div><img src={estrella} alt="Estrella" /></div>
-        <div><img src={estrella} alt="Estrella" /></div>
-        <div><img src={estrella} alt="Estrella" /></div>
-        <div><img src={estrella} alt="Estrella" /></div>
-        <div><img src={estrella} alt="Estrella" /></div>
-        <div><img src={estrella} alt="Estrella" /></div>
-        <div><img src={estrella} alt="Estrella" /></div>
+        <div><img src={emptyStar} alt="Estrella" onClick={() => markCompleted('star_1')} id="star_1" /></div>
+        <div><img src={emptyStar} alt="Estrella" onClick={() => markCompleted('star_2')} id="star_2" /></div>
+        <div><img src={emptyStar} alt="Estrella" onClick={() => markCompleted('star_3')} id="star_3" /></div>
+        <div><img src={emptyStar} alt="Estrella" onClick={() => markCompleted('star_4')} id="star_4" /></div>
+        <div><img src={emptyStar} alt="Estrella" onClick={() => markCompleted('star_5')} id="star_5" /></div>
+        <div><img src={emptyStar} alt="Estrella" onClick={() => markCompleted('star_6')} id="star_6" /></div>
+        <div><img src={emptyStar} alt="Estrella" onClick={() => markCompleted('star_7')} id="star_7" /></div>
 
       </div>
       <div>
@@ -121,13 +85,14 @@ function UserDetailComponent({ user, actions }) {
   );
 
   return (
+
     <section className="user__detail">
       <article className="user__header">
         <img src="https://firebasestorage.googleapis.com/v0/b/mainaprops.appspot.com/o/avatar_bici.png?alt=media&token=d7a1b930-c413-49b5-b43c-004811d800b5" alt="Avatar" />
         <h3>
           Hola
           <br />
-          {user?.user_profile?.challenges?.reward}
+          {users[0]?.user_profile?.name}
         </h3>
 
         <p>Estàs apunt d’aconseguir els teus propòsits</p>
@@ -194,14 +159,14 @@ function UserDetailComponent({ user, actions }) {
 }
 
 UserDetailComponent.propTypes = {
-  user: PropTypes.shape([]).isRequired,
+  users: PropTypes.shape([]).isRequired,
   actions: PropTypes.shape({
     userByParam: PropTypes.func,
   }).isRequired,
 };
 
 function mapStateToProps(state) {
-  return { user: state.users.user_profile };
+  return { users: state.users };
 }
 
 function mapDispatchToProps(dispatch) {

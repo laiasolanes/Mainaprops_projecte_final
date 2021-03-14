@@ -2,7 +2,6 @@
 import actionTypes from '../actions/actionTypes';
 
 export default function usersReducer(state = [], action) {
-  debugger;
   let newState;
 
   switch (action.type) {
@@ -20,6 +19,7 @@ export default function usersReducer(state = [], action) {
       return state.filter((user) => user._id !== action.payload);
 
     case actionTypes.LOAD_USER:
+      debugger;
       return [...state, action.dataUser];
 
     default:
