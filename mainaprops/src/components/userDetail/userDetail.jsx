@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable no-unused-expressions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { useEffect, useState } from 'react';
@@ -6,20 +8,11 @@ import { PropTypes } from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { Modal, Button } from '@material-ui/core';
 import './userDetail.css';
-import userData from '../../constants/usersData';
 import { userByParam } from '../../redux/actions/actionCreators';
 import useStylesDetail from '../../constants/useStylesDetail';
 
 const pageURL = window.location.href;
 const idUser = pageURL.substr(pageURL.lastIndexOf('/') + 1);
-
-const userProfile = userData.filter((element) => element._id === idUser);
-
-const challengesUser = userProfile[0]?.user_profile?.challenges;
-
-const challengesCompleted = challengesUser?.filter((challenge) => challenge.completed === true);
-const challengesActives = challengesUser?.filter((challenge) => challenge.completed === false);
-console.log(challengesActives?.length);
 
 const emptyStar = 'https://firebasestorage.googleapis.com/v0/b/mainaprops.appspot.com/o/estrella_perfil_50.png?alt=media&token=c929198f-4414-4aae-8e70-fccca09e23a0';
 const fillStar = 'https://firebasestorage.googleapis.com/v0/b/mainaprops.appspot.com/o/estrella_50.png?alt=media&token=c67c7b3f-ca4d-411d-a776-bdf1639489bc';
@@ -28,6 +21,11 @@ function UserDetailComponent({ users, actions }) {
   const styles = useStylesDetail();
 
   const [modalChallenge, setModalChallenge] = useState(false);
+  const [challengeSelected, setChallengeSelected] = useState({});
+
+  const selectChallenge = (challenge) => {
+    setChallengeSelected(challenge);
+  };
 
   useEffect(() => {
     if (!users || !users.length) {
@@ -41,38 +39,59 @@ function UserDetailComponent({ users, actions }) {
 
   function markCompleted(elementId) {
     const element = document.getElementById(elementId);
-    if (element.src === emptyStar) {
-      element.src = fillStar;
-    } else {
-      element.src = emptyStar;
-    }
+    element.src === emptyStar ? element.src = fillStar : element.src = emptyStar;
+  }
+
+  function clickViewChallenge(challenge) {
+    selectChallenge(challenge);
+    openCloseModalChallenge();
   }
 
   const body = (
     <div className={styles.modal}>
-      <img src="https://firebasestorage.googleapis.com/v0/b/mainaprops.appspot.com/o/avatar_bici.png?alt=media&token=d7a1b930-c413-49b5-b43c-004811d800b5" alt="Avatar" className="reward__image" />
-      <h3 className="reward__title">{userProfile[0]?.user_profile.name}</h3>
-      <p className="reward__text">Marca les tasques que hagis fet i aconsegueix la merescuda recompensa!</p>
+      <img src={challengeSelected?.reward?.image} alt="Avatar" className="reward__image" />
+      <h3 className="reward__title">{challengeSelected?.reward?.name}</h3>
+      <p className="reward__text">
+        {users[0]?.user_profile.name}
+        {' '}
+        marca les tasques que hagis fet i aconsegueix la merescuda recompensa!
+      </p>
 
-      <h5>Parar la taula</h5>
-      <div className="flex check__tasks">
-        <div><img src={emptyStar} alt="Estrella" onClick={() => markCompleted('star_1')} id="star_1" /></div>
-        <div><img src={emptyStar} alt="Estrella" onClick={() => markCompleted('star_2')} id="star_2" /></div>
-        <div><img src={emptyStar} alt="Estrella" onClick={() => markCompleted('star_3')} id="star_3" /></div>
-        <div><img src={emptyStar} alt="Estrella" onClick={() => markCompleted('star_4')} id="star_4" /></div>
-        <div><img src={emptyStar} alt="Estrella" onClick={() => markCompleted('star_5')} id="star_5" /></div>
-        <div><img src={emptyStar} alt="Estrella" onClick={() => markCompleted('star_6')} id="star_6" /></div>
-        <div><img src={emptyStar} alt="Estrella" onClick={() => markCompleted('star_7')} id="star_7" /></div>
+      {
 
-      </div>
+        challengeSelected && challengeSelected?.tasks?.map((task) => (
+          <>
+            <h5>{task.name}</h5>
+            <div className="flex check__tasks">
+              {
+                  task.times && task.times.map((time) => (
+
+                    <div>
+                      <img
+                        src={time ? fillStar : emptyStar}
+                        alt="Estrella"
+                        onClick={() => markCompleted(task._id + time)}
+                        id={task._id + time}
+                      />
+                    </div>
+
+                  ))
+                }
+              <div />
+            </div>
+            <div />
+          </>
+        ))
+      }
+
       <div>
         <Button
           className={styles.button_violet}
           onClick={openCloseModalChallenge}
         >
           Guardar
-
         </Button>
+
         <Button
           className={styles.button_turquoise}
           onClick={openCloseModalChallenge}
@@ -82,6 +101,15 @@ function UserDetailComponent({ users, actions }) {
       </div>
 
     </div>
+  );
+
+  const challengesActives = users[0]?.user_profile.challenges?.filter(
+    (challenge) => challenge.completed === false,
+  );
+
+  console.log(challengesActives?.length);
+  const challengesCompleted = users[0]?.user_profile.challenges?.filter(
+    (challenge) => challenge.completed === true,
   );
 
   return (
@@ -100,13 +128,13 @@ function UserDetailComponent({ users, actions }) {
         <div className="flex challenges__resume">
 
           <div className="resume__detail">
-            <span>{challengesCompleted.length}</span>
+            <span>{challengesCompleted?.length}</span>
             <br />
             reptes completats
           </div>
 
           <div className="resume__detail">
-            <span>{challengesActives.length}</span>
+            <span>{challengesActives?.length}</span>
             <br />
             reptes actius
           </div>
@@ -122,7 +150,7 @@ function UserDetailComponent({ users, actions }) {
       </article>
 
       {
-          challengesActives.map((challenge) => (
+          challengesActives?.map((challenge) => (
             <article className="user__challenge">
 
               <img src={challenge.reward.image} alt="Recompensa" />
@@ -131,8 +159,11 @@ function UserDetailComponent({ users, actions }) {
                 {challenge.reward.name}
               </h3>
 
-              <div className="challenge__resume">
-                <span>{challenge.tasks.times}</span>
+              <div
+                className="challenge__resume"
+                onClick={() => clickViewChallenge(challenge)}
+              >
+                <span>{challenge.tasks.length}</span>
                 <br />
                 tasques pendents
               </div>
@@ -140,11 +171,12 @@ function UserDetailComponent({ users, actions }) {
               <Button
                 variant="contained"
                 className="button--turquoise-small"
-                onClick={openCloseModalChallenge}
+                onClick={() => clickViewChallenge(challenge)}
               >
                 Veure repte
               </Button>
             </article>
+
           ))
       }
 
