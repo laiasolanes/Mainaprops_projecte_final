@@ -10,13 +10,10 @@ import { Modal, Button } from '@material-ui/core';
 import './userDetail.css';
 import { userByParam } from '../../redux/actions/actionCreators';
 import useStylesDetail from '../../constants/useStylesDetail';
+import { emptyStar, fillStar } from '../../constants/starImages';
 
 const pageURL = window.location.href;
 const idUser = pageURL.substr(pageURL.lastIndexOf('/') + 1);
-
-const emptyStar = 'https://firebasestorage.googleapis.com/v0/b/mainaprops.appspot.com/o/estrella_perfil_50.png?alt=media&token=c929198f-4414-4aae-8e70-fccca09e23a0';
-const fillStar = 'https://firebasestorage.googleapis.com/v0/b/mainaprops.appspot.com/o/estrella_50.png?alt=media&token=c67c7b3f-ca4d-411d-a776-bdf1639489bc';
-
 function UserDetailComponent({ users, actions }) {
   const styles = useStylesDetail();
 
@@ -168,11 +165,14 @@ function UserDetailComponent({ users, actions }) {
             reptes completats
           </div>
 
-          <div className="resume__detail">
-            <span>{challengesActives?.length}</span>
-            <br />
-            reptes actius
-          </div>
+          <a href="#startChallenges">
+            <div className="resume__detail">
+              <span>{challengesActives?.length}</span>
+              <br />
+              reptes actius
+            </div>
+
+          </a>
 
         </div>
 
@@ -183,7 +183,7 @@ function UserDetailComponent({ users, actions }) {
           Crear repte
         </Button>
       </article>
-
+      <div id="startChallenges" />
       {
           challengesActives?.map((challenge) => (
             <article className="user__challenge" key={challenge._id}>
