@@ -108,7 +108,7 @@
             .button--turquoise-small {
                 @include buttonSmall;
                 background: $color_turquoise;
-                color: $color_violet;
+                color: #ffffff;
             }
             .button--turquoise-small:hover{
                 background: $color_turquoise_dark;

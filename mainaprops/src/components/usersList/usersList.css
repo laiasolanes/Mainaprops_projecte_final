@@ -47,6 +47,12 @@ h4 {
   letter-spacing: 1px;
 }
 
+h5 {
+  font-family: "Itim", "Helvetica Neue", sans-serif;
+  font-size: 20px;
+  margin: 10px 0;
+}
+
 a:link, a:visited, a:active {
   text-decoration: none;
 }
@@ -54,54 +60,6 @@ a:link, a:visited, a:active {
 p {
   color: #706f6f;
   font-weight: 300;
-}
-
-.button--violet-big {
-  border-radius: 50px;
-  width: 100%;
-  padding: 16px;
-  margin: 10px 0;
-  text-transform: none;
-  font-size: 18px;
-  font-weight: 600;
-  background: #3D2563;
-  color: #ffffff;
-}
-
-.button--violet-big:hover {
-  background: #4d2d80;
-}
-
-.button--violet-small {
-  border-radius: 50px;
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  text-transform: none;
-  font-weight: 600;
-  background: #3D2563;
-  color: #ffffff;
-}
-
-.button--violet-small:hover {
-  background: #4d2d80;
-}
-
-.button--outlined-small {
-  border-radius: 50px;
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  text-transform: none;
-  font-weight: 600;
-  background: transparent;
-  border: 3px solid #ffffff;
-  color: #ffffff;
-}
-
-.button--outlined-small:hover {
-  color: #6CC3C6;
-  background: #ffffff;
 }
 
 .users__list {
@@ -166,8 +124,8 @@ p {
 }
 
 .avatar__section .avatar__row {
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;

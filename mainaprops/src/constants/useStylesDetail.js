@@ -48,7 +48,7 @@ const useStylesDetail = makeStyles((theme) => ({
   button_turquoise: {
     width: '100%',
     backgroundColor: '#6CC3C6',
-    color: '#3D2563',
+    color: '#ffffff',
     fontWeight: '600',
     textTransform: 'none',
     margin: '10px 0',

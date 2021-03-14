@@ -121,7 +121,7 @@ export function UsersListComponent({ users, actions }) {
         id="avatarInput"
       />
 
-      <section className="flex avatar__section">
+      <section className="avatar__section">
         <div className="flex avatar__row">
           <Button onClick={() => setSrc('avatarInput', avatarCohet)} className="avatar__button" id="primer" />
           <Button onClick={() => setSrc('avatarInput', avatarBici)} className="avatar__button" />
@@ -183,7 +183,7 @@ export function UsersListComponent({ users, actions }) {
         id="avatarInputEdit"
       />
 
-      <section className="flex avatar__section">
+      <section className="avatar__section">
         <div className="flex avatar__row">
           <Button onClick={() => setSrc('avatarInputEdit', avatarCohet)} className="avatar__button" />
           <Button onClick={() => setSrc('avatarInputEdit', avatarBici)} className="avatar__button" />
