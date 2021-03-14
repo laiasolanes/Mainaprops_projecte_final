@@ -223,4 +223,10 @@ p {
 .check__tasks img {
   cursor: pointer;
 }
+
+.reward__achieved {
+  display: block;
+  margin: auto;
+  width: 50%;
+}
 /*# sourceMappingURL=userDetail.css.map */

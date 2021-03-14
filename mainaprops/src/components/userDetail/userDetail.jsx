@@ -21,6 +21,7 @@ function UserDetailComponent({ users, actions }) {
   const styles = useStylesDetail();
 
   const [modalChallenge, setModalChallenge] = useState(false);
+  const [modalAchieved, setModalAchieved] = useState(false);
   const [challengeSelected, setChallengeSelected] = useState({});
 
   const selectChallenge = (challenge) => {
@@ -37,6 +38,10 @@ function UserDetailComponent({ users, actions }) {
     setModalChallenge(!modalChallenge);
   }
 
+  function openCloseModalAchieved() {
+    setModalAchieved(!modalAchieved);
+  }
+
   function markCompleted(elementId) {
     const element = document.getElementById(elementId);
     element.src === emptyStar ? element.src = fillStar : element.src = emptyStar;
@@ -47,8 +52,13 @@ function UserDetailComponent({ users, actions }) {
     openCloseModalChallenge();
   }
 
-  const body = (
-    <div className={styles.modal}>
+  function clickSaveChallenge() {
+    openCloseModalChallenge();
+    openCloseModalAchieved();
+  }
+
+  const challengeBody = (
+    <div className={styles.modalChallenge}>
       <img src={challengeSelected?.reward?.image} alt="Avatar" className="reward__image" />
       <h3 className="reward__title">{challengeSelected?.reward?.name}</h3>
       <p className="reward__text">
@@ -61,7 +71,7 @@ function UserDetailComponent({ users, actions }) {
 
         challengeSelected && challengeSelected?.tasks?.map((task) => (
           <>
-            <h5>{task.name}</h5>
+            <h5 key={task._id}>{task.name}</h5>
             <div className="flex check__tasks">
               {
                   task.times && task.times.map((time) => (
@@ -87,7 +97,7 @@ function UserDetailComponent({ users, actions }) {
       <div>
         <Button
           className={styles.button_violet}
-          onClick={openCloseModalChallenge}
+          onClick={() => clickSaveChallenge()}
         >
           Guardar
         </Button>
@@ -97,6 +107,31 @@ function UserDetailComponent({ users, actions }) {
           onClick={openCloseModalChallenge}
         >
           Cancelar
+        </Button>
+      </div>
+
+    </div>
+  );
+
+  const achievedBody = (
+    <div className={styles.modalAchieved}>
+      <h2>
+        Repte
+        <br />
+        aconseguit!
+      </h2>
+      <img src={challengeSelected?.reward?.image} alt="Avatar" className="reward__achieved" />
+
+      <h3 className="reward__title">{challengeSelected?.reward?.name}</h3>
+      <br />
+
+      <div>
+
+        <Button
+          className={styles.button_turquoise}
+          onClick={(openCloseModalAchieved)}
+        >
+          Tornar als reptes
         </Button>
       </div>
 
@@ -151,7 +186,7 @@ function UserDetailComponent({ users, actions }) {
 
       {
           challengesActives?.map((challenge) => (
-            <article className="user__challenge">
+            <article className="user__challenge" key={challenge._id}>
 
               <img src={challenge.reward.image} alt="Recompensa" />
 
@@ -184,7 +219,14 @@ function UserDetailComponent({ users, actions }) {
         open={modalChallenge}
         onClose={openCloseModalChallenge}
       >
-        {body}
+        {challengeBody}
+      </Modal>
+
+      <Modal
+        open={modalAchieved}
+        onClose={openCloseModalAchieved}
+      >
+        {achievedBody}
       </Modal>
     </section>
   );
