@@ -22,7 +22,7 @@ import {
   avatarUnicorn,
 } from '../../constants/avatarImages';
 
-function UsersList({ users, actions }) {
+export function UsersListComponent({ users, actions }) {
   const styles = useStylesList();
 
   const [modalInsert, setModalInsert] = useState(false);
@@ -36,7 +36,6 @@ function UsersList({ users, actions }) {
   const [userNameInput, setUserNameInput] = useState('');
   const [userAgeInput, setUserAgeInput] = useState('');
   const [userImageInput, setUserImageInput] = useState('');
-  console.log(userSelected);
 
   const openCloseModalInsert = () => {
     setModalInsert(!modalInsert);
@@ -64,7 +63,7 @@ function UsersList({ users, actions }) {
   };
 
   useEffect(() => {
-    if (!users || !users.length) {
+    if (!users || !users.length || users.length === 1) {
       actions.loadUsers();
     }
   }, [users]);
@@ -240,8 +239,12 @@ function UsersList({ users, actions }) {
       {
           users && users.map((user) => (
             <div className="flex list__row" key={user._id}>
-              <div className="list__avatar"><img src={user.user_profile.image} alt="Avatar" /></div>
-              <div className="list__name"><h4>{user.user_profile.name}</h4></div>
+              <div className="list__avatar" key={user._id}>
+                <img src={user.user_profile.image} alt="Avatar" />
+              </div>
+              <div className="list__name">
+                <h4>{user.user_profile.name}</h4>
+              </div>
               <div className="flex list__icons">
                 <div>
                   <EditRoundedIcon
@@ -289,8 +292,20 @@ function UsersList({ users, actions }) {
   );
 }
 
-UsersList.propTypes = {
-  users: PropTypes.shape([]).isRequired,
+UsersListComponent.propTypes = {
+  users: PropTypes.arrayOf(
+    PropTypes.shape(
+      {
+        user_profile: PropTypes.shape(
+          {
+            challenges: PropTypes.arrayOf(PropTypes.string),
+            name: PropTypes.string,
+            image: PropTypes.string,
+          },
+        ),
+      },
+    ),
+  ).isRequired,
   actions: PropTypes.shape({
     loadUsers: PropTypes.func,
     insertUser: PropTypes.func,
@@ -309,4 +324,4 @@ function mapDispatchToProps(dispatch) {
     }, dispatch),
   };
 }
-export default connect(mapStateToProps, mapDispatchToProps)(UsersList);
+export default connect(mapStateToProps, mapDispatchToProps)(UsersListComponent);

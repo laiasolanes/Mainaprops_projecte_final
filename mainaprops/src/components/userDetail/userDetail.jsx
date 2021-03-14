@@ -14,7 +14,7 @@ import { emptyStar, fillStar } from '../../constants/starImages';
 
 const pageURL = window.location.href;
 const idUser = pageURL.substr(pageURL.lastIndexOf('/') + 1);
-function UserDetailComponent({ users, actions }) {
+export function UserDetailComponent({ users, actions }) {
   const styles = useStylesDetail();
 
   const [modalChallenge, setModalChallenge] = useState(false);
@@ -139,7 +139,6 @@ function UserDetailComponent({ users, actions }) {
     (challenge) => challenge.completed === false,
   );
 
-  console.log(challengesActives?.length);
   const challengesCompleted = users[0]?.user_profile.challenges?.filter(
     (challenge) => challenge.completed === true,
   );
@@ -148,7 +147,7 @@ function UserDetailComponent({ users, actions }) {
 
     <section className="user__detail">
       <article className="user__header">
-        <img src="https://firebasestorage.googleapis.com/v0/b/mainaprops.appspot.com/o/avatar_bici.png?alt=media&token=d7a1b930-c413-49b5-b43c-004811d800b5" alt="Avatar" />
+        <img src={users[0]?.user_profile?.image} alt="Avatar" />
         <h3>
           Hola
           <br />
@@ -233,7 +232,19 @@ function UserDetailComponent({ users, actions }) {
 }
 
 UserDetailComponent.propTypes = {
-  users: PropTypes.shape([]).isRequired,
+  users: PropTypes.arrayOf(
+    PropTypes.shape(
+      {
+        user_profile: PropTypes.shape(
+          {
+            challenges: PropTypes.arrayOf(PropTypes.string),
+            name: PropTypes.string,
+            image: PropTypes.string,
+          },
+        ),
+      },
+    ),
+  ).isRequired,
   actions: PropTypes.shape({
     userByParam: PropTypes.func,
   }).isRequired,
