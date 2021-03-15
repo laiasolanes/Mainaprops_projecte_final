@@ -1,6 +1,8 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-underscore-dangle */
 const User = require('../models/userModel');
+const Task = require('../models/taskModel');
+const Reward = require('../models/rewardModel');
 require('../models/challengeModel');
 require('../models/rewardModel');
 require('../models/taskModel');
@@ -26,9 +28,17 @@ async function getUsers(req, res) {
 
 async function updateUser(req, res) {
   const id = req.body._id;
+  const update = {
+    $set: {
+      'user_profile.name': req.body.user_profile.name,
+      'user_profile.age': req.body.user_profile.age,
+      'user_profile.image': req.body.user_profile.image,
+    },
+
+  };
   try {
     const updatedUser = await User
-      .findByIdAndUpdate(id, req.body, { new: true });
+      .findByIdAndUpdate(id, update, { new: true });
     res.json(updatedUser);
 
     console.log(updatedUser);
@@ -66,12 +76,23 @@ async function getUserByParam(req, res) {
   }
 }
 
+async function getTasksAndRewards(req, res) {
+  const allTasks = await Task
+    .find({});
+
+  const allRewards = await Reward
+    .find({});
+
+  res.json({ allTasks, allRewards });
+}
+
 module.exports = {
   createUser,
   getUsers,
   updateUser,
   deleteUser,
   getUserByParam,
+  getTasksAndRewards,
 };
 
 // .populate('reward', 'task');
