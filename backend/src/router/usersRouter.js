@@ -15,6 +15,10 @@ function UsersRouter() {
     .route('/:userId')
     .get(usersController.getUserByParam);
 
+  router
+    .route('/:userId/newchallenge')
+    .get(usersController.getTasksAndRewards);
+
   return router;
 }
 

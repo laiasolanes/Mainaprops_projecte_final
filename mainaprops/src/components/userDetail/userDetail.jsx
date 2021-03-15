@@ -71,14 +71,14 @@ export function UserDetailComponent({ users, actions }) {
             <h5 key={task._id}>{task.name}</h5>
             <div className="flex check__tasks">
               {
-                  task.times && task.times.map((time) => (
+                  task.times && task.times.map((time, index) => (
 
                     <div>
                       <img
                         src={time ? fillStar : emptyStar}
                         alt="Estrella"
-                        onClick={() => markCompleted(task._id + time)}
-                        id={task._id + time}
+                        onClick={() => markCompleted(task._id + index)}
+                        id={task._id + index}
                       />
                     </div>
 
