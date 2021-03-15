@@ -229,10 +229,10 @@ export function UsersListComponent({ users, actions }) {
           users && users.map((user) => (
             <div className="flex list__row" key={user._id}>
               <div className="list__avatar" key={user._id}>
-                <img src={user.user_profile.image} alt="Avatar" />
+                <a href={`/users/${user._id}`}><img src={user.user_profile.image} alt="Avatar" /></a>
               </div>
               <div className="list__name">
-                <h4>{user.user_profile.name}</h4>
+                <a href={`/users/${user._id}`}><h4>{user.user_profile.name}</h4></a>
               </div>
               <div className="flex list__icons">
                 <div>
