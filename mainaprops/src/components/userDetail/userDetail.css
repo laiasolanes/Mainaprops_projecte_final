@@ -1,0 +1,232 @@
+@import url("https://fonts.googleapis.com/css2?family=Itim&family=Unica+One&family=Montserrat:wght@300;600;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Itim&family=Unica+One&family=Montserrat:wght@300;600;800&display=swap");
+*, *:after, *:before {
+  margin: 0px;
+  padding: 0px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: "Montserrat", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+}
+
+body {
+  background: rgba(108, 195, 198, 0.5);
+}
+
+#root {
+  background: #6CC3C6;
+}
+
+.flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+h2 {
+  font-family: "Itim", "Helvetica Neue", sans-serif;
+  font-size: 2.5em;
+  color: #ffffff;
+  font-weight: 300;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+h3 {
+  font-family: "Itim", "Helvetica Neue", sans-serif;
+  font-size: 2.5em;
+  font-weight: 300;
+  text-align: center;
+  letter-spacing: 1px;
+  line-height: 1em;
+}
+
+h4 {
+  font-family: "Montserrat", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  letter-spacing: 1px;
+}
+
+h5 {
+  font-family: "Itim", "Helvetica Neue", sans-serif;
+  font-size: 20px;
+  margin: 10px 0;
+}
+
+a:link, a:visited, a:active {
+  text-decoration: none;
+}
+
+p {
+  color: #706f6f;
+  font-weight: 300;
+}
+
+.user__detail {
+  padding: 110px 30px 30px 30px;
+}
+
+.user__detail .user__header {
+  background: #ffffff;
+  -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  padding: 50px;
+  text-align: center;
+}
+
+.user__detail .user__header h3 {
+  color: #3D2563;
+}
+
+.user__detail .user__header p {
+  margin-top: 20px;
+}
+
+.user__detail .user__header img {
+  position: absolute;
+  width: 100px;
+  top: 120px;
+  left: 40px;
+}
+
+.user__detail .user__header .button--violet-small {
+  border-radius: 50px;
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  text-transform: none;
+  font-weight: 600;
+  background: #3D2563;
+  text-transform: none;
+  color: #ffffff;
+}
+
+.user__detail .user__header .button--violet-small:hover {
+  background: #4d2d80;
+}
+
+.user__detail .user__header .challenges__resume {
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 20px 0;
+}
+
+.user__detail .user__header .challenges__resume .resume__detail {
+  border-radius: 10px;
+  padding: 10px 0;
+  width: 100px;
+  cursor: pointer;
+  -webkit-transition: all 300ms;
+  transition: all 300ms;
+}
+
+.user__detail .user__header .challenges__resume .resume__detail span {
+  font-weight: 900;
+  font-size: 1.2em;
+}
+
+.user__detail .user__header .challenges__resume .resume__detail:hover {
+  -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+  -webkit-transform: translateY(-3px);
+          transform: translateY(-3px);
+}
+
+.user__detail .user__challenge {
+  margin-top: 20px;
+  background: #3D2563;
+  -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  padding: 50px;
+  text-align: center;
+  position: relative;
+}
+
+.user__detail .user__challenge img {
+  position: absolute;
+  width: 100px;
+  top: 100px;
+  left: 10px;
+  z-index: 0;
+}
+
+.user__detail .user__challenge h3 {
+  position: relative;
+  color: #ffffff;
+  z-index: 2;
+}
+
+.user__detail .user__challenge .challenge__resume {
+  border-radius: 10px;
+  padding: 10px 0;
+  width: 100px;
+  margin: 20px auto;
+  color: #e2e2e2;
+  cursor: pointer;
+  -webkit-transition: all 300ms;
+  transition: all 300ms;
+}
+
+.user__detail .user__challenge .challenge__resume span {
+  font-weight: 900;
+  font-size: 1.2em;
+}
+
+.user__detail .user__challenge .challenge__resume:hover {
+  -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
+          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
+  -webkit-transform: translateY(-3px);
+          transform: translateY(-3px);
+}
+
+.user__detail .user__challenge .button--turquoise-small {
+  border-radius: 50px;
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  text-transform: none;
+  font-weight: 600;
+  background: #6CC3C6;
+  color: #ffffff;
+}
+
+.user__detail .user__challenge .button--turquoise-small:hover {
+  background: #58a2a5;
+}
+
+.reward__image {
+  position: absolute;
+  width: 100px;
+  top: 70px;
+  left: 20px;
+  z-index: 0;
+}
+
+.reward__title {
+  position: relative;
+  z-index: 10;
+  width: 50%;
+  margin: auto;
+}
+
+.reward__text {
+  margin: 30px 0;
+}
+
+.check__tasks {
+  margin-bottom: 50px;
+}
+
+.check__tasks img {
+  cursor: pointer;
+}
+
+.reward__achieved {
+  display: block;
+  margin: auto;
+  width: 50%;
+}
+/*# sourceMappingURL=userDetail.css.map */

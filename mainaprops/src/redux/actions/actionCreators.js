@@ -50,12 +50,25 @@ export function updateUser(nameInput, ageInput, imageInput, userId) {
   return async function dispatchUpdatedUser(dispatch) {
     const updatedUserData = await axios.put(url,
       { user_profile: { name: nameInput, age: ageInput, image: imageInput }, _id: userId });
-    debugger;
+
     console.log(updatedUserData.data);
 
     dispatch({
       type: actionTypes.UPDATE_USER,
       payload: updatedUserData.data,
+    });
+  };
+}
+
+export function userByParam(paramId) {
+  return async function dispatchUsersByParam(dispatch) {
+    debugger;
+    const response = await axios.get(`${url}/${paramId}`);
+    const dataUser = response.data;
+
+    dispatch({
+      type: actionTypes.LOAD_USER,
+      dataUser,
     });
   };
 }

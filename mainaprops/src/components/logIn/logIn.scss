@@ -1,5 +1,6 @@
 @import '../../styles/colors';
 @import '../../styles/texts';
+@import '../../styles/styles.scss';
 
 .login {
     padding: 150px 30px 30px 30px;
@@ -21,20 +22,16 @@
         margin: 0 30px 30px 30px;
     }
 
-    .button--violet {
+    .button--violet-big {
+        @include buttonBig;
         background: $color_violet;
-        border-radius: 50px;
-        width: 100%;
-        padding:16px;
-        margin: 50px 0;
-        text-transform: none;
-        font-size: 18px;
         color: #ffffff;
-        font-weight: 600;
+        margin: 50px 0;
+     
     }
-    .button--violet:hover{
+    .button--violet-big:hover{
         background: $color_violet_light;
-       }
+    }
 
     h3 {
         color: #ffffff;

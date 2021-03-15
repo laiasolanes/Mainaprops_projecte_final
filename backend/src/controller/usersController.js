@@ -1,6 +1,9 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-underscore-dangle */
 const User = require('../models/userModel');
+require('../models/challengeModel');
+require('../models/rewardModel');
+require('../models/taskModel');
 
 async function createUser(req, res) {
   const filter = { user_profile: { name: req.body.user_profile.name } };
@@ -17,7 +20,6 @@ async function createUser(req, res) {
 async function getUsers(req, res) {
   const allUsers = await User
     .find({});
-    // .populate('reward', 'task');
 
   res.json(allUsers);
 }
@@ -51,15 +53,17 @@ async function deleteUser(req, res) {
 async function getUserByParam(req, res) {
   const { userId } = req.params;
 
-  User.findById(userId, (error, adventure) => {
-    if (error) {
-      res.status(404);
-      res.send(`There was an error. User id ${userId} does not exist.`);
-    } else {
-      res.status(302);
-      res.json(adventure);
-    }
-  });
+  try {
+    let userChallenges = await User.findById(userId);
+    userChallenges = await userChallenges.populate({ path: 'user_profile.challenges' }).execPopulate();
+    userChallenges = await userChallenges.populate({ path: 'user_profile.challenges.tasks' }).execPopulate();
+    userChallenges = await userChallenges.populate({ path: 'user_profile.challenges.reward' }).execPopulate();
+    res.status(200);
+    res.json(userChallenges);
+  } catch (error) {
+    res.status(500);
+    res.send('There was an error get user by param');
+  }
 }
 
 module.exports = {
@@ -69,3 +73,5 @@ module.exports = {
   deleteUser,
   getUserByParam,
 };
+
+// .populate('reward', 'task');
