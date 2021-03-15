@@ -1,3 +1,4 @@
+/* eslint-disable prefer-const */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-underscore-dangle */
 import React, { useEffect, useState } from 'react';
@@ -33,9 +34,10 @@ export function UsersListComponent({ users, actions }) {
     age: '',
     image: '',
   });
+  console.log(userSelected);
   const [userNameInput, setUserNameInput] = useState('');
   const [userAgeInput, setUserAgeInput] = useState('');
-  const [userImageInput, setUserImageInput] = useState('');
+  let [userImageInput, setUserImageInput] = useState('');
 
   const openCloseModalInsert = () => {
     setModalInsert(!modalInsert);
@@ -88,12 +90,20 @@ export function UsersListComponent({ users, actions }) {
     actions.updateUser(
       userNameInput, userAgeInput, userImageInput, userSelected._id,
     );
+    console.log(updateUser);
     openCloseModalEdit();
   }
 
   function setSrc(elementId, src) {
     const element = document.getElementById(elementId);
     element.value = src;
+    const input = document.getElementById('avatarInput');
+    console.log(input.value);
+  }
+
+  function setImage(url) {
+    userImageInput = url;
+    console.log(userImageInput);
   }
 
   const bodyInsertar = (
@@ -173,25 +183,16 @@ export function UsersListComponent({ users, actions }) {
         value={userAgeInput}
         placeholder={userSelected.user_profile && userSelected.user_profile.age}
       />
-      <TextField
-        name="image"
-        className={styles.inputMaterial}
-        label="Avatar"
-        onChange={(event) => setUserImageInput(event.target.value)}
-        value={userImageInput}
-        placeholder={userSelected.user_profile && userSelected.user_profile.image}
-        id="avatarInputEdit"
-      />
 
       <section className="avatar__section">
         <div className="flex avatar__row">
-          <Button onClick={() => setSrc('avatarInputEdit', avatarCohet)} className="avatar__button" />
-          <Button onClick={() => setSrc('avatarInputEdit', avatarBici)} className="avatar__button" />
-          <Button onClick={() => setSrc('avatarInputEdit', avatarDiana)} className="avatar__button" />
+          <Button onClick={() => setImage(avatarCohet)} className="avatar__button" />
+          <Button onClick={() => setImage(avatarBici)} className="avatar__button" />
+          <Button onClick={() => setImage(avatarDiana)} className="avatar__button" />
 
-          <Button onClick={() => setSrc('avatarInputEdit', avatarNena)} className="avatar__button" />
-          <Button onClick={() => setSrc('avatarInputEdit', avatarNen)} className="avatar__button" />
-          <Button onClick={() => setSrc('avatarInputEdit', avatarUnicorn)} className="avatar__button" />
+          <Button onClick={() => setImage(avatarNena)} className="avatar__button" />
+          <Button onClick={() => setImage(avatarNen)} className="avatar__button" />
+          <Button onClick={() => setImage(avatarUnicorn)} className="avatar__button" />
         </div>
       </section>
 
