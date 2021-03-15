@@ -51,8 +51,6 @@ export function updateUser(nameInput, ageInput, imageInput, userId) {
     const updatedUserData = await axios.put(url,
       { user_profile: { name: nameInput, age: ageInput, image: imageInput }, _id: userId });
 
-    console.log(updatedUserData.data);
-
     dispatch({
       type: actionTypes.UPDATE_USER,
       payload: updatedUserData.data,
