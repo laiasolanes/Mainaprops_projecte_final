@@ -54,10 +54,11 @@ h5 {
 
 a:link, a:visited, a:active {
   text-decoration: none;
+  color: #000000;
 }
 
 p {
-  color: #5f5f5f;
+  color: #575757;
   font-weight: 300;
 }
 /*# sourceMappingURL=styles.css.map */

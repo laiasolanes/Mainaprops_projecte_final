@@ -287,7 +287,7 @@ UsersListComponent.propTypes = {
       {
         user_profile: PropTypes.shape(
           {
-            challenges: PropTypes.arrayOf(PropTypes.string),
+            challenges: PropTypes.arrayOf(PropTypes.shape({})),
             name: PropTypes.string,
             image: PropTypes.string,
           },

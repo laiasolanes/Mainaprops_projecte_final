@@ -52,7 +52,11 @@ HomeComponent.propTypes = {
     PropTypes.shape(
       {
         user_profile: PropTypes.shape(
-          { challenges: PropTypes.arrayOf(PropTypes.string) },
+          {
+            challenges: PropTypes.arrayOf(PropTypes.string),
+            name: PropTypes.string,
+            image: PropTypes.string,
+          },
         ),
       },
     ),
