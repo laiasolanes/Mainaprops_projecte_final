@@ -178,6 +178,7 @@ export function UserDetailComponent({ users, actions }) {
         <Button
           variant="contained"
           className="button--violet-small"
+          href={`/users/${users[0]?._id}/newchallenge`}
         >
           Crear repte
         </Button>
@@ -242,6 +243,7 @@ UserDetailComponent.propTypes = {
             image: PropTypes.string,
           },
         ),
+        _id: PropTypes.number,
       },
     ),
   ).isRequired,
