@@ -254,7 +254,13 @@ export function UsersListComponent({ users, actions }) {
           ))
       }
 
-      <Button variant="contained" className="button--outlined-big" onClick={openCloseModalInsert}>+ usuaris</Button>
+      <Button
+        variant="contained"
+        className="button--outlined-big"
+        onClick={openCloseModalInsert}
+      >
+        + usuaris
+      </Button>
 
       <Modal
         open={modalInsert}
