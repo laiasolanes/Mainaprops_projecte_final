@@ -11,6 +11,7 @@ import {
   homeworkTask,
   tidyupTask,
 } from '../../constants/taskImages';
+
 import useStylesNewChallenge from '../../constants/useStylesNewChallenge';
 
 const pageURL = window.location.href.split('/');
@@ -20,22 +21,22 @@ export default function NewChallenge() {
   const styles = useStylesNewChallenge();
 
   const [modalTimes, setModalTimes] = useState(false);
-  //   const [modalRewards, setModalRewards] = useState(false);
+  const [modalRewards, setModalRewards] = useState(false);
 
   function openCloseModalTimes() {
     setModalTimes(!modalTimes);
   }
 
-  //   function openCloseModalRewards() {
-  //     setModalRewards(!modalRewards);
-  //   }
+  function openCloseModalRewards() {
+    setModalRewards(!modalRewards);
+  }
 
   const challengeBody = (
     <div className={styles.modalChallenge}>
-      <img src={bathTask} alt="Task" className="time__image" />
+      <img src={bathTask} alt="Task" className={styles.timeImage} />
       <h3>Dutxar-se</h3>
-      <p className="time__text">Selecciona els dies de la setmana que has de fer la tasca.</p>
-      <div className="flex days">
+      <p className={styles.text}>Selecciona els dies de la setmana que has de fer la tasca.</p>
+      <div className={styles.days}>
         <Button className={styles.button_day}>dilluns</Button>
         <Button className={styles.button_day}>dimarts</Button>
         <Button className={styles.button_day}>dimecres</Button>
@@ -50,24 +51,76 @@ export default function NewChallenge() {
         onClick={openCloseModalTimes}
       >
         Guardar
-
       </Button>
+
       <Button
         className={styles.button_outlined}
         onClick={openCloseModalTimes}
       >
         Cancelar
-
       </Button>
 
     </div>
   );
 
-  //   const rewardsBody = (
-  //     <div className={styles.modalChallenge}>
-  //       <h2>hola</h2>
-  //     </div>
-  //   );
+  const rewardsBody = (
+    <div className={styles.modalChallenge}>
+
+      <h3>La recompensa</h3>
+
+      <p className={styles.text}>
+        Selecciona la recompensa que
+        rebras quan facis totes les tasques i aconsegueixis el repte.
+      </p>
+
+      <div className="all__rewards">
+
+        <div className={styles.rowRewards}>
+
+          <article className="reward" id="weekend">
+            <Button
+              className={styles.rewardButton}
+            >
+              <div>
+                <img className={styles.imgButton} src={mascotTask} alt="Recompensa" />
+                <p className={styles.pButton}>Escapada familiar</p>
+              </div>
+
+            </Button>
+          </article>
+
+          <article className="task" id="instrument">
+            <Button
+              className={styles.rewardButton}
+            >
+              <div>
+                <img className={styles.imgButton} src={mascotTask} alt="Recompensa" />
+                <p className={styles.pButton}>Escapada familiar</p>
+              </div>
+
+            </Button>
+          </article>
+
+        </div>
+
+        <Button
+          className={styles.button_turquoise}
+          onClick={openCloseModalRewards}
+        >
+          Guardar
+        </Button>
+
+        <Button
+          className={styles.button_outlined}
+          onClick={openCloseModalRewards}
+        >
+          Cancelar
+        </Button>
+
+      </div>
+
+    </div>
+  );
 
   return (
     <section className="create__challenge">
@@ -185,6 +238,7 @@ export default function NewChallenge() {
       <Button
         variant="contained"
         className="button--violet-big"
+        onClick={openCloseModalRewards}
       >
         Guardar
       </Button>
@@ -202,6 +256,13 @@ export default function NewChallenge() {
         onClose={openCloseModalTimes}
       >
         {challengeBody}
+      </Modal>
+
+      <Modal
+        open={modalRewards}
+        onClose={openCloseModalRewards}
+      >
+        {rewardsBody}
       </Modal>
 
     </section>

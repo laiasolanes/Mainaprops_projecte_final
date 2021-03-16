@@ -12,51 +12,49 @@
         margin: 20px 0;
     }
 
-    .all__tasks {
-        
-    }
-
     .create__text {
         margin: 10px 0;
     }
 
-    .row__tasks {
-        justify-content: space-between;
-
-    }
-
-    .task__button {
-        margin: 10px;
-        width: 150px;
-        height:150px;
-        padding: 0 10px 10px 10px;
-        opacity: 0.8;
-        border: 3px solid rgba(255, 255, 255, 0);
-        border-radius: 10px;
-        background-color: rgba(255, 255, 255, 0.2);
-        cursor: pointer;
-        flex-direction: column;
-        text-transform: none;
-        line-height: 1em;
-        
-        span {
-            display: flex;
+    .all__tasks {
+    
+        .row__tasks {
+            justify-content: space-between;
+        }
+    
+        .task__button {
+            margin: 10px;
+            width: 150px;
+            height:150px;
+            padding: 0 10px 10px 10px;
+            opacity: 0.8;
+            border: 3px solid rgba(255, 255, 255, 0);
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.2);
+            cursor: pointer;
             flex-direction: column;
+            text-transform: none;
+            line-height: 1em;
+            
+            span {
+                display: flex;
+                flex-direction: column;
+            }
+    
+            img {
+                width: 90%;
+                margin-top: -20px;
+            }
+    
+            p {
+                font-family: $text_title;
+                margin-top: 10px;
+            }
         }
-
-        img {
-            width: 90%;
-            margin-top: -20px;
+        .task__button:focus {
+            opacity: 1;
+            border: 3px solid #ffffff;
         }
-
-        p {
-            font-family: $text_title;
-            margin-top: 10px;
-        }
-    }
-    .task__button:focus {
-        opacity: 1;
-        border: 3px solid #ffffff;
     }
 
     .button--violet-big {
@@ -82,17 +80,3 @@
   
 }
 
-.time__image {
-    width: 30%;
-    display: block;
-    margin: auto;
-}
-
-.time__text {
-    color: #b6b4b4;
-    margin: 20px 0;
-}
-
-.days {
-    flex-direction: column;
-}

@@ -1,7 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStylesNewChallenge = makeStyles((theme) => ({
-
   modalChallenge: {
     position: 'absolute',
     width: '98%',
@@ -33,6 +32,60 @@ const useStylesNewChallenge = makeStyles((theme) => ({
       backgroundColor: '#ffffff',
     },
   },
+
+  timeImage: {
+    width: '30%',
+    display: 'block',
+    margin: 'auto',
+  },
+
+  text: {
+    color: '#b6b4b4',
+    margin: '20px 0',
+  },
+
+  days: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+
+  rowRewards: {
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
+
+  rewardButton: {
+    margin: '10px',
+    width: '150px',
+    height: '150px',
+    padding: '0 10px 10px 10px',
+    opacity: '0.8',
+    border: '3px solid rgba(255, 255, 255, 0)',
+    borderRadius: '10px',
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    cursor: 'pointer',
+    flexDirection: 'column',
+    textTransform: 'none',
+    lineHeight: '1em',
+    '&:focus': {
+      opacity: '1',
+      border: '3px solid #ffffff',
+      backgroundColor: 'rgba(255,255,255,0)',
+    },
+
+  },
+
+  imgButton: {
+    width: '70%',
+    marginTop: '-20px',
+  },
+
+  pButton: {
+    color: '#ffffff',
+    marginTop: '10px',
+    fontWeight: '600',
+  },
+
   button_turquoise: {
     width: '100%',
     backgroundColor: '#6CC3C6',
