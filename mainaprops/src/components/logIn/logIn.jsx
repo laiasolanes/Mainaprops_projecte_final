@@ -10,7 +10,14 @@ export default function LogIn() {
 
       <h1 className="app-name">Mainaprops</h1>
 
-      <Button variant="contained" className="button--violet-big">Accedir amb google</Button>
+      <Button
+        variant="contained"
+        className="button--violet-big"
+        href="/"
+      >
+        Accedir amb google
+
+      </Button>
 
       <p>
         Una aplicació per motivar els teus fills a complir els seus propòsits.
