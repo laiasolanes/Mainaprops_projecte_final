@@ -9,7 +9,7 @@
 }
 
 body {
-  background: rgba(108, 195, 198, 0.5);
+  background: #6cc3c6;
 }
 
 #root {
@@ -125,5 +125,57 @@ p {
 .create__challenge .task__button:focus {
   opacity: 1;
   border: 3px solid #ffffff;
+}
+
+.create__challenge .button--violet-big {
+  border-radius: 50px;
+  width: 100%;
+  padding: 14px;
+  margin: 10px 0;
+  text-transform: none;
+  font-size: 18px;
+  font-weight: 600;
+  background: #3D2563;
+  color: #ffffff;
+}
+
+.create__challenge .button--violet-big:hover {
+  background: #4d2d80;
+}
+
+.create__challenge .button--outlined-big {
+  border-radius: 50px;
+  width: 100%;
+  padding: 11px;
+  margin: 10px 0;
+  text-transform: none;
+  font-size: 18px;
+  font-weight: 600;
+  background: transparent;
+  border: 3px solid #ffffff;
+  color: #ffffff;
+}
+
+.create__challenge .button--outlined-big:hover {
+  color: #6CC3C6;
+  background: #ffffff;
+}
+
+.time__image {
+  width: 30%;
+  display: block;
+  margin: auto;
+}
+
+.time__text {
+  color: #b6b4b4;
+  margin: 20px 0;
+}
+
+.days {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 /*# sourceMappingURL=newChallenge.css.map */

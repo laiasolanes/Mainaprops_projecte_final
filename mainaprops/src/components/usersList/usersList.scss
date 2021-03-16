@@ -37,7 +37,7 @@
        }
    }
    .button--outlined-big {
-        @include buttonBig;
+        @include buttonBigOutlined;
         background: transparent;
         border: 3px solid #ffffff;
         color: #ffffff;

@@ -59,5 +59,40 @@
         border: 3px solid #ffffff;
     }
 
+    .button--violet-big {
+        @include buttonBig;
+        background: $color_violet;
+        color: #ffffff;
+     
+    }
+    .button--violet-big:hover{
+        background: $color_violet_light;
+    }
+    
+    .button--outlined-big {
+        @include buttonBigOutlined;
+        background: transparent;
+        border: 3px solid #ffffff;
+        color: #ffffff;
+    }
+    .button--outlined-big:hover{
+        color: $color_turquoise;
+        background: #ffffff;
+    }
   
+}
+
+.time__image {
+    width: 30%;
+    display: block;
+    margin: auto;
+}
+
+.time__text {
+    color: #b6b4b4;
+    margin: 20px 0;
+}
+
+.days {
+    flex-direction: column;
 }

@@ -1,13 +1,14 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const useStylesList = makeStyles((theme) => ({
-  modal: {
+const useStylesNewChallenge = makeStyles((theme) => ({
+
+  modalChallenge: {
     position: 'absolute',
     width: '98%',
-    backgroundColor: '#6CC3C6',
+    backgroundColor: '#3D2563',
     border: '3px solid #ffffff',
     color: '#ffffff',
-    borderRadius: '50px',
+    borderRadius: '20px',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(8, 4, 8, 4),
     top: '50%',
@@ -15,15 +16,26 @@ const useStylesList = makeStyles((theme) => ({
     transform: 'translate(-50%, -50%)',
     outlineStyle: 'none',
   },
-  textfield: {
+
+  button_outlined: {
     width: '100%',
+    backgroundColor: 'transparent',
+    color: '#ffffff',
+    border: '2px solid #ffffff',
+    fontWeight: '600',
+    textTransform: 'none',
+    margin: '10px 0',
+    padding: '10px 0',
+    borderRadius: '50px',
+    boxShadow: theme.shadows[2],
+    '&:hover': {
+      color: '#6CC3C6',
+      backgroundColor: '#ffffff',
+    },
   },
-  inputMaterial: {
+  button_turquoise: {
     width: '100%',
-  },
-  button_violet: {
-    width: '100%',
-    backgroundColor: '#3D2563',
+    backgroundColor: '#6CC3C6',
     color: '#ffffff',
     fontWeight: '600',
     textTransform: 'none',
@@ -32,25 +44,26 @@ const useStylesList = makeStyles((theme) => ({
     borderRadius: '50px',
     boxShadow: theme.shadows[2],
     '&:hover': {
-      backgroundColor: '#4d2d80',
+      backgroundColor: '#58a2a5',
     },
   },
-  button_outlined: {
-    width: '100%',
-    backgroundColor: '#6CC3C6',
+
+  button_day: {
+    backgroundColor: 'rgba(255,255,255,0.1)',
+    width: '50%',
+    margin: '5px auto',
     color: '#ffffff',
+    fontFamily: 'Itim',
     fontWeight: '600',
     textTransform: 'none',
-    margin: '10px 0',
-    padding: '7px 0',
-    borderRadius: '50px',
-    border: '3px solid #ffffff',
-    boxShadow: theme.shadows[2],
     '&:hover': {
-      backgroundColor: '#ffffff',
-      color: '#6CC3C6',
+      backgroundColor: 'rgba(255,255,255,0.6)',
+    },
+    '&:focus': {
+      backgroundColor: 'rgba(255,255,255,0.6)',
     },
   },
 
 }));
-export default useStylesList;
+
+export default useStylesNewChallenge;

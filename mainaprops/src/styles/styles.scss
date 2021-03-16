@@ -9,7 +9,7 @@
 }
 
 body {
-    background: rgba(108, 195, 198, 0.5);
+    background: rgba(108, 195, 198, 1);
 }
 
 #root{
@@ -64,13 +64,30 @@ p {
 @mixin buttonBig{
     border-radius: 50px;
     width: 100%;
-    padding:16px;
+    padding:14px;
+    margin: 10px 0;
+    text-transform: none;
+    font-size: 18px;
+    font-weight: 600;
+}
+@mixin buttonBigOutlined{
+    border-radius: 50px;
+    width: 100%;
+    padding:11px;
     margin: 10px 0;
     text-transform: none;
     font-size: 18px;
     font-weight: 600;
 }
 @mixin buttonSmall{
+    border-radius: 50px;
+    width: 100%;
+    padding:10px;
+    margin: 10px 0;
+    text-transform: none;
+    font-weight: 600;
+}
+@mixin buttonSmallOutlined{
     border-radius: 50px;
     width: 100%;
     padding:10px;
