@@ -1,0 +1,82 @@
+@import '../../styles/colors';
+@import '../../styles/texts';
+@import '../../styles/styles.scss';
+
+.create__challenge {
+    padding: 110px 30px 30px 30px;
+
+    .create__title {
+        font-family: $text_title;
+        font-size: 26px;
+        color: #e2e2e2;
+        margin: 20px 0;
+    }
+
+    .create__text {
+        margin: 10px 0;
+    }
+
+    .all__tasks {
+    
+        .row__tasks {
+            justify-content: space-between;
+        }
+    
+        .task__button {
+            margin: 10px;
+            width: 150px;
+            height:150px;
+            padding: 0 10px 10px 10px;
+            opacity: 0.8;
+            border: 3px solid rgba(255, 255, 255, 0);
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            flex-direction: column;
+            text-transform: none;
+            line-height: 1em;
+            
+            span {
+                display: flex;
+                flex-direction: column;
+            }
+    
+            img {
+                width: 90%;
+                margin-top: -20px;
+            }
+    
+            p {
+                font-family: $text_title;
+                margin-top: 10px;
+            }
+        }
+        .task__button:focus {
+            opacity: 1;
+            border: 3px solid #ffffff;
+        }
+    }
+
+    .button--violet-big {
+        @include buttonBig;
+        background: $color_violet;
+        color: #ffffff;
+     
+    }
+    .button--violet-big:hover{
+        background: $color_violet_light;
+    }
+    
+    .button--outlined-big {
+        @include buttonBigOutlined;
+        background: transparent;
+        border: 3px solid #ffffff;
+        color: #ffffff;
+    }
+    .button--outlined-big:hover{
+        color: $color_turquoise;
+        background: #ffffff;
+    }
+  
+}
+

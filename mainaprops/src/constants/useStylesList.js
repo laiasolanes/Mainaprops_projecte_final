@@ -42,7 +42,7 @@ const useStylesList = makeStyles((theme) => ({
     fontWeight: '600',
     textTransform: 'none',
     margin: '10px 0',
-    padding: '8px 0',
+    padding: '7px 0',
     borderRadius: '50px',
     border: '3px solid #ffffff',
     boxShadow: theme.shadows[2],

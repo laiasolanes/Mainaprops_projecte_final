@@ -14,6 +14,8 @@
 
         h3 {
             color: $color_violet;
+            position:relative;
+            z-index: 2;
         }
 
         p {
@@ -25,6 +27,7 @@
             width: 100px;
             top: 120px;
             left: 40px;
+            z-index: 0;
         }
 
         .button--violet-small {

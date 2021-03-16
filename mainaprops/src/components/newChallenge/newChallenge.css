@@ -63,21 +63,71 @@ p {
   font-weight: 300;
 }
 
-.home {
-  text-align: center;
+.create__challenge {
   padding: 110px 30px 30px 30px;
 }
 
-.home img {
-  display: block;
-  margin: auto;
+.create__challenge .create__title {
+  font-family: "Itim", "Helvetica Neue", sans-serif;
+  font-size: 26px;
+  color: #e2e2e2;
+  margin: 20px 0;
 }
 
-.home p {
-  margin: 30px;
+.create__challenge .create__text {
+  margin: 10px 0;
 }
 
-.home .button--violet-big {
+.create__challenge .all__tasks .row__tasks {
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.create__challenge .all__tasks .task__button {
+  margin: 10px;
+  width: 150px;
+  height: 150px;
+  padding: 0 10px 10px 10px;
+  opacity: 0.8;
+  border: 3px solid rgba(255, 255, 255, 0);
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  text-transform: none;
+  line-height: 1em;
+}
+
+.create__challenge .all__tasks .task__button span {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.create__challenge .all__tasks .task__button img {
+  width: 90%;
+  margin-top: -20px;
+}
+
+.create__challenge .all__tasks .task__button p {
+  font-family: "Itim", "Helvetica Neue", sans-serif;
+  margin-top: 10px;
+}
+
+.create__challenge .all__tasks .task__button:focus {
+  opacity: 1;
+  border: 3px solid #ffffff;
+}
+
+.create__challenge .button--violet-big {
   border-radius: 50px;
   width: 100%;
   padding: 14px;
@@ -89,11 +139,11 @@ p {
   color: #ffffff;
 }
 
-.home .button--violet-big:hover {
+.create__challenge .button--violet-big:hover {
   background: #4d2d80;
 }
 
-.home .button--outlined-big {
+.create__challenge .button--outlined-big {
   border-radius: 50px;
   width: 100%;
   padding: 11px;
@@ -106,8 +156,8 @@ p {
   color: #ffffff;
 }
 
-.home .button--outlined-big:hover {
+.create__challenge .button--outlined-big:hover {
   color: #6CC3C6;
   background: #ffffff;
 }
-/*# sourceMappingURL=home.css.map */
+/*# sourceMappingURL=newChallenge.css.map */

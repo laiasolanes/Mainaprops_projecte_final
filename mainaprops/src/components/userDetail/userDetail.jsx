@@ -68,7 +68,7 @@ export function UserDetailComponent({ users, actions }) {
 
         challengeSelected && challengeSelected?.tasks?.map((task) => (
           <>
-            <h5 key={task._id}>{task.name}</h5>
+            <h5 key={task.name}>{task.name}</h5>
             <div className="flex check__tasks">
               {
                   task.times && task.times.map((time, index) => (
@@ -178,6 +178,7 @@ export function UserDetailComponent({ users, actions }) {
         <Button
           variant="contained"
           className="button--violet-small"
+          href={`/users/${users[0]?._id}/newchallenge`}
         >
           Crear repte
         </Button>
@@ -237,11 +238,12 @@ UserDetailComponent.propTypes = {
       {
         user_profile: PropTypes.shape(
           {
-            challenges: PropTypes.arrayOf(PropTypes.string),
+            challenges: PropTypes.arrayOf(PropTypes.shape({})),
             name: PropTypes.string,
             image: PropTypes.string,
           },
         ),
+        _id: PropTypes.number,
       },
     ),
   ).isRequired,
