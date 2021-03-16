@@ -94,5 +94,3 @@ module.exports = {
   getUserByParam,
   getTasksAndRewards,
 };
-
-// .populate('reward', 'task');

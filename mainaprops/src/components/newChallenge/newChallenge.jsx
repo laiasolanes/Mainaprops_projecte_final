@@ -32,19 +32,16 @@ export default function NewChallenge() {
     setModalRewards(!modalRewards);
   }
 
+  const weekDays = ['dilluns', 'dimarts', 'dimecres', 'dijous', 'divendres', 'dissabte', 'diumenge'];
+
   const challengeBody = (
     <div className={styles.modalChallenge}>
       <img src={bathTask} alt="Task" className={styles.timeImage} />
       <h3>Dutxar-se</h3>
       <p className={styles.text}>Selecciona els dies de la setmana que has de fer la tasca.</p>
+
       <div className={styles.days}>
-        <Button className={styles.button_day}>dilluns</Button>
-        <Button className={styles.button_day}>dimarts</Button>
-        <Button className={styles.button_day}>dimecres</Button>
-        <Button className={styles.button_day}>dijous</Button>
-        <Button className={styles.button_day}>divendres</Button>
-        <Button className={styles.button_day}>dissabte</Button>
-        <Button className={styles.button_day}>diumenge</Button>
+        {weekDays.map((day) => <Button className={styles.button_day}>{day}</Button>)}
       </div>
 
       <Button
