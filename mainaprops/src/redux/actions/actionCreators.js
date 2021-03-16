@@ -70,3 +70,15 @@ export function userByParam(paramId) {
     });
   };
 }
+
+export function loadTasksAndRewards(paramId) {
+  return async function dispatchTasksAndRewards(dispatch) {
+    const response = await axios.get(`${url}/${paramId}/newchallenge`);
+    const dataTasksAndRewards = response.data;
+
+    dispatch({
+      type: actionTypes.LOAD_TASKS_AND_REWARDS,
+      dataTasksAndRewards,
+    });
+  };
+}
