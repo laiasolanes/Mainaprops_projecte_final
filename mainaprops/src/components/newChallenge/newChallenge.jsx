@@ -13,7 +13,6 @@ import {
   bathTask,
 
 } from '../../constants/taskImages';
-import rewards from '../../constants/rewardImages';
 import useStylesNewChallenge from '../../constants/useStylesNewChallenge';
 
 const pageURL = window.location.href.split('/');
@@ -56,7 +55,7 @@ export function NewChallengeComponent({ dataChallenge, actions }) {
       <h3>Dutxar-se</h3>
       <p className={styles.text}>Selecciona els dies de la setmana que has de fer la tasca.</p>
 
-      <FormGroup column>
+      <FormGroup column="true">
 
         <FormControlLabel
           control={(
@@ -180,106 +179,37 @@ export function NewChallengeComponent({ dataChallenge, actions }) {
         rebras quan facis totes les tasques i aconsegueixis el repte.
       </p>
 
-      <div className="all__rewards">
+      <div className={styles.rowRewards}>
 
-        <div className={styles.rowRewards}>
+        {
+          dataChallenge && dataChallenge?.allRewards?.map((reward) => (
+            <article className="reward" id={reward._id} key={reward._id}>
+              <Button
+                className={styles.rewardButton}
+              >
+                <div>
+                  <img className={styles.imgButton} src={reward.image} alt="Recompensa" />
+                  <p className={styles.pButton}>{reward.name}</p>
+                </div>
 
-          <article className="reward" id="weekend">
-            <Button
-              className={styles.rewardButton}
-            >
-              <div>
-                <img className={styles.imgButton} src={rewards.weekend} alt="Recompensa" />
-                <p className={styles.pButton}>Escapada familiar</p>
-              </div>
-
-            </Button>
-          </article>
-
-          <article className="task" id="film">
-            <Button
-              className={styles.rewardButton}
-            >
-              <div>
-                <img className={styles.imgButton} src={rewards.film} alt="Recompensa" />
-                <p className={styles.pButton}>Pel·lícula preferida</p>
-              </div>
-
-            </Button>
-          </article>
-
-        </div>
-
-        <div className={styles.rowRewards}>
-
-          <article className="reward" id="show">
-            <Button
-              className={styles.rewardButton}
-            >
-              <div>
-                <img className={styles.imgButton} src={rewards.show} alt="Recompensa" />
-                <p className={styles.pButton}>Espectacle ne família</p>
-              </div>
-
-            </Button>
-          </article>
-
-          <article className="task" id="book">
-            <Button
-              className={styles.rewardButton}
-            >
-              <div>
-                <img className={styles.imgButton} src={rewards.book} alt="Recompensa" />
-                <p className={styles.pButton}>Un llibre nou</p>
-              </div>
-
-            </Button>
-          </article>
-
-        </div>
-        <div className={styles.rowRewards}>
-
-          <article className="reward" id="dinner">
-            <Button
-              className={styles.rewardButton}
-            >
-              <div>
-                <img className={styles.imgButton} src={rewards.dinner} alt="Recompensa" />
-                <p className={styles.pButton}>Espectacle ne família</p>
-              </div>
-
-            </Button>
-          </article>
-
-          <article className="task" id="friends">
-            <Button
-              className={styles.rewardButton}
-            >
-              <div>
-                <img className={styles.imgButton} src={rewards.friends} alt="Recompensa" />
-                <p className={styles.pButton}>Nit amb amics</p>
-              </div>
-
-            </Button>
-          </article>
-
-        </div>
-
-        <Button
-          className={styles.button_turquoise}
-          onClick={openCloseModalRewards}
-        >
-          Guardar
-        </Button>
-
-        <Button
-          className={styles.button_outlined}
-          onClick={openCloseModalRewards}
-        >
-          Cancelar
-        </Button>
-
+              </Button>
+            </article>
+          ))
+        }
       </div>
+      <Button
+        className={styles.button_turquoise}
+        onClick={openCloseModalRewards}
+      >
+        Guardar
+      </Button>
+
+      <Button
+        className={styles.button_outlined}
+        onClick={openCloseModalRewards}
+      >
+        Cancelar
+      </Button>
 
     </div>
   );
@@ -294,10 +224,10 @@ export function NewChallengeComponent({ dataChallenge, actions }) {
         la seva recompensa.
       </p>
 
-      <div className="all__tasks">
+      <div className="flex all__tasks">
         {
         dataChallenge && dataChallenge?.allTasks?.map((task) => (
-          <article className="task" id="mascot">
+          <article className="task" id={task._id}>
             <Button
               className="task__button"
               onClick={openCloseModalTimes}

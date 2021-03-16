@@ -78,7 +78,9 @@ p {
   margin: 10px 0;
 }
 
-.create__challenge .all__tasks .row__tasks {
+.create__challenge .all__tasks {
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;

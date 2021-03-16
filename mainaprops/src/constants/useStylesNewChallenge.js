@@ -52,6 +52,7 @@ const useStylesNewChallenge = makeStyles((theme) => ({
   rowRewards: {
     display: 'flex',
     justifyContent: 'space-between',
+    flexWrap: 'wrap',
   },
 
   rewardButton: {

@@ -17,10 +17,8 @@
     }
 
     .all__tasks {
-    
-        .row__tasks {
-            justify-content: space-between;
-        }
+        flex-wrap: wrap;
+        justify-content: space-between;
     
         .task__button {
             margin: 10px;
