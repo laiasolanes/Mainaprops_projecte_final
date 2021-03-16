@@ -8,11 +8,7 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import { loadDataChallenge } from '../../redux/actions/actionCreators';
-import {
 
-  bathTask,
-
-} from '../../constants/taskImages';
 import useStylesNewChallenge from '../../constants/useStylesNewChallenge';
 
 const pageURL = window.location.href.split('/');
@@ -33,6 +29,8 @@ export function NewChallengeComponent({ dataChallenge, actions }) {
     diumenge: false,
   });
 
+  const [taskSelected, setTaskSelected] = useState({});
+
   useEffect(() => {
     actions.loadDataChallenge(idUser);
   }, []);
@@ -49,11 +47,32 @@ export function NewChallengeComponent({ dataChallenge, actions }) {
     setStateDays({ ...stateDays, [event.target.name]: event.target.checked });
   };
 
-  const challengeBody = (
+  function addClass(idItem) {
+    const item = document.getElementById(idItem);
+    return item.classList.contains('selected')
+      ? item.classList.remove('selected')
+      : item.classList.add('selected');
+  }
+
+  function clickTask(task, id) {
+    setTaskSelected(task);
+    addClass(id);
+    const item = document.getElementById(id);
+    if (item.classList.contains('selected')) {
+      openCloseModalTimes();
+    }
+  }
+
+  const timesTaskBody = (
     <div className={styles.modalChallenge}>
-      <img src={bathTask} alt="Task" className={styles.timeImage} />
-      <h3>Dutxar-se</h3>
-      <p className={styles.text}>Selecciona els dies de la setmana que has de fer la tasca.</p>
+      <img src={taskSelected.image} alt="Task" className={styles.timeImage} />
+      <h3>{taskSelected.name}</h3>
+      <p className={styles.text}>
+        Selecciona els dies de la setmana que has de
+        {' '}
+        {taskSelected?.name?.toLowerCase()}
+        .
+      </p>
 
       <FormGroup column="true">
 
@@ -227,10 +246,11 @@ export function NewChallengeComponent({ dataChallenge, actions }) {
       <div className="flex all__tasks">
         {
         dataChallenge && dataChallenge?.allTasks?.map((task) => (
-          <article className="task" id={task._id}>
+          <article className="task">
             <Button
+              id={task._id}
               className="task__button"
-              onClick={openCloseModalTimes}
+              onClick={() => clickTask(task, task._id)}
             >
               <img src={task.image} alt="Tasca" />
               <p>{task.name}</p>
@@ -261,7 +281,7 @@ export function NewChallengeComponent({ dataChallenge, actions }) {
         open={modalTimes}
         onClose={openCloseModalTimes}
       >
-        {challengeBody}
+        {timesTaskBody}
       </Modal>
 
       <Modal

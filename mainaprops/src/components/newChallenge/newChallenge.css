@@ -124,9 +124,13 @@ p {
   margin-top: 10px;
 }
 
-.create__challenge .all__tasks .task__button:focus {
+.create__challenge .all__tasks .selected {
   opacity: 1;
   border: 3px solid #ffffff;
+}
+
+.create__challenge .all__tasks .task__button:hover {
+  opacity: 1;
 }
 
 .create__challenge .button--violet-big {

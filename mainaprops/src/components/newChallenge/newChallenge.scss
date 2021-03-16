@@ -16,9 +16,12 @@
         margin: 10px 0;
     }
 
+
     .all__tasks {
         flex-wrap: wrap;
         justify-content: space-between;
+
+
     
         .task__button {
             margin: 10px;
@@ -49,9 +52,14 @@
                 margin-top: 10px;
             }
         }
-        .task__button:focus {
+        .selected {
+           
             opacity: 1;
             border: 3px solid #ffffff;
+        }
+        .task__button:hover {
+            opacity: 1;
+            
         }
     }
 
