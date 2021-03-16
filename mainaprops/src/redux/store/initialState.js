@@ -1,6 +1,6 @@
 const initialState = {
   users: [],
-  tasksAndRewards: [],
+  dataChallenge: {},
 };
 
 export default initialState;

@@ -71,14 +71,14 @@ export function userByParam(paramId) {
   };
 }
 
-export function loadTasksAndRewards(paramId) {
-  return async function dispatchTasksAndRewards(dispatch) {
+export function loadDataChallenge(paramId) {
+  return async function dispatchDataChallenge(dispatch) {
     const response = await axios.get(`${url}/${paramId}/newchallenge`);
-    const dataTasksAndRewards = response.data;
+    const dataChallenge = response.data;
 
     dispatch({
-      type: actionTypes.LOAD_TASKS_AND_REWARDS,
-      dataTasksAndRewards,
+      type: actionTypes.LOAD_DATA_CHALLENGE,
+      dataChallenge,
     });
   };
 }

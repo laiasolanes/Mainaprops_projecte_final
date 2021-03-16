@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
 import users from './usersReducer';
-import tasksAndRewards from './tasksAndRewardsReducer';
+import dataChallenge from './dataChallengeReducer';
 
 const rootReducer = combineReducers({
   users,
-  tasksAndRewards,
+  dataChallenge,
 });
 
 export default rootReducer;

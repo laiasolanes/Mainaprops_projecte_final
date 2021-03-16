@@ -1,28 +1,25 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import { PropTypes } from 'prop-types';
+import { bindActionCreators } from 'redux';
 import './newChallenge.css';
 import { Modal, Button } from '@material-ui/core';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-
+import { loadDataChallenge } from '../../redux/actions/actionCreators';
 import {
-  mascotTask,
-  instrumentTask,
-  dishwasherTask,
+
   bathTask,
-  peaceTask,
-  tableTask,
-  homeworkTask,
-  tidyupTask,
+
 } from '../../constants/taskImages';
 import rewards from '../../constants/rewardImages';
-
 import useStylesNewChallenge from '../../constants/useStylesNewChallenge';
 
 const pageURL = window.location.href.split('/');
 const idUser = pageURL[4];
 
-export default function NewChallenge() {
+export function NewChallengeComponent({ dataChallenge, actions }) {
   const styles = useStylesNewChallenge();
 
   const [modalTimes, setModalTimes] = useState(false);
@@ -36,6 +33,10 @@ export default function NewChallenge() {
     dissabte: false,
     diumenge: false,
   });
+
+  useEffect(() => {
+    actions.loadDataChallenge(idUser);
+  }, []);
 
   function openCloseModalTimes() {
     setModalTimes(!modalTimes);
@@ -294,105 +295,19 @@ export default function NewChallenge() {
       </p>
 
       <div className="all__tasks">
-
-        <div className="flex row__tasks">
-
+        {
+        dataChallenge && dataChallenge?.allTasks?.map((task) => (
           <article className="task" id="mascot">
             <Button
               className="task__button"
               onClick={openCloseModalTimes}
             >
-              <img src={mascotTask} alt="Tasca" />
-              <p>Cuidar la mascota</p>
+              <img src={task.image} alt="Tasca" />
+              <p>{task.name}</p>
             </Button>
           </article>
-
-          <article className="task" id="instrument">
-            <Button
-              className="task__button"
-              onClick={openCloseModalTimes}
-            >
-              <img src={instrumentTask} alt="Tasca" />
-              <p>Practicar instrument</p>
-            </Button>
-          </article>
-
-        </div>
-
-        <div className="flex row__tasks">
-
-          <article className="task" id="dishwasher">
-            <Button
-              className="task__button"
-              onClick={openCloseModalTimes}
-            >
-              <img src={dishwasherTask} alt="Tasca" />
-              <p>Buidar el rentaplats</p>
-
-            </Button>
-          </article>
-
-          <article className="task" id="bath">
-            <Button
-              className="task__button"
-              onClick={openCloseModalTimes}
-            >
-              <img src={bathTask} alt="Tasca" />
-              <p>Dutxar-se</p>
-            </Button>
-          </article>
-
-        </div>
-
-        <div className="flex row__tasks">
-
-          <article className="task" id="peace">
-            <Button
-              className="task__button"
-              onClick={openCloseModalTimes}
-            >
-              <img src={peaceTask} alt="Tasca" />
-              <p>Conviure en pau</p>
-
-            </Button>
-          </article>
-
-          <article className="task" id="table">
-            <Button
-              className="task__button"
-              onClick={openCloseModalTimes}
-            >
-              <img src={tableTask} alt="Tasca" />
-              <p>Parar taula</p>
-            </Button>
-          </article>
-
-        </div>
-
-        <div className="flex row__tasks">
-
-          <article className="task" id="homework">
-            <Button
-              className="task__button"
-              onClick={openCloseModalTimes}
-            >
-              <img src={homeworkTask} alt="Tasca" />
-              <p>Fer els deures</p>
-
-            </Button>
-          </article>
-
-          <article className="task" id="tidyup">
-            <Button
-              className="task__button"
-              onClick={openCloseModalTimes}
-            >
-              <img src={tidyupTask} alt="Tasca" />
-              <p>Endreçar</p>
-            </Button>
-          </article>
-
-        </div>
+        ))
+      }
 
       </div>
 
@@ -429,3 +344,33 @@ export default function NewChallenge() {
     </section>
   );
 }
+
+NewChallengeComponent.propTypes = {
+  dataChallenge: PropTypes.shape(
+    {
+      allTasks: PropTypes.arrayOf(
+        PropTypes.shape({}),
+      ),
+      allRewards: PropTypes.arrayOf(
+        PropTypes.shape({}),
+      ),
+    },
+  ).isRequired,
+  actions: PropTypes.shape({
+    loadDataChallenge: PropTypes.func,
+  }).isRequired,
+};
+
+function mapStateToProps(state) {
+  return { dataChallenge: state.dataChallenge };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators({
+      loadDataChallenge,
+    }, dispatch),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewChallengeComponent);
