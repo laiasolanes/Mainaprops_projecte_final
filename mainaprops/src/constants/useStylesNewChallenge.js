@@ -107,14 +107,19 @@ const useStylesNewChallenge = makeStyles((theme) => ({
     backgroundColor: 'rgba(255,255,255,0.1)',
     width: '50%',
     margin: '5px auto',
+    borderRadius: '5px',
     color: '#ffffff',
     fontWeight: '600',
     textTransform: 'none',
     '&:hover': {
-      backgroundColor: 'rgba(255,255,255,0.6)',
+      backgroundColor: 'rgba(255,255,255,0.3)',
     },
-    '&:focus': {
-      backgroundColor: 'rgba(255,255,255,0.6)',
+  },
+
+  check: {
+    color: '#58a2a5',
+    '&$checked': {
+      color: '#58a2a5',
     },
   },
 

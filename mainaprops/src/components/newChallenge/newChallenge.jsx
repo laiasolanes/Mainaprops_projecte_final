@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import './newChallenge.css';
 import { Modal, Button } from '@material-ui/core';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+
 import {
   mascotTask,
   instrumentTask,
@@ -23,6 +27,15 @@ export default function NewChallenge() {
 
   const [modalTimes, setModalTimes] = useState(false);
   const [modalRewards, setModalRewards] = useState(false);
+  const [stateDays, setStateDays] = useState({
+    dilluns: false,
+    dimarts: false,
+    dimecres: false,
+    dijous: false,
+    divendres: false,
+    dissabte: false,
+    diumenge: false,
+  });
 
   function openCloseModalTimes() {
     setModalTimes(!modalTimes);
@@ -32,7 +45,9 @@ export default function NewChallenge() {
     setModalRewards(!modalRewards);
   }
 
-  const weekDays = ['dilluns', 'dimarts', 'dimecres', 'dijous', 'divendres', 'dissabte', 'diumenge'];
+  const daysCheckChange = (event) => {
+    setStateDays({ ...stateDays, [event.target.name]: event.target.checked });
+  };
 
   const challengeBody = (
     <div className={styles.modalChallenge}>
@@ -40,9 +55,102 @@ export default function NewChallenge() {
       <h3>Dutxar-se</h3>
       <p className={styles.text}>Selecciona els dies de la setmana que has de fer la tasca.</p>
 
-      <div className={styles.days}>
-        {weekDays.map((day) => <Button className={styles.button_day}>{day}</Button>)}
-      </div>
+      <FormGroup column>
+
+        <FormControlLabel
+          control={(
+            <Checkbox
+              color="default"
+              checked={stateDays.dilluns}
+              onChange={daysCheckChange}
+              name="dilluns"
+              className={styles.check}
+            />
+            )}
+          label="dilluns"
+          className={styles.button_day}
+        />
+
+        <FormControlLabel
+          control={(
+            <Checkbox
+              color="default"
+              checked={stateDays.dimarts}
+              onChange={daysCheckChange}
+              name="dimarts"
+              className={styles.check}
+            />
+            )}
+          label="dimarts"
+          className={styles.button_day}
+        />
+        <FormControlLabel
+          control={(
+            <Checkbox
+              color="default"
+              checked={stateDays.dimecres}
+              onChange={daysCheckChange}
+              name="dimecres"
+              className={styles.check}
+            />
+            )}
+          label="dimecres"
+          className={styles.button_day}
+        />
+        <FormControlLabel
+          control={(
+            <Checkbox
+              color="default"
+              checked={stateDays.dijous}
+              onChange={daysCheckChange}
+              name="dijous"
+              className={styles.check}
+            />
+            )}
+          label="dijous"
+          className={styles.button_day}
+        />
+        <FormControlLabel
+          control={(
+            <Checkbox
+              color="default"
+              checked={stateDays.divendres}
+              onChange={daysCheckChange}
+              name="divendres"
+              className={styles.check}
+            />
+            )}
+          label="divendres"
+          className={styles.button_day}
+        />
+        <FormControlLabel
+          control={(
+            <Checkbox
+              color="default"
+              checked={stateDays.dissabte}
+              onChange={daysCheckChange}
+              name="dissabte"
+              className={styles.check}
+            />
+            )}
+          label="dissabte"
+          className={styles.button_day}
+        />
+        <FormControlLabel
+          control={(
+            <Checkbox
+              color="default"
+              checked={stateDays.diumenge}
+              onChange={daysCheckChange}
+              name="diumenge"
+              className={styles.check}
+            />
+            )}
+          label="diumenge"
+          className={styles.button_day}
+        />
+
+      </FormGroup>
 
       <Button
         className={styles.button_turquoise}
