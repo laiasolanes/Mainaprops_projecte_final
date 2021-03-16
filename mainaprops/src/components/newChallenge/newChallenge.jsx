@@ -11,6 +11,7 @@ import {
   homeworkTask,
   tidyupTask,
 } from '../../constants/taskImages';
+import rewards from '../../constants/rewardImages';
 
 import useStylesNewChallenge from '../../constants/useStylesNewChallenge';
 
@@ -82,20 +83,75 @@ export default function NewChallenge() {
               className={styles.rewardButton}
             >
               <div>
-                <img className={styles.imgButton} src={mascotTask} alt="Recompensa" />
+                <img className={styles.imgButton} src={rewards.weekend} alt="Recompensa" />
                 <p className={styles.pButton}>Escapada familiar</p>
               </div>
 
             </Button>
           </article>
 
-          <article className="task" id="instrument">
+          <article className="task" id="film">
             <Button
               className={styles.rewardButton}
             >
               <div>
-                <img className={styles.imgButton} src={mascotTask} alt="Recompensa" />
-                <p className={styles.pButton}>Escapada familiar</p>
+                <img className={styles.imgButton} src={rewards.film} alt="Recompensa" />
+                <p className={styles.pButton}>Pel·lícula preferida</p>
+              </div>
+
+            </Button>
+          </article>
+
+        </div>
+
+        <div className={styles.rowRewards}>
+
+          <article className="reward" id="show">
+            <Button
+              className={styles.rewardButton}
+            >
+              <div>
+                <img className={styles.imgButton} src={rewards.show} alt="Recompensa" />
+                <p className={styles.pButton}>Espectacle ne família</p>
+              </div>
+
+            </Button>
+          </article>
+
+          <article className="task" id="book">
+            <Button
+              className={styles.rewardButton}
+            >
+              <div>
+                <img className={styles.imgButton} src={rewards.book} alt="Recompensa" />
+                <p className={styles.pButton}>Un llibre nou</p>
+              </div>
+
+            </Button>
+          </article>
+
+        </div>
+        <div className={styles.rowRewards}>
+
+          <article className="reward" id="dinner">
+            <Button
+              className={styles.rewardButton}
+            >
+              <div>
+                <img className={styles.imgButton} src={rewards.dinner} alt="Recompensa" />
+                <p className={styles.pButton}>Espectacle ne família</p>
+              </div>
+
+            </Button>
+          </article>
+
+          <article className="task" id="friends">
+            <Button
+              className={styles.rewardButton}
+            >
+              <div>
+                <img className={styles.imgButton} src={rewards.friends} alt="Recompensa" />
+                <p className={styles.pButton}>Nit amb amics</p>
               </div>
 
             </Button>

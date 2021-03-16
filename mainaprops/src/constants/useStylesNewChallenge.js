@@ -67,23 +67,25 @@ const useStylesNewChallenge = makeStyles((theme) => ({
     flexDirection: 'column',
     textTransform: 'none',
     lineHeight: '1em',
+    '&:hover': {
+      opacity: '1',
+      backgroundColor: 'rgba(255,255,255,0.3)',
+    },
     '&:focus': {
       opacity: '1',
       border: '3px solid #ffffff',
-      backgroundColor: 'rgba(255,255,255,0)',
+      backgroundColor: 'rgba(255,255,255,0.3)',
     },
-
   },
 
   imgButton: {
-    width: '70%',
-    marginTop: '-20px',
+    width: '80%',
   },
 
   pButton: {
     color: '#ffffff',
-    marginTop: '10px',
     fontWeight: '600',
+    fontFamily: 'Itim',
   },
 
   button_turquoise: {
@@ -106,7 +108,6 @@ const useStylesNewChallenge = makeStyles((theme) => ({
     width: '50%',
     margin: '5px auto',
     color: '#ffffff',
-    fontFamily: 'Itim',
     fontWeight: '600',
     textTransform: 'none',
     '&:hover': {
