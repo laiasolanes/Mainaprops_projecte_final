@@ -3,6 +3,7 @@
 const User = require('../models/userModel');
 const Task = require('../models/taskModel');
 const Reward = require('../models/rewardModel');
+const Challenge = require('../models/challengeModel');
 require('../models/challengeModel');
 require('../models/rewardModel');
 require('../models/taskModel');
@@ -86,6 +87,35 @@ async function getDataChallenge(req, res) {
   res.json({ allTasks, allRewards });
 }
 
+async function createChallenge(req, res) {
+  const newChallenge = new Challenge(req.body);
+
+  newChallenge.save();
+  res.json(newChallenge);
+}
+
+async function updateUserChallenge(req, res) {
+  const id = req.body._id;
+  const challengesUser = await Challenge
+    .find({ user_id: id });
+
+  const update = {
+    $set: {
+      'user_profile.challenges': challengesUser,
+    },
+  };
+  try {
+    const updatedUser = await User
+      .findByIdAndUpdate(id, update, { new: true });
+    res.json(updatedUser);
+
+    console.log(updatedUser);
+  } catch (error) {
+    res.status(500);
+    res.send('There was an error updating user with challenges');
+  }
+}
+
 module.exports = {
   createUser,
   getUsers,
@@ -93,4 +123,6 @@ module.exports = {
   deleteUser,
   getUserByParam,
   getDataChallenge,
+  createChallenge,
+  updateUserChallenge,
 };
