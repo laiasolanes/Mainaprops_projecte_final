@@ -41,8 +41,6 @@ async function updateUser(req, res) {
     const updatedUser = await User
       .findByIdAndUpdate(id, update, { new: true });
     res.json(updatedUser);
-
-    console.log(updatedUser);
   } catch (error) {
     res.status(500);
     res.send('There was an error updating');
@@ -88,10 +86,25 @@ async function getDataChallenge(req, res) {
 }
 
 async function createChallenge(req, res) {
-  const newChallenge = new Challenge(req.body);
+  const newChallenge = new Challenge({ ...req.body, completed: false, end_date: null });
 
   newChallenge.save();
-  res.json(newChallenge);
+
+  const id = req.body.user_id;
+  const update = {
+    $push: {
+      'user_profile.challenges': newChallenge,
+    },
+  };
+
+  try {
+    const updatedUser = await User
+      .findByIdAndUpdate(id, update, { new: true });
+    res.json(updatedUser);
+  } catch (error) {
+    res.status(500);
+    res.send('There was an error updating user with challenges');
+  }
 }
 
 async function updateUserChallenge(req, res) {
@@ -108,8 +121,6 @@ async function updateUserChallenge(req, res) {
     const updatedUser = await User
       .findByIdAndUpdate(id, update, { new: true });
     res.json(updatedUser);
-
-    console.log(updatedUser);
   } catch (error) {
     res.status(500);
     res.send('There was an error updating user with challenges');

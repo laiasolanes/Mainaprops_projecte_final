@@ -81,3 +81,18 @@ export function loadDataChallenge(paramId) {
     });
   };
 }
+
+export function createChallenge(userId, challengeTasks, challengeReward) {
+  debugger;
+  return async function dispatchChallenge(dispatch) {
+    const challengeUser = await axios.post(`${url}/${userId}/newchallenge`,
+      {
+        user_id: userId, tasks: challengeTasks, reward: challengeReward,
+      });
+
+    dispatch({
+      type: actionTypes.CREATE_CHALLENGE,
+      payload: challengeUser.data,
+    });
+  };
+}

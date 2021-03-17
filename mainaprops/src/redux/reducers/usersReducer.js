@@ -11,6 +11,7 @@ export default function usersReducer(state = initialState.users, action) {
     case actionTypes.INSERT_USER:
       return [...state, action.newUserData];
 
+    case actionTypes.CREATE_CHALLENGE:
     case actionTypes.UPDATE_USER:
       newState = state.filter((user) => user._id !== action.payload._id);
       return [...newState, action.payload];

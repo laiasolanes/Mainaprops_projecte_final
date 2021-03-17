@@ -5,6 +5,7 @@ const actionTypes = {
   DELETE_USER: 'DELETE USER',
   LOAD_USER: 'LOAD USER',
   LOAD_DATA_CHALLENGE: 'LOAD DATA CHALLENGE',
+  CREATE_CHALLENGE: 'CREATE CHALLENGE',
 };
 
 export default actionTypes;

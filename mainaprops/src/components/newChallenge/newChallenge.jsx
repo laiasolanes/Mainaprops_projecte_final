@@ -7,7 +7,7 @@ import { Modal, Button } from '@material-ui/core';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import { loadDataChallenge } from '../../redux/actions/actionCreators';
+import { loadDataChallenge, createChallenge } from '../../redux/actions/actionCreators';
 
 import useStylesNewChallenge from '../../constants/useStylesNewChallenge';
 
@@ -30,6 +30,8 @@ export function NewChallengeComponent({ dataChallenge, actions }) {
   });
 
   const [taskSelected, setTaskSelected] = useState({});
+  const [tasksChallenge, setTasksChallenge] = useState([]);
+  const [rewardSelected, setRewardSelected] = useState({});
 
   useEffect(() => {
     actions.loadDataChallenge(idUser);
@@ -61,6 +63,20 @@ export function NewChallengeComponent({ dataChallenge, actions }) {
     if (item.classList.contains('selected')) {
       openCloseModalTimes();
     }
+  }
+
+  function clickSaveTask(idTask) {
+    setTasksChallenge([...tasksChallenge, { task_id: idTask }]);
+    openCloseModalTimes();
+  }
+
+  function clickSaveChallenge() {
+    debugger;
+    console.log(`
+    - usuari: ${idUser} 
+    - tasques: ${tasksChallenge} 
+    - recompensa: ${rewardSelected}`);
+    actions.createChallenge(idUser, tasksChallenge, rewardSelected);
   }
 
   const timesTaskBody = (
@@ -173,7 +189,7 @@ export function NewChallengeComponent({ dataChallenge, actions }) {
 
       <Button
         className={styles.button_turquoise}
-        onClick={openCloseModalTimes}
+        onClick={() => clickSaveTask(taskSelected._id)}
       >
         Guardar
       </Button>
@@ -205,6 +221,7 @@ export function NewChallengeComponent({ dataChallenge, actions }) {
             <article className="reward" id={reward._id} key={reward._id}>
               <Button
                 className={styles.rewardButton}
+                onClick={() => setRewardSelected(reward._id)}
               >
                 <div>
                   <img className={styles.imgButton} src={reward.image} alt="Recompensa" />
@@ -218,7 +235,8 @@ export function NewChallengeComponent({ dataChallenge, actions }) {
       </div>
       <Button
         className={styles.button_turquoise}
-        onClick={openCloseModalRewards}
+        onClick={() => clickSaveChallenge()}
+        href="/users"
       >
         Guardar
       </Button>
@@ -308,6 +326,7 @@ NewChallengeComponent.propTypes = {
   ).isRequired,
   actions: PropTypes.shape({
     loadDataChallenge: PropTypes.func,
+    createChallenge: PropTypes.func,
   }).isRequired,
 };
 
@@ -318,7 +337,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators({
-      loadDataChallenge,
+      loadDataChallenge, createChallenge,
     }, dispatch),
   };
 }
