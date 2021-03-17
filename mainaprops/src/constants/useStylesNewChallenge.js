@@ -57,8 +57,8 @@ const useStylesNewChallenge = makeStyles((theme) => ({
 
   rewardButton: {
     margin: '10px',
-    width: '150px',
-    height: '150px',
+    width: '143px',
+    height: '143px',
     padding: '0 10px 10px 10px',
     opacity: '0.8',
     border: '3px solid rgba(255, 255, 255, 0)',
