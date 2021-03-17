@@ -21,10 +21,6 @@ export function UserDetailComponent({ users, actions }) {
   const [modalAchieved, setModalAchieved] = useState(false);
   const [challengeSelected, setChallengeSelected] = useState({});
 
-  const selectChallenge = (challenge) => {
-    setChallengeSelected(challenge);
-  };
-
   useEffect(() => {
     if (!users || !users.length) {
       actions.userByParam(idUser);
@@ -45,7 +41,7 @@ export function UserDetailComponent({ users, actions }) {
   }
 
   function clickViewChallenge(challenge) {
-    selectChallenge(challenge);
+    setChallengeSelected(challenge);
     openCloseModalChallenge();
   }
 

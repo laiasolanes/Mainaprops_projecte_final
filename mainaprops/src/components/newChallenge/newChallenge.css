@@ -78,7 +78,9 @@ p {
   margin: 10px 0;
 }
 
-.create__challenge .all__tasks .row__tasks {
+.create__challenge .all__tasks {
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
@@ -122,9 +124,13 @@ p {
   margin-top: 10px;
 }
 
-.create__challenge .all__tasks .task__button:focus {
+.create__challenge .all__tasks .selected {
   opacity: 1;
   border: 3px solid #ffffff;
+}
+
+.create__challenge .all__tasks .task__button:hover {
+  opacity: 1;
 }
 
 .create__challenge .button--violet-big {

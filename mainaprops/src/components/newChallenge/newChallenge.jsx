@@ -1,27 +1,39 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import { PropTypes } from 'prop-types';
+import { bindActionCreators } from 'redux';
 import './newChallenge.css';
 import { Modal, Button } from '@material-ui/core';
-import {
-  mascotTask,
-  instrumentTask,
-  dishwasherTask,
-  bathTask,
-  peaceTask,
-  tableTask,
-  homeworkTask,
-  tidyupTask,
-} from '../../constants/taskImages';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import { loadDataChallenge } from '../../redux/actions/actionCreators';
 
 import useStylesNewChallenge from '../../constants/useStylesNewChallenge';
 
 const pageURL = window.location.href.split('/');
 const idUser = pageURL[4];
 
-export default function NewChallenge() {
+export function NewChallengeComponent({ dataChallenge, actions }) {
   const styles = useStylesNewChallenge();
 
   const [modalTimes, setModalTimes] = useState(false);
   const [modalRewards, setModalRewards] = useState(false);
+  const [stateDays, setStateDays] = useState({
+    dilluns: false,
+    dimarts: false,
+    dimecres: false,
+    dijous: false,
+    divendres: false,
+    dissabte: false,
+    diumenge: false,
+  });
+
+  const [taskSelected, setTaskSelected] = useState({});
+
+  useEffect(() => {
+    actions.loadDataChallenge(idUser);
+  }, []);
 
   function openCloseModalTimes() {
     setModalTimes(!modalTimes);
@@ -31,20 +43,133 @@ export default function NewChallenge() {
     setModalRewards(!modalRewards);
   }
 
-  const challengeBody = (
+  const daysCheckChange = (event) => {
+    setStateDays({ ...stateDays, [event.target.name]: event.target.checked });
+  };
+
+  function addClass(idItem) {
+    const item = document.getElementById(idItem);
+    return item.classList.contains('selected')
+      ? item.classList.remove('selected')
+      : item.classList.add('selected');
+  }
+
+  function clickTask(task, id) {
+    setTaskSelected(task);
+    addClass(id);
+    const item = document.getElementById(id);
+    if (item.classList.contains('selected')) {
+      openCloseModalTimes();
+    }
+  }
+
+  const timesTaskBody = (
     <div className={styles.modalChallenge}>
-      <img src={bathTask} alt="Task" className={styles.timeImage} />
-      <h3>Dutxar-se</h3>
-      <p className={styles.text}>Selecciona els dies de la setmana que has de fer la tasca.</p>
-      <div className={styles.days}>
-        <Button className={styles.button_day}>dilluns</Button>
-        <Button className={styles.button_day}>dimarts</Button>
-        <Button className={styles.button_day}>dimecres</Button>
-        <Button className={styles.button_day}>dijous</Button>
-        <Button className={styles.button_day}>divendres</Button>
-        <Button className={styles.button_day}>dissabte</Button>
-        <Button className={styles.button_day}>diumenge</Button>
-      </div>
+      <img src={taskSelected.image} alt="Task" className={styles.timeImage} />
+      <h3>{taskSelected.name}</h3>
+      <p className={styles.text}>
+        Selecciona els dies de la setmana que has de
+        {' '}
+        {taskSelected?.name?.toLowerCase()}
+        .
+      </p>
+
+      <FormGroup column="true">
+
+        <FormControlLabel
+          control={(
+            <Checkbox
+              color="default"
+              checked={stateDays.dilluns}
+              onChange={daysCheckChange}
+              name="dilluns"
+              className={styles.check}
+            />
+            )}
+          label="dilluns"
+          className={styles.button_day}
+        />
+
+        <FormControlLabel
+          control={(
+            <Checkbox
+              color="default"
+              checked={stateDays.dimarts}
+              onChange={daysCheckChange}
+              name="dimarts"
+              className={styles.check}
+            />
+            )}
+          label="dimarts"
+          className={styles.button_day}
+        />
+        <FormControlLabel
+          control={(
+            <Checkbox
+              color="default"
+              checked={stateDays.dimecres}
+              onChange={daysCheckChange}
+              name="dimecres"
+              className={styles.check}
+            />
+            )}
+          label="dimecres"
+          className={styles.button_day}
+        />
+        <FormControlLabel
+          control={(
+            <Checkbox
+              color="default"
+              checked={stateDays.dijous}
+              onChange={daysCheckChange}
+              name="dijous"
+              className={styles.check}
+            />
+            )}
+          label="dijous"
+          className={styles.button_day}
+        />
+        <FormControlLabel
+          control={(
+            <Checkbox
+              color="default"
+              checked={stateDays.divendres}
+              onChange={daysCheckChange}
+              name="divendres"
+              className={styles.check}
+            />
+            )}
+          label="divendres"
+          className={styles.button_day}
+        />
+        <FormControlLabel
+          control={(
+            <Checkbox
+              color="default"
+              checked={stateDays.dissabte}
+              onChange={daysCheckChange}
+              name="dissabte"
+              className={styles.check}
+            />
+            )}
+          label="dissabte"
+          className={styles.button_day}
+        />
+        <FormControlLabel
+          control={(
+            <Checkbox
+              color="default"
+              checked={stateDays.diumenge}
+              onChange={daysCheckChange}
+              name="diumenge"
+              className={styles.check}
+            />
+            )}
+          label="diumenge"
+          className={styles.button_day}
+        />
+
+      </FormGroup>
 
       <Button
         className={styles.button_turquoise}
@@ -73,51 +198,37 @@ export default function NewChallenge() {
         rebras quan facis totes les tasques i aconsegueixis el repte.
       </p>
 
-      <div className="all__rewards">
+      <div className={styles.rowRewards}>
 
-        <div className={styles.rowRewards}>
+        {
+          dataChallenge && dataChallenge?.allRewards?.map((reward) => (
+            <article className="reward" id={reward._id} key={reward._id}>
+              <Button
+                className={styles.rewardButton}
+              >
+                <div>
+                  <img className={styles.imgButton} src={reward.image} alt="Recompensa" />
+                  <p className={styles.pButton}>{reward.name}</p>
+                </div>
 
-          <article className="reward" id="weekend">
-            <Button
-              className={styles.rewardButton}
-            >
-              <div>
-                <img className={styles.imgButton} src={mascotTask} alt="Recompensa" />
-                <p className={styles.pButton}>Escapada familiar</p>
-              </div>
-
-            </Button>
-          </article>
-
-          <article className="task" id="instrument">
-            <Button
-              className={styles.rewardButton}
-            >
-              <div>
-                <img className={styles.imgButton} src={mascotTask} alt="Recompensa" />
-                <p className={styles.pButton}>Escapada familiar</p>
-              </div>
-
-            </Button>
-          </article>
-
-        </div>
-
-        <Button
-          className={styles.button_turquoise}
-          onClick={openCloseModalRewards}
-        >
-          Guardar
-        </Button>
-
-        <Button
-          className={styles.button_outlined}
-          onClick={openCloseModalRewards}
-        >
-          Cancelar
-        </Button>
-
+              </Button>
+            </article>
+          ))
+        }
       </div>
+      <Button
+        className={styles.button_turquoise}
+        onClick={openCloseModalRewards}
+      >
+        Guardar
+      </Button>
+
+      <Button
+        className={styles.button_outlined}
+        onClick={openCloseModalRewards}
+      >
+        Cancelar
+      </Button>
 
     </div>
   );
@@ -132,106 +243,21 @@ export default function NewChallenge() {
         la seva recompensa.
       </p>
 
-      <div className="all__tasks">
-
-        <div className="flex row__tasks">
-
-          <article className="task" id="mascot">
+      <div className="flex all__tasks">
+        {
+        dataChallenge && dataChallenge?.allTasks?.map((task) => (
+          <article className="task">
             <Button
+              id={task._id}
               className="task__button"
-              onClick={openCloseModalTimes}
+              onClick={() => clickTask(task, task._id)}
             >
-              <img src={mascotTask} alt="Tasca" />
-              <p>Cuidar la mascota</p>
+              <img src={task.image} alt="Tasca" />
+              <p>{task.name}</p>
             </Button>
           </article>
-
-          <article className="task" id="instrument">
-            <Button
-              className="task__button"
-              onClick={openCloseModalTimes}
-            >
-              <img src={instrumentTask} alt="Tasca" />
-              <p>Practicar instrument</p>
-            </Button>
-          </article>
-
-        </div>
-
-        <div className="flex row__tasks">
-
-          <article className="task" id="dishwasher">
-            <Button
-              className="task__button"
-              onClick={openCloseModalTimes}
-            >
-              <img src={dishwasherTask} alt="Tasca" />
-              <p>Buidar el rentaplats</p>
-
-            </Button>
-          </article>
-
-          <article className="task" id="bath">
-            <Button
-              className="task__button"
-              onClick={openCloseModalTimes}
-            >
-              <img src={bathTask} alt="Tasca" />
-              <p>Dutxar-se</p>
-            </Button>
-          </article>
-
-        </div>
-
-        <div className="flex row__tasks">
-
-          <article className="task" id="peace">
-            <Button
-              className="task__button"
-              onClick={openCloseModalTimes}
-            >
-              <img src={peaceTask} alt="Tasca" />
-              <p>Conviure en pau</p>
-
-            </Button>
-          </article>
-
-          <article className="task" id="table">
-            <Button
-              className="task__button"
-              onClick={openCloseModalTimes}
-            >
-              <img src={tableTask} alt="Tasca" />
-              <p>Parar taula</p>
-            </Button>
-          </article>
-
-        </div>
-
-        <div className="flex row__tasks">
-
-          <article className="task" id="homework">
-            <Button
-              className="task__button"
-              onClick={openCloseModalTimes}
-            >
-              <img src={homeworkTask} alt="Tasca" />
-              <p>Fer els deures</p>
-
-            </Button>
-          </article>
-
-          <article className="task" id="tidyup">
-            <Button
-              className="task__button"
-              onClick={openCloseModalTimes}
-            >
-              <img src={tidyupTask} alt="Tasca" />
-              <p>Endreçar</p>
-            </Button>
-          </article>
-
-        </div>
+        ))
+      }
 
       </div>
 
@@ -255,7 +281,7 @@ export default function NewChallenge() {
         open={modalTimes}
         onClose={openCloseModalTimes}
       >
-        {challengeBody}
+        {timesTaskBody}
       </Modal>
 
       <Modal
@@ -268,3 +294,33 @@ export default function NewChallenge() {
     </section>
   );
 }
+
+NewChallengeComponent.propTypes = {
+  dataChallenge: PropTypes.shape(
+    {
+      allTasks: PropTypes.arrayOf(
+        PropTypes.shape({}),
+      ),
+      allRewards: PropTypes.arrayOf(
+        PropTypes.shape({}),
+      ),
+    },
+  ).isRequired,
+  actions: PropTypes.shape({
+    loadDataChallenge: PropTypes.func,
+  }).isRequired,
+};
+
+function mapStateToProps(state) {
+  return { dataChallenge: state.dataChallenge };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators({
+      loadDataChallenge,
+    }, dispatch),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewChallengeComponent);

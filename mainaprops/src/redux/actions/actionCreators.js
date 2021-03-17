@@ -70,3 +70,15 @@ export function userByParam(paramId) {
     });
   };
 }
+
+export function loadDataChallenge(paramId) {
+  return async function dispatchDataChallenge(dispatch) {
+    const response = await axios.get(`${url}/${paramId}/newchallenge`);
+    const dataChallenge = response.data;
+
+    dispatch({
+      type: actionTypes.LOAD_DATA_CHALLENGE,
+      dataChallenge,
+    });
+  };
+}

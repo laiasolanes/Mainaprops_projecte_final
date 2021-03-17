@@ -17,7 +17,7 @@ function UsersRouter() {
 
   router
     .route('/:userId/newchallenge')
-    .get(usersController.getTasksAndRewards);
+    .get(usersController.getDataChallenge);
 
   return router;
 }

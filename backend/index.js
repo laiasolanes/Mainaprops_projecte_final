@@ -21,7 +21,10 @@ app.use(express.json());
 
 // CONNECTING TO DB
 connect(database,
-  { useNewUrlParser: true, useUnifiedTopology: true });
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
 
 // ROUTES
 app.use('/api/users', usersRouter);

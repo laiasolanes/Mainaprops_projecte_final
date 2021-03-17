@@ -1,7 +1,7 @@
-/* eslint-disable no-debugger */
 import actionTypes from '../actions/actionTypes';
+import initialState from '../store/initialState';
 
-export default function usersReducer(state = [], action) {
+export default function usersReducer(state = initialState.users, action) {
   let newState;
 
   switch (action.type) {
@@ -19,7 +19,6 @@ export default function usersReducer(state = [], action) {
       return state.filter((user) => user._id !== action.payload);
 
     case actionTypes.LOAD_USER:
-      debugger;
       return [...state, action.dataUser];
 
     default:

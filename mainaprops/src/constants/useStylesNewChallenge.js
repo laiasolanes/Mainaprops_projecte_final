@@ -52,12 +52,13 @@ const useStylesNewChallenge = makeStyles((theme) => ({
   rowRewards: {
     display: 'flex',
     justifyContent: 'space-between',
+    flexWrap: 'wrap',
   },
 
   rewardButton: {
     margin: '10px',
-    width: '150px',
-    height: '150px',
+    width: '143px',
+    height: '143px',
     padding: '0 10px 10px 10px',
     opacity: '0.8',
     border: '3px solid rgba(255, 255, 255, 0)',
@@ -67,23 +68,25 @@ const useStylesNewChallenge = makeStyles((theme) => ({
     flexDirection: 'column',
     textTransform: 'none',
     lineHeight: '1em',
+    '&:hover': {
+      opacity: '1',
+      backgroundColor: 'rgba(255,255,255,0.3)',
+    },
     '&:focus': {
       opacity: '1',
       border: '3px solid #ffffff',
-      backgroundColor: 'rgba(255,255,255,0)',
+      backgroundColor: 'rgba(255,255,255,0.3)',
     },
-
   },
 
   imgButton: {
-    width: '70%',
-    marginTop: '-20px',
+    width: '80%',
   },
 
   pButton: {
     color: '#ffffff',
-    marginTop: '10px',
     fontWeight: '600',
+    fontFamily: 'Itim',
   },
 
   button_turquoise: {
@@ -105,15 +108,19 @@ const useStylesNewChallenge = makeStyles((theme) => ({
     backgroundColor: 'rgba(255,255,255,0.1)',
     width: '50%',
     margin: '5px auto',
+    borderRadius: '5px',
     color: '#ffffff',
-    fontFamily: 'Itim',
     fontWeight: '600',
     textTransform: 'none',
     '&:hover': {
-      backgroundColor: 'rgba(255,255,255,0.6)',
+      backgroundColor: 'rgba(255,255,255,0.3)',
     },
-    '&:focus': {
-      backgroundColor: 'rgba(255,255,255,0.6)',
+  },
+
+  check: {
+    color: '#58a2a5',
+    '&$checked': {
+      color: '#58a2a5',
     },
   },
 

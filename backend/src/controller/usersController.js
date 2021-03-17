@@ -76,7 +76,7 @@ async function getUserByParam(req, res) {
   }
 }
 
-async function getTasksAndRewards(req, res) {
+async function getDataChallenge(req, res) {
   const allTasks = await Task
     .find({});
 
@@ -92,7 +92,5 @@ module.exports = {
   updateUser,
   deleteUser,
   getUserByParam,
-  getTasksAndRewards,
+  getDataChallenge,
 };
-
-// .populate('reward', 'task');

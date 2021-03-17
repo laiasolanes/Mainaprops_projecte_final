@@ -4,6 +4,7 @@ const actionTypes = {
   UPDATE_USER: 'UPDATE USER',
   DELETE_USER: 'DELETE USER',
   LOAD_USER: 'LOAD USER',
+  LOAD_DATA_CHALLENGE: 'LOAD DATA CHALLENGE',
 };
 
 export default actionTypes;
