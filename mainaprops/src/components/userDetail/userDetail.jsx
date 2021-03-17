@@ -64,7 +64,13 @@ export function UserDetailComponent({ users, actions }) {
 
         challengeSelected && challengeSelected?.tasks?.map((task) => (
           <>
-            <h5 key={task.name}>{task.name}</h5>
+
+            <h5 key={task?.task_id?.name}>
+              <img className="image__task" src={task?.task_id?.image} alt="Tasca" />
+
+              {task?.task_id?.name}
+            </h5>
+
             <div className="flex check__tasks">
               {
                   task.times && task.times.map((time, index) => (
@@ -73,8 +79,8 @@ export function UserDetailComponent({ users, actions }) {
                       <img
                         src={time ? fillStar : emptyStar}
                         alt="Estrella"
-                        onClick={() => markCompleted(task._id + index)}
-                        id={task._id + index}
+                        onClick={() => markCompleted(task.task_id._id + index)}
+                        id={task.task_id._id + index}
                       />
                     </div>
 

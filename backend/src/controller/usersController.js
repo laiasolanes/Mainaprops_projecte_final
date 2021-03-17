@@ -66,7 +66,7 @@ async function getUserByParam(req, res) {
   try {
     let userChallenges = await User.findById(userId);
     userChallenges = await userChallenges.populate({ path: 'user_profile.challenges' }).execPopulate();
-    userChallenges = await userChallenges.populate({ path: 'user_profile.challenges.tasks' }).execPopulate();
+    userChallenges = await userChallenges.populate({ path: 'user_profile.challenges.tasks.task_id' }).execPopulate();
     userChallenges = await userChallenges.populate({ path: 'user_profile.challenges.reward' }).execPopulate();
     res.status(200);
     res.json(userChallenges);
