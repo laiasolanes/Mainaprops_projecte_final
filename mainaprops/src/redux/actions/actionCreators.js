@@ -21,7 +21,7 @@ export function insertUser(newUser) {
   return async function dispatchNewUser(dispatch) {
     const response = await axios.post(url, { user_profile: newUser });
     const newUserData = response.data;
-    debugger;
+
     dispatch({
       type: actionTypes.INSERT_USER,
       newUserData,
@@ -60,7 +60,6 @@ export function updateUser(nameInput, ageInput, imageInput, userId) {
 
 export function userByParam(paramId) {
   return async function dispatchUsersByParam(dispatch) {
-    debugger;
     const response = await axios.get(`${url}/${paramId}`);
     const dataUser = response.data;
 

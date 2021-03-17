@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Itim&family=Unica+One&family=Montserrat:wght@300;600;800&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Itim&family=Unica+One&family=Montserrat:wght@300;600;800&display=swap");
 *, *:after, *:before {
   margin: 0px;
   padding: 0px;
@@ -9,7 +8,7 @@
 }
 
 body {
-  background: rgba(108, 195, 198, 0.5);
+  background: #6cc3c6;
 }
 
 #root {
@@ -24,7 +23,7 @@ body {
 
 h2 {
   font-family: "Itim", "Helvetica Neue", sans-serif;
-  font-size: 2.5em;
+  font-size: 3em;
   color: #ffffff;
   font-weight: 300;
   text-align: center;
@@ -55,10 +54,11 @@ h5 {
 
 a:link, a:visited, a:active {
   text-decoration: none;
+  color: #000000;
 }
 
 p {
-  color: #706f6f;
+  color: #575757;
   font-weight: 300;
 }
 
@@ -77,23 +77,23 @@ p {
   font-family: "Unica One", "Itim", "Montserrat", cursive;
   color: #3D2563;
   font-size: 40px;
+  margin-bottom: 30px;
 }
 
 .login p {
-  margin: 0 30px 30px 30px;
+  margin: 30px 30px 30px 30px;
 }
 
 .login .button--violet-big {
   border-radius: 50px;
   width: 100%;
-  padding: 16px;
+  padding: 14px;
   margin: 10px 0;
   text-transform: none;
   font-size: 18px;
   font-weight: 600;
   background: #3D2563;
   color: #ffffff;
-  margin: 50px 0;
 }
 
 .login .button--violet-big:hover {
