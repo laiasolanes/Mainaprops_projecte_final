@@ -49,11 +49,15 @@ export function NewChallengeComponent({ dataChallenge, actions }) {
   }
 
   function clickTask(task, id) {
+    debugger;
     setTaskSelected(task);
     addClass(id);
     const item = document.getElementById(id);
     if (item.classList.contains('selected')) {
+      console.log(tasksChallenge);
       openCloseModalTimes();
+    } else {
+      setTasksChallenge(tasksChallenge.filter((taskSaved) => taskSaved.task_id !== task._id));
     }
   }
 
