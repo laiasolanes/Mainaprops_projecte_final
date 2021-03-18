@@ -107,26 +107,6 @@ async function createChallenge(req, res) {
   }
 }
 
-async function updateUserChallenge(req, res) {
-  const id = req.body._id;
-  const challengesUser = await Challenge
-    .find({ user_id: id });
-
-  const update = {
-    $set: {
-      'user_profile.challenges': challengesUser,
-    },
-  };
-  try {
-    const updatedUser = await User
-      .findByIdAndUpdate(id, update, { new: true });
-    res.json(updatedUser);
-  } catch (error) {
-    res.status(500);
-    res.send('There was an error updating user with challenges');
-  }
-}
-
 module.exports = {
   createUser,
   getUsers,
@@ -135,5 +115,4 @@ module.exports = {
   getUserByParam,
   getDataChallenge,
   createChallenge,
-  updateUserChallenge,
 };
