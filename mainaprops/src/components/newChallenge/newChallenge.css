@@ -165,4 +165,9 @@ p {
   color: #6CC3C6;
   background: #ffffff;
 }
+
+.selected {
+  opacity: 1;
+  border: 3px solid #ffffff;
+}
 /*# sourceMappingURL=newChallenge.css.map */
