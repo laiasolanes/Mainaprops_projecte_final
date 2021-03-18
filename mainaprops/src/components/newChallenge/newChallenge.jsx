@@ -19,7 +19,7 @@ export function NewChallengeComponent({ dataChallenge, actions }) {
 
   const [taskSelected, setTaskSelected] = useState({});
   const [tasksChallenge, setTasksChallenge] = useState([]);
-  const [rewardSelected, setRewardSelected] = useState({});
+  const [rewardSelected, setRewardSelected] = useState('');
   const [timesTask, setTimesTask] = useState([]);
 
   useEffect(() => {
@@ -49,12 +49,10 @@ export function NewChallengeComponent({ dataChallenge, actions }) {
   }
 
   function clickTask(task, id) {
-    debugger;
     setTaskSelected(task);
     addClass(id);
     const item = document.getElementById(id);
     if (item.classList.contains('selected')) {
-      console.log(tasksChallenge);
       openCloseModalTimes();
     } else {
       setTasksChallenge(tasksChallenge.filter((taskSaved) => taskSaved.task_id !== task._id));
@@ -67,19 +65,23 @@ export function NewChallengeComponent({ dataChallenge, actions }) {
     } else {
       setTimesTask([...timesTask, false]);
     }
-
     addAttribute(idTime);
   }
 
   function clickSaveTask(idTask) {
     setTasksChallenge([...tasksChallenge, { task_id: idTask, times: timesTask }]);
     setTimesTask([]);
-    console.log(tasksChallenge);
     openCloseModalTimes();
   }
 
   function clickSaveChallenge() {
+    console.log(rewardSelected);
     actions.createChallenge(idUser, tasksChallenge, rewardSelected);
+  }
+
+  function clickCancelChallenge() {
+    setRewardSelected('');
+    openCloseModalRewards();
   }
 
   const weekDays = ['dilluns', 'dimarts', 'dimecres', 'dijous', 'divendres', 'dissabte', 'diumenge'];
@@ -115,6 +117,7 @@ export function NewChallengeComponent({ dataChallenge, actions }) {
       <Button
         className={styles.button_turquoise}
         onClick={() => clickSaveTask(taskSelected._id)}
+        disabled={!(timesTask.length > 0)}
       >
         Guardar
       </Button>
@@ -130,6 +133,7 @@ export function NewChallengeComponent({ dataChallenge, actions }) {
   );
 
   const rewardsBody = (
+
     <div className={styles.modalChallenge}>
 
       <h3>La recompensa</h3>
@@ -162,13 +166,14 @@ export function NewChallengeComponent({ dataChallenge, actions }) {
         className={styles.button_turquoise}
         onClick={() => clickSaveChallenge()}
         href={`/users/${idUser}`}
+        disabled={!rewardSelected}
       >
         Guardar
       </Button>
 
       <Button
         className={styles.button_outlined}
-        onClick={openCloseModalRewards}
+        onClick={() => clickCancelChallenge()}
       >
         Cancelar
       </Button>
@@ -205,9 +210,11 @@ export function NewChallengeComponent({ dataChallenge, actions }) {
       </div>
 
       <Button
+        id="prova"
         variant="contained"
         className="button--violet-big"
         onClick={openCloseModalRewards}
+        disabled={!(tasksChallenge.length > 0)}
       >
         Guardar
       </Button>
