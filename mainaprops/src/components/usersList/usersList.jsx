@@ -1,6 +1,3 @@
-/* eslint-disable prefer-const */
-/* eslint-disable no-unused-expressions */
-/* eslint-disable no-underscore-dangle */
 import React, { useEffect, useState } from 'react';
 import './usersList.css';
 import { connect } from 'react-redux';
@@ -37,7 +34,7 @@ export function UsersListComponent({ users, actions }) {
 
   const [userNameInput, setUserNameInput] = useState('');
   const [userAgeInput, setUserAgeInput] = useState('');
-  let [userImageInput, setUserImageInput] = useState('');
+  const [userImageInput, setUserImageInput] = useState('');
 
   const openCloseModalInsert = () => {
     setModalInsert(!modalInsert);
@@ -53,7 +50,7 @@ export function UsersListComponent({ users, actions }) {
 
   const selectUser = (user, type) => {
     setUserSelected(user);
-    (type === 'Edit') ? openCloseModalEdit() : openCloseModalDelete();
+    return (type === 'Edit') ? openCloseModalEdit() : openCloseModalDelete();
   };
 
   const handelChange = (e) => {
@@ -98,7 +95,7 @@ export function UsersListComponent({ users, actions }) {
   }
 
   function setImage(url) {
-    userImageInput = url;
+    setUserImageInput(url);
   }
 
   const bodyInsertar = (

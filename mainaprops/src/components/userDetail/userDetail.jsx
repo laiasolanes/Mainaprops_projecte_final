@@ -1,5 +1,4 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable no-unused-expressions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { useEffect, useState } from 'react';
@@ -20,6 +19,11 @@ export function UserDetailComponent({ users, actions }) {
   const [modalChallenge, setModalChallenge] = useState(false);
   const [modalAchieved, setModalAchieved] = useState(false);
   const [challengeSelected, setChallengeSelected] = useState({});
+  const [selectedElement, setSelectedElement] = useState(null);
+  const [taskSelected, setTaskSelected] = useState({
+    times: [],
+  });
+  // const [timesSelected, setTimesSelected] = useState([]);
 
   useEffect(() => {
     if (!users || !users.length) {
@@ -35,10 +39,37 @@ export function UserDetailComponent({ users, actions }) {
     setModalAchieved(!modalAchieved);
   }
 
-  function markCompleted(elementId) {
-    const element = document.getElementById(elementId);
-    element.src === emptyStar ? element.src = fillStar : element.src = emptyStar;
+  function markCompleted(elementId, tasca) {
+    debugger;
+
+    setSelectedElement(document.getElementById(elementId));
+
+    setTaskSelected(tasca);
+    // if (element.src === emptyStar) {
+    //   element.src = fillStar;
+    //   const newArray = taskSelected.times.slice(0, taskSelected.times.length - 1);
+
+    //   let withTrueArray = [true, ...newArray];
+    //   taskSelected.times = withTrueArray;
+    // } else {
+    //   element.src = emptyStar;
+    //   taskSelected.times.slice(1);
+    // }
   }
+
+  useEffect(() => {
+    if (selectedElement?.src === emptyStar) {
+      selectedElement.src = fillStar;
+      const newArray = taskSelected.times.slice(0, taskSelected.times.length - 1);
+
+      const withTrueArray = [true, ...newArray];
+      taskSelected.times = withTrueArray;
+      console.log(taskSelected.times);
+    } else if (selectedElement) {
+      selectedElement.src = emptyStar;
+      taskSelected.times.slice(1);
+    }
+  }, [taskSelected, selectedElement]);
 
   function clickViewChallenge(challenge) {
     setChallengeSelected(challenge);
@@ -69,20 +100,21 @@ export function UserDetailComponent({ users, actions }) {
               <img className="image__task" src={task?.task_id?.image} alt="Tasca" />
 
               {task?.task_id?.name}
+
             </h5>
 
             <div className="flex check__tasks">
               {
                   task.times && task.times.map((time, index) => (
 
-                    // eslint-disable-next-line react/no-array-index-key
-                    <div key={task.task_id._id + index}>
+                    <div>
                       <img
                         src={time ? fillStar : emptyStar}
                         alt="Estrella"
-                        onClick={() => markCompleted(task.task_id._id + index)}
+                        onClick={() => markCompleted(task.task_id._id + index, task)}
                         id={task.task_id._id + index}
                       />
+
                     </div>
 
                   ))
