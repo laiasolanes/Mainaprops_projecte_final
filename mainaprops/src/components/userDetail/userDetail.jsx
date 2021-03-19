@@ -1,6 +1,3 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
@@ -112,6 +109,7 @@ export function UserDetailComponent({ users, actions }) {
                         src={time ? fillStar : emptyStar}
                         alt="Estrella"
                         onClick={() => markCompleted(task.task_id._id + index, task)}
+                        aria-hidden="true"
                         id={task.task_id._id + index}
                       />
 
@@ -232,6 +230,9 @@ export function UserDetailComponent({ users, actions }) {
               <div
                 className="challenge__resume"
                 onClick={() => clickViewChallenge(challenge)}
+                aria-hidden="true"
+                role="button"
+                tabIndex="0"
               >
                 <span>{challenge.tasks.length}</span>
                 <br />
