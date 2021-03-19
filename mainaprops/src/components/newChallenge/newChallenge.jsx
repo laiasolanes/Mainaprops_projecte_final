@@ -4,11 +4,7 @@ import { PropTypes } from 'prop-types';
 import { bindActionCreators } from 'redux';
 import './newChallenge.css';
 import { Modal, Button } from '@material-ui/core';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import { loadDataChallenge } from '../../redux/actions/actionCreators';
-
+import { loadDataChallenge, createChallenge } from '../../redux/actions/actionCreators';
 import useStylesNewChallenge from '../../constants/useStylesNewChallenge';
 
 const pageURL = window.location.href.split('/');
@@ -19,17 +15,11 @@ export function NewChallengeComponent({ dataChallenge, actions }) {
 
   const [modalTimes, setModalTimes] = useState(false);
   const [modalRewards, setModalRewards] = useState(false);
-  const [stateDays, setStateDays] = useState({
-    dilluns: false,
-    dimarts: false,
-    dimecres: false,
-    dijous: false,
-    divendres: false,
-    dissabte: false,
-    diumenge: false,
-  });
 
   const [taskSelected, setTaskSelected] = useState({});
+  const [tasksChallenge, setTasksChallenge] = useState([]);
+  const [rewardSelected, setRewardSelected] = useState('');
+  const [timesTask, setTimesTask] = useState([]);
 
   useEffect(() => {
     actions.loadDataChallenge(idUser);
@@ -43,15 +33,18 @@ export function NewChallengeComponent({ dataChallenge, actions }) {
     setModalRewards(!modalRewards);
   }
 
-  const daysCheckChange = (event) => {
-    setStateDays({ ...stateDays, [event.target.name]: event.target.checked });
-  };
-
   function addClass(idItem) {
     const item = document.getElementById(idItem);
     return item.classList.contains('selected')
       ? item.classList.remove('selected')
       : item.classList.add('selected');
+  }
+
+  function addAttribute(idItem) {
+    const item = document.getElementById(idItem);
+    return item.hasAttribute('selected')
+      ? item.removeAttribute('selected')
+      : item.setAttribute('selected', '');
   }
 
   function clickTask(task, id) {
@@ -60,8 +53,37 @@ export function NewChallengeComponent({ dataChallenge, actions }) {
     const item = document.getElementById(id);
     if (item.classList.contains('selected')) {
       openCloseModalTimes();
+    } else {
+      setTasksChallenge(tasksChallenge.filter((taskSaved) => taskSaved.task_id !== task._id));
     }
   }
+
+  function clickTimes(idTime, button) {
+    if (button.parentElement.hasAttribute('selected')) {
+      setTimesTask(timesTask.slice(1));
+    } else {
+      setTimesTask([...timesTask, false]);
+    }
+    addAttribute(idTime);
+  }
+
+  function clickSaveTask(idTask) {
+    setTasksChallenge([...tasksChallenge, { task_id: idTask, times: timesTask }]);
+    setTimesTask([]);
+    openCloseModalTimes();
+  }
+
+  function clickSaveChallenge() {
+    console.log(rewardSelected);
+    actions.createChallenge(idUser, tasksChallenge, rewardSelected);
+  }
+
+  function clickCancelChallenge() {
+    setRewardSelected('');
+    openCloseModalRewards();
+  }
+
+  const weekDays = ['dilluns', 'dimarts', 'dimecres', 'dijous', 'divendres', 'dissabte', 'diumenge'];
 
   const timesTaskBody = (
     <div className={styles.modalChallenge}>
@@ -73,107 +95,29 @@ export function NewChallengeComponent({ dataChallenge, actions }) {
         {taskSelected?.name?.toLowerCase()}
         .
       </p>
+      <div className={styles.days}>
 
-      <FormGroup column="true">
-
-        <FormControlLabel
-          control={(
-            <Checkbox
-              color="default"
-              checked={stateDays.dilluns}
-              onChange={daysCheckChange}
-              name="dilluns"
-              className={styles.check}
-            />
-            )}
-          label="dilluns"
-          className={styles.button_day}
-        />
-
-        <FormControlLabel
-          control={(
-            <Checkbox
-              color="default"
-              checked={stateDays.dimarts}
-              onChange={daysCheckChange}
-              name="dimarts"
-              className={styles.check}
-            />
-            )}
-          label="dimarts"
-          className={styles.button_day}
-        />
-        <FormControlLabel
-          control={(
-            <Checkbox
-              color="default"
-              checked={stateDays.dimecres}
-              onChange={daysCheckChange}
-              name="dimecres"
-              className={styles.check}
-            />
-            )}
-          label="dimecres"
-          className={styles.button_day}
-        />
-        <FormControlLabel
-          control={(
-            <Checkbox
-              color="default"
-              checked={stateDays.dijous}
-              onChange={daysCheckChange}
-              name="dijous"
-              className={styles.check}
-            />
-            )}
-          label="dijous"
-          className={styles.button_day}
-        />
-        <FormControlLabel
-          control={(
-            <Checkbox
-              color="default"
-              checked={stateDays.divendres}
-              onChange={daysCheckChange}
-              name="divendres"
-              className={styles.check}
-            />
-            )}
-          label="divendres"
-          className={styles.button_day}
-        />
-        <FormControlLabel
-          control={(
-            <Checkbox
-              color="default"
-              checked={stateDays.dissabte}
-              onChange={daysCheckChange}
-              name="dissabte"
-              className={styles.check}
-            />
-            )}
-          label="dissabte"
-          className={styles.button_day}
-        />
-        <FormControlLabel
-          control={(
-            <Checkbox
-              color="default"
-              checked={stateDays.diumenge}
-              onChange={daysCheckChange}
-              name="diumenge"
-              className={styles.check}
-            />
-            )}
-          label="diumenge"
-          className={styles.button_day}
-        />
-
-      </FormGroup>
+        {
+        weekDays.map((day) => (
+          <Button
+            className={document.getElementById(day)
+              ?.hasAttribute('selected')
+              ? styles.selected
+              : styles.button_day}
+            id={day}
+            key={day}
+            onClick={(event) => clickTimes(day, event.target)}
+          >
+            {day}
+          </Button>
+        ))
+      }
+      </div>
 
       <Button
         className={styles.button_turquoise}
-        onClick={openCloseModalTimes}
+        onClick={() => clickSaveTask(taskSelected._id)}
+        disabled={!(timesTask.length > 0)}
       >
         Guardar
       </Button>
@@ -189,6 +133,7 @@ export function NewChallengeComponent({ dataChallenge, actions }) {
   );
 
   const rewardsBody = (
+
     <div className={styles.modalChallenge}>
 
       <h3>La recompensa</h3>
@@ -205,6 +150,7 @@ export function NewChallengeComponent({ dataChallenge, actions }) {
             <article className="reward" id={reward._id} key={reward._id}>
               <Button
                 className={styles.rewardButton}
+                onClick={() => setRewardSelected(reward._id)}
               >
                 <div>
                   <img className={styles.imgButton} src={reward.image} alt="Recompensa" />
@@ -218,14 +164,16 @@ export function NewChallengeComponent({ dataChallenge, actions }) {
       </div>
       <Button
         className={styles.button_turquoise}
-        onClick={openCloseModalRewards}
+        onClick={() => clickSaveChallenge()}
+        href={`/users/${idUser}`}
+        disabled={!rewardSelected}
       >
         Guardar
       </Button>
 
       <Button
         className={styles.button_outlined}
-        onClick={openCloseModalRewards}
+        onClick={() => clickCancelChallenge()}
       >
         Cancelar
       </Button>
@@ -238,15 +186,15 @@ export function NewChallengeComponent({ dataChallenge, actions }) {
       <h2>Crear repte</h2>
       <p className="create__title">El repte durarà una setmana</p>
       <p className="create__text">
-        Selecciona les tasques que haurà de fer
-        Mariona per complir el repte i aconseguir
-        la seva recompensa.
+        Selecciona les tasques que hauràs de fer
+        per complir el repte i aconseguir
+        la recompensa.
       </p>
 
       <div className="flex all__tasks">
         {
         dataChallenge && dataChallenge?.allTasks?.map((task) => (
-          <article className="task">
+          <article className="task" key={task._id}>
             <Button
               id={task._id}
               className="task__button"
@@ -262,9 +210,11 @@ export function NewChallengeComponent({ dataChallenge, actions }) {
       </div>
 
       <Button
+        id="prova"
         variant="contained"
         className="button--violet-big"
         onClick={openCloseModalRewards}
+        disabled={!(tasksChallenge.length > 0)}
       >
         Guardar
       </Button>
@@ -308,6 +258,7 @@ NewChallengeComponent.propTypes = {
   ).isRequired,
   actions: PropTypes.shape({
     loadDataChallenge: PropTypes.func,
+    createChallenge: PropTypes.func,
   }).isRequired,
 };
 
@@ -318,7 +269,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators({
-      loadDataChallenge,
+      loadDataChallenge, createChallenge,
     }, dispatch),
   };
 }

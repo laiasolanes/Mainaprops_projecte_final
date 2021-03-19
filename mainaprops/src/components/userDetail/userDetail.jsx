@@ -1,7 +1,3 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable no-unused-expressions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
@@ -20,6 +16,10 @@ export function UserDetailComponent({ users, actions }) {
   const [modalChallenge, setModalChallenge] = useState(false);
   const [modalAchieved, setModalAchieved] = useState(false);
   const [challengeSelected, setChallengeSelected] = useState({});
+  const [selectedElement, setSelectedElement] = useState(null);
+  const [taskSelected, setTaskSelected] = useState({
+    times: [],
+  });
 
   useEffect(() => {
     if (!users || !users.length) {
@@ -35,10 +35,36 @@ export function UserDetailComponent({ users, actions }) {
     setModalAchieved(!modalAchieved);
   }
 
-  function markCompleted(elementId) {
-    const element = document.getElementById(elementId);
-    element.src === emptyStar ? element.src = fillStar : element.src = emptyStar;
+  function markCompleted(elementId, tasca) {
+    setTaskSelected(tasca);
+    setSelectedElement(document.getElementById(elementId));
   }
+
+  useEffect(() => {
+    if (selectedElement?.src === emptyStar) {
+      selectedElement.src = fillStar;
+      const newArray = taskSelected.times.slice(0, taskSelected.times.length - 1);
+
+      const withTrueArray = [true, ...newArray];
+      const index = challengeSelected.tasks.findIndex((task) => task._id === taskSelected._id);
+      const tasksCopy = [...challengeSelected.tasks];
+      tasksCopy.splice(index, 1, { ...taskSelected, times: withTrueArray });
+
+      debugger;
+      setChallengeSelected({
+        ...challengeSelected,
+        tasks: tasksCopy,
+      });
+      setTaskSelected({ ...taskSelected, times: withTrueArray });
+    } else if (selectedElement) {
+      selectedElement.src = emptyStar;
+      taskSelected.times.slice(1);
+    }
+  }, [selectedElement]);
+
+  useEffect(() => {
+    console.log(taskSelected.times);
+  }, [taskSelected]);
 
   function clickViewChallenge(challenge) {
     setChallengeSelected(challenge);
@@ -46,8 +72,14 @@ export function UserDetailComponent({ users, actions }) {
   }
 
   function clickSaveChallenge() {
-    openCloseModalChallenge();
-    openCloseModalAchieved();
+    const finish = taskSelected.times.every((item) => item === true);
+
+    if (finish === true) {
+      openCloseModalChallenge();
+      openCloseModalAchieved();
+    } else {
+      openCloseModalChallenge();
+    }
   }
 
   const challengeBody = (
@@ -64,7 +96,14 @@ export function UserDetailComponent({ users, actions }) {
 
         challengeSelected && challengeSelected?.tasks?.map((task) => (
           <>
-            <h5 key={task.name}>{task.name}</h5>
+
+            <h5 key={task?.task_id?.name}>
+              <img className="image__task" src={task?.task_id?.image} alt="Tasca" />
+
+              {task?.task_id?.name}
+
+            </h5>
+
             <div className="flex check__tasks">
               {
                   task.times && task.times.map((time, index) => (
@@ -73,9 +112,11 @@ export function UserDetailComponent({ users, actions }) {
                       <img
                         src={time ? fillStar : emptyStar}
                         alt="Estrella"
-                        onClick={() => markCompleted(task._id + index)}
-                        id={task._id + index}
+                        onClick={() => markCompleted(task.task_id._id + index, task)}
+                        aria-hidden="true"
+                        id={task.task_id._id + index}
                       />
+
                     </div>
 
                   ))
@@ -193,6 +234,9 @@ export function UserDetailComponent({ users, actions }) {
               <div
                 className="challenge__resume"
                 onClick={() => clickViewChallenge(challenge)}
+                aria-hidden="true"
+                role="button"
+                tabIndex="0"
               >
                 <span>{challenge.tasks.length}</span>
                 <br />
@@ -239,7 +283,7 @@ UserDetailComponent.propTypes = {
             image: PropTypes.string,
           },
         ),
-        _id: PropTypes.number,
+        _id: PropTypes.string,
       },
     ),
   ).isRequired,

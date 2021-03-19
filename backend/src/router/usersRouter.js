@@ -17,7 +17,8 @@ function UsersRouter() {
 
   router
     .route('/:userId/newchallenge')
-    .get(usersController.getDataChallenge);
+    .get(usersController.getDataChallenge)
+    .post(usersController.createChallenge);
 
   return router;
 }

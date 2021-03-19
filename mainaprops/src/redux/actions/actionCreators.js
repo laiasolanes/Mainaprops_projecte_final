@@ -1,5 +1,3 @@
-/* eslint-disable no-debugger */
-/* eslint-disable no-underscore-dangle */
 import axios from 'axios';
 import actionTypes from './actionTypes';
 
@@ -21,7 +19,7 @@ export function insertUser(newUser) {
   return async function dispatchNewUser(dispatch) {
     const response = await axios.post(url, { user_profile: newUser });
     const newUserData = response.data;
-    debugger;
+
     dispatch({
       type: actionTypes.INSERT_USER,
       newUserData,
@@ -60,7 +58,6 @@ export function updateUser(nameInput, ageInput, imageInput, userId) {
 
 export function userByParam(paramId) {
   return async function dispatchUsersByParam(dispatch) {
-    debugger;
     const response = await axios.get(`${url}/${paramId}`);
     const dataUser = response.data;
 
@@ -79,6 +76,21 @@ export function loadDataChallenge(paramId) {
     dispatch({
       type: actionTypes.LOAD_DATA_CHALLENGE,
       dataChallenge,
+    });
+  };
+}
+
+export function createChallenge(userId, challengeTasks, challengeReward) {
+  debugger;
+  return async function dispatchChallenge(dispatch) {
+    const challengeUser = await axios.post(`${url}/${userId}/newchallenge`,
+      {
+        user_id: userId, tasks: challengeTasks, reward: challengeReward,
+      });
+
+    dispatch({
+      type: actionTypes.CREATE_CHALLENGE,
+      payload: challengeUser.data,
     });
   };
 }

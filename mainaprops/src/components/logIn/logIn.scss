@@ -16,17 +16,18 @@
         font-family: $text_logo;
         color: $color_violet;
         font-size: 40px;
+        margin-bottom: 30px;
     }
 
     p{
-        margin: 0 30px 30px 30px;
+        margin: 30px 30px 30px 30px;
     }
 
     .button--violet-big {
         @include buttonBig;
         background: $color_violet;
         color: #ffffff;
-        margin: 50px 0;
+    
      
     }
     .button--violet-big:hover{

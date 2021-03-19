@@ -3,6 +3,7 @@
 const User = require('../models/userModel');
 const Task = require('../models/taskModel');
 const Reward = require('../models/rewardModel');
+const Challenge = require('../models/challengeModel');
 require('../models/challengeModel');
 require('../models/rewardModel');
 require('../models/taskModel');
@@ -40,8 +41,6 @@ async function updateUser(req, res) {
     const updatedUser = await User
       .findByIdAndUpdate(id, update, { new: true });
     res.json(updatedUser);
-
-    console.log(updatedUser);
   } catch (error) {
     res.status(500);
     res.send('There was an error updating');
@@ -66,7 +65,7 @@ async function getUserByParam(req, res) {
   try {
     let userChallenges = await User.findById(userId);
     userChallenges = await userChallenges.populate({ path: 'user_profile.challenges' }).execPopulate();
-    userChallenges = await userChallenges.populate({ path: 'user_profile.challenges.tasks' }).execPopulate();
+    userChallenges = await userChallenges.populate({ path: 'user_profile.challenges.tasks.task_id' }).execPopulate();
     userChallenges = await userChallenges.populate({ path: 'user_profile.challenges.reward' }).execPopulate();
     res.status(200);
     res.json(userChallenges);
@@ -86,6 +85,28 @@ async function getDataChallenge(req, res) {
   res.json({ allTasks, allRewards });
 }
 
+async function createChallenge(req, res) {
+  const newChallenge = new Challenge({ ...req.body, completed: false, end_date: null });
+
+  newChallenge.save();
+
+  const id = req.body.user_id;
+  const update = {
+    $push: {
+      'user_profile.challenges': newChallenge,
+    },
+  };
+
+  try {
+    const updatedUser = await User
+      .findByIdAndUpdate(id, update, { new: true });
+    res.json(updatedUser);
+  } catch (error) {
+    res.status(500);
+    res.send('There was an error updating user with challenges');
+  }
+}
+
 module.exports = {
   createUser,
   getUsers,
@@ -93,4 +114,5 @@ module.exports = {
   deleteUser,
   getUserByParam,
   getDataChallenge,
+  createChallenge,
 };

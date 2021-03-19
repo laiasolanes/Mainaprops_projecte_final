@@ -112,9 +112,23 @@ const useStylesNewChallenge = makeStyles((theme) => ({
     color: '#ffffff',
     fontWeight: '600',
     textTransform: 'none',
+    border: '1px solid transparent',
     '&:hover': {
       backgroundColor: 'rgba(255,255,255,0.3)',
     },
+
+  },
+
+  selected: {
+    backgroundColor: 'rgba(255,255,255,0.3)',
+    width: '50%',
+    margin: '5px auto',
+    borderRadius: '5px',
+    color: '#ffffff',
+    fontWeight: '600',
+    textTransform: 'none',
+    opacity: 1,
+    border: '1px solid #ffffff',
   },
 
   check: {

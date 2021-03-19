@@ -1,6 +1,3 @@
-/* eslint-disable prefer-const */
-/* eslint-disable no-unused-expressions */
-/* eslint-disable no-underscore-dangle */
 import React, { useEffect, useState } from 'react';
 import './usersList.css';
 import { connect } from 'react-redux';
@@ -14,14 +11,7 @@ import {
   loadUsers, insertUser, deleteUser, updateUser,
 } from '../../redux/actions/actionCreators';
 import useStylesList from '../../constants/useStylesList';
-import {
-  avatarCohet,
-  avatarBici,
-  avatarDiana,
-  avatarNena,
-  avatarNen,
-  avatarUnicorn,
-} from '../../constants/avatarImages';
+import avatar from '../../constants/avatarImages';
 
 export function UsersListComponent({ users, actions }) {
   const styles = useStylesList();
@@ -37,7 +27,7 @@ export function UsersListComponent({ users, actions }) {
 
   const [userNameInput, setUserNameInput] = useState('');
   const [userAgeInput, setUserAgeInput] = useState('');
-  let [userImageInput, setUserImageInput] = useState('');
+  const [userImageInput, setUserImageInput] = useState('');
 
   const openCloseModalInsert = () => {
     setModalInsert(!modalInsert);
@@ -53,7 +43,7 @@ export function UsersListComponent({ users, actions }) {
 
   const selectUser = (user, type) => {
     setUserSelected(user);
-    (type === 'Edit') ? openCloseModalEdit() : openCloseModalDelete();
+    return (type === 'Edit') ? openCloseModalEdit() : openCloseModalDelete();
   };
 
   const handelChange = (e) => {
@@ -92,13 +82,13 @@ export function UsersListComponent({ users, actions }) {
     );
     openCloseModalEdit();
   }
-
   function setImageInsert(url) {
+    console.log(userSelected.image);
     userSelected.image = url;
   }
 
   function setImage(url) {
-    userImageInput = url;
+    setUserImageInput(url);
   }
 
   const bodyInsertar = (
@@ -110,6 +100,7 @@ export function UsersListComponent({ users, actions }) {
         className={styles.inputMaterial}
         label="Nom"
         onChange={handelChange}
+        autoComplete="off"
       />
       <TextField
         name="age"
@@ -117,23 +108,26 @@ export function UsersListComponent({ users, actions }) {
         className={styles.inputMaterial}
         label="Edat"
         onChange={handelChange}
+        autoComplete="off"
+        InputProps={{ inputProps: { min: 0, max: 90 } }}
       />
 
       <section className="avatar__section">
         <div className="flex avatar__row">
-          <Button onClick={() => setImageInsert(avatarCohet)} className="avatar__button" id="primer" />
-          <Button onClick={() => setImageInsert(avatarBici)} className="avatar__button" />
-          <Button onClick={() => setImageInsert(avatarDiana)} className="avatar__button" />
+          <Button onClick={() => setImageInsert(avatar.avatarCohet)} className="avatar__button" id="primer" />
+          <Button onClick={() => setImageInsert(avatar.avatarBici)} className="avatar__button" />
+          <Button onClick={() => setImageInsert(avatar.avatarDiana)} className="avatar__button" />
 
-          <Button onClick={() => setImageInsert(avatarNena)} className="avatar__button" />
-          <Button onClick={() => setImageInsert(avatarNen)} className="avatar__button" />
-          <Button onClick={() => setImageInsert(avatarUnicorn)} className="avatar__button" />
+          <Button onClick={() => setImageInsert(avatar.avatarNena)} className="avatar__button" />
+          <Button onClick={() => setImageInsert(avatar.avatarNen)} className="avatar__button" />
+          <Button onClick={() => setImageInsert(avatar.avatarUnicorn)} className="avatar__button" />
         </div>
       </section>
 
       <Button
         className={styles.button_violet}
         onClick={() => clickAddUser()}
+        disabled={!userSelected.name || !userSelected.age}
       >
         Afegir
       </Button>
@@ -174,13 +168,13 @@ export function UsersListComponent({ users, actions }) {
 
       <section className="avatar__section">
         <div className="flex avatar__row">
-          <Button onClick={() => setImage(avatarCohet)} className="avatar__button" />
-          <Button onClick={() => setImage(avatarBici)} className="avatar__button" />
-          <Button onClick={() => setImage(avatarDiana)} className="avatar__button" />
+          <Button onClick={() => setImage(avatar.avatarCohet)} className="avatar__button" />
+          <Button onClick={() => setImage(avatar.avatarBici)} className="avatar__button" />
+          <Button onClick={() => setImage(avatar.avatarDiana)} className="avatar__button" />
 
-          <Button onClick={() => setImage(avatarNena)} className="avatar__button" />
-          <Button onClick={() => setImage(avatarNen)} className="avatar__button" />
-          <Button onClick={() => setImage(avatarUnicorn)} className="avatar__button" />
+          <Button onClick={() => setImage(avatar.avatarNena)} className="avatar__button" />
+          <Button onClick={() => setImage(avatar.avatarNen)} className="avatar__button" />
+          <Button onClick={() => setImage(avatar.avatarUnicorn)} className="avatar__button" />
         </div>
       </section>
 
@@ -228,7 +222,7 @@ export function UsersListComponent({ users, actions }) {
       {
           users && users.map((user) => (
             <div className="flex list__row" key={user._id}>
-              <div className="list__avatar" key={user._id}>
+              <div className="list__avatar">
                 <a href={`/users/${user._id}`}><img src={user.user_profile.image} alt="Avatar" /></a>
               </div>
               <div className="list__name">

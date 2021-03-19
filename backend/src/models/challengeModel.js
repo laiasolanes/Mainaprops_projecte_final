@@ -9,7 +9,11 @@ const challengeSchema = new Schema({
   },
   tasks: [
     {
-      type: Schema.Types.ObjectId, ref: 'Task',
+      task_id: {
+        type: Schema.Types.ObjectId,
+        ref: 'Task',
+      },
+      times: [Boolean],
     },
   ],
 });

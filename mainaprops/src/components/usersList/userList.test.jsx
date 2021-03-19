@@ -2,7 +2,11 @@ import React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
 import { act } from 'react-dom/test-utils';
 import { BrowserRouter } from 'react-router-dom';
-import { fireEvent } from '@testing-library/user-event';
+import Button from '@material-ui/core';
+import {
+  cleanup,
+  fireEvent,
+} from '@testing-library/react';
 import { UsersListComponent } from './usersList';
 
 jest.mock('../../redux/actions/actionCreators');
@@ -76,4 +80,18 @@ describe('Given a component UserListComponent', () => {
       expect(selectUser).toHaveBeenCalled();
     });
   });
+
+  describe('When cliccked button', () => {
+    test('Then it invoke ', (done) => {
+      function clickAddUser() {
+        done();
+      }
+      const { getByText } = render(
+        <Button onClick={clickAddUser}>Afegeix</Button>,
+      );
+      const node = getByText('Afegeix');
+      fireEvent.click(node);
+    });
+  });
+  afterEach(cleanup);
 });
