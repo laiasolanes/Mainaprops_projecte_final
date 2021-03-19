@@ -11,14 +11,7 @@ import {
   loadUsers, insertUser, deleteUser, updateUser,
 } from '../../redux/actions/actionCreators';
 import useStylesList from '../../constants/useStylesList';
-import {
-  avatarCohet,
-  avatarBici,
-  avatarDiana,
-  avatarNena,
-  avatarNen,
-  avatarUnicorn,
-} from '../../constants/avatarImages';
+import avatar from '../../constants/avatarImages';
 
 export function UsersListComponent({ users, actions }) {
   const styles = useStylesList();
@@ -121,13 +114,13 @@ export function UsersListComponent({ users, actions }) {
 
       <section className="avatar__section">
         <div className="flex avatar__row">
-          <Button onClick={() => setImageInsert(avatarCohet)} className="avatar__button" id="primer" />
-          <Button onClick={() => setImageInsert(avatarBici)} className="avatar__button" />
-          <Button onClick={() => setImageInsert(avatarDiana)} className="avatar__button" />
+          <Button onClick={() => setImageInsert(avatar.avatarCohet)} className="avatar__button" id="primer" />
+          <Button onClick={() => setImageInsert(avatar.avatarBici)} className="avatar__button" />
+          <Button onClick={() => setImageInsert(avatar.avatarDiana)} className="avatar__button" />
 
-          <Button onClick={() => setImageInsert(avatarNena)} className="avatar__button" />
-          <Button onClick={() => setImageInsert(avatarNen)} className="avatar__button" />
-          <Button onClick={() => setImageInsert(avatarUnicorn)} className="avatar__button" />
+          <Button onClick={() => setImageInsert(avatar.avatarNena)} className="avatar__button" />
+          <Button onClick={() => setImageInsert(avatar.avatarNen)} className="avatar__button" />
+          <Button onClick={() => setImageInsert(avatar.avatarUnicorn)} className="avatar__button" />
         </div>
       </section>
 
@@ -175,13 +168,13 @@ export function UsersListComponent({ users, actions }) {
 
       <section className="avatar__section">
         <div className="flex avatar__row">
-          <Button onClick={() => setImage(avatarCohet)} className="avatar__button" />
-          <Button onClick={() => setImage(avatarBici)} className="avatar__button" />
-          <Button onClick={() => setImage(avatarDiana)} className="avatar__button" />
+          <Button onClick={() => setImage(avatar.avatarCohet)} className="avatar__button" />
+          <Button onClick={() => setImage(avatar.avatarBici)} className="avatar__button" />
+          <Button onClick={() => setImage(avatar.avatarDiana)} className="avatar__button" />
 
-          <Button onClick={() => setImage(avatarNena)} className="avatar__button" />
-          <Button onClick={() => setImage(avatarNen)} className="avatar__button" />
-          <Button onClick={() => setImage(avatarUnicorn)} className="avatar__button" />
+          <Button onClick={() => setImage(avatar.avatarNena)} className="avatar__button" />
+          <Button onClick={() => setImage(avatar.avatarNen)} className="avatar__button" />
+          <Button onClick={() => setImage(avatar.avatarUnicorn)} className="avatar__button" />
         </div>
       </section>
 
@@ -229,7 +222,7 @@ export function UsersListComponent({ users, actions }) {
       {
           users && users.map((user) => (
             <div className="flex list__row" key={user._id}>
-              <div className="list__avatar" key={user._id}>
+              <div className="list__avatar">
                 <a href={`/users/${user._id}`}><img src={user.user_profile.image} alt="Avatar" /></a>
               </div>
               <div className="list__name">

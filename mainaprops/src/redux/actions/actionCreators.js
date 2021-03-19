@@ -1,5 +1,3 @@
-/* eslint-disable no-debugger */
-/* eslint-disable no-underscore-dangle */
 import axios from 'axios';
 import actionTypes from './actionTypes';
 

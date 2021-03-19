@@ -5,7 +5,6 @@ import { bindActionCreators } from 'redux';
 import './newChallenge.css';
 import { Modal, Button } from '@material-ui/core';
 import { loadDataChallenge, createChallenge } from '../../redux/actions/actionCreators';
-
 import useStylesNewChallenge from '../../constants/useStylesNewChallenge';
 
 const pageURL = window.location.href.split('/');

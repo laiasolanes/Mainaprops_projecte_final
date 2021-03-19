@@ -20,7 +20,6 @@ export function UserDetailComponent({ users, actions }) {
   const [taskSelected, setTaskSelected] = useState({
     times: [],
   });
-  // const [timesSelected, setTimesSelected] = useState([]);
 
   useEffect(() => {
     if (!users || !users.length) {
@@ -37,21 +36,8 @@ export function UserDetailComponent({ users, actions }) {
   }
 
   function markCompleted(elementId, tasca) {
-    debugger;
-
-    setSelectedElement(document.getElementById(elementId));
-
     setTaskSelected(tasca);
-    // if (element.src === emptyStar) {
-    //   element.src = fillStar;
-    //   const newArray = taskSelected.times.slice(0, taskSelected.times.length - 1);
-
-    //   let withTrueArray = [true, ...newArray];
-    //   taskSelected.times = withTrueArray;
-    // } else {
-    //   element.src = emptyStar;
-    //   taskSelected.times.slice(1);
-    // }
+    setSelectedElement(document.getElementById(elementId));
   }
 
   useEffect(() => {
@@ -60,13 +46,25 @@ export function UserDetailComponent({ users, actions }) {
       const newArray = taskSelected.times.slice(0, taskSelected.times.length - 1);
 
       const withTrueArray = [true, ...newArray];
-      taskSelected.times = withTrueArray;
-      console.log(taskSelected.times);
+      const index = challengeSelected.tasks.findIndex((task) => task._id === taskSelected._id);
+      const tasksCopy = [...challengeSelected.tasks];
+      tasksCopy.splice(index, 1, { ...taskSelected, times: withTrueArray });
+
+      debugger;
+      setChallengeSelected({
+        ...challengeSelected,
+        tasks: tasksCopy,
+      });
+      setTaskSelected({ ...taskSelected, times: withTrueArray });
     } else if (selectedElement) {
       selectedElement.src = emptyStar;
       taskSelected.times.slice(1);
     }
-  }, [taskSelected, selectedElement]);
+  }, [selectedElement]);
+
+  useEffect(() => {
+    console.log(taskSelected.times);
+  }, [taskSelected]);
 
   function clickViewChallenge(challenge) {
     setChallengeSelected(challenge);
@@ -74,8 +72,14 @@ export function UserDetailComponent({ users, actions }) {
   }
 
   function clickSaveChallenge() {
-    openCloseModalChallenge();
-    openCloseModalAchieved();
+    const finish = taskSelected.times.every((item) => item === true);
+
+    if (finish === true) {
+      openCloseModalChallenge();
+      openCloseModalAchieved();
+    } else {
+      openCloseModalChallenge();
+    }
   }
 
   const challengeBody = (
