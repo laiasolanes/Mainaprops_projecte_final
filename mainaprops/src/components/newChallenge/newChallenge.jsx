@@ -106,6 +106,7 @@ export function NewChallengeComponent({ dataChallenge, actions }) {
               ? styles.selected
               : styles.button_day}
             id={day}
+            key={day}
             onClick={(event) => clickTimes(day, event.target)}
           >
             {day}
@@ -194,7 +195,7 @@ export function NewChallengeComponent({ dataChallenge, actions }) {
       <div className="flex all__tasks">
         {
         dataChallenge && dataChallenge?.allTasks?.map((task) => (
-          <article className="task">
+          <article className="task" key={task._id}>
             <Button
               id={task._id}
               className="task__button"

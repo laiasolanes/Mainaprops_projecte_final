@@ -92,8 +92,8 @@ export function UsersListComponent({ users, actions }) {
     );
     openCloseModalEdit();
   }
-
   function setImageInsert(url) {
+    console.log(userSelected.image);
     userSelected.image = url;
   }
 
@@ -110,6 +110,7 @@ export function UsersListComponent({ users, actions }) {
         className={styles.inputMaterial}
         label="Nom"
         onChange={handelChange}
+        autoComplete="off"
       />
       <TextField
         name="age"
@@ -117,6 +118,8 @@ export function UsersListComponent({ users, actions }) {
         className={styles.inputMaterial}
         label="Edat"
         onChange={handelChange}
+        autoComplete="off"
+        InputProps={{ inputProps: { min: 0, max: 90 } }}
       />
 
       <section className="avatar__section">
@@ -134,6 +137,7 @@ export function UsersListComponent({ users, actions }) {
       <Button
         className={styles.button_violet}
         onClick={() => clickAddUser()}
+        disabled={!userSelected.name || !userSelected.age}
       >
         Afegir
       </Button>

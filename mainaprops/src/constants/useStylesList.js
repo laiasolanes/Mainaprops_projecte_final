@@ -34,6 +34,10 @@ const useStylesList = makeStyles((theme) => ({
     '&:hover': {
       backgroundColor: '#4d2d80',
     },
+    '&:disabled': {
+      backgroundColor: 'rgba(0,0,0,0.12)',
+
+    },
   },
   button_outlined: {
     width: '100%',

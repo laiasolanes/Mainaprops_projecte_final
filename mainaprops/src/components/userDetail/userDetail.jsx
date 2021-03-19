@@ -75,7 +75,8 @@ export function UserDetailComponent({ users, actions }) {
               {
                   task.times && task.times.map((time, index) => (
 
-                    <div>
+                    // eslint-disable-next-line react/no-array-index-key
+                    <div key={task.task_id._id + index}>
                       <img
                         src={time ? fillStar : emptyStar}
                         alt="Estrella"
@@ -245,7 +246,7 @@ UserDetailComponent.propTypes = {
             image: PropTypes.string,
           },
         ),
-        _id: PropTypes.number,
+        _id: PropTypes.string,
       },
     ),
   ).isRequired,
