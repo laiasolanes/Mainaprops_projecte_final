@@ -81,7 +81,6 @@ export function loadDataChallenge(paramId) {
 }
 
 export function createChallenge(userId, challengeTasks, challengeReward) {
-  debugger;
   return async function dispatchChallenge(dispatch) {
     const challengeUser = await axios.post(`${url}/${userId}/newchallenge`,
       {
@@ -91,6 +90,21 @@ export function createChallenge(userId, challengeTasks, challengeReward) {
     dispatch({
       type: actionTypes.CREATE_CHALLENGE,
       payload: challengeUser.data,
+    });
+  };
+}
+
+export function updateChallenge(userId, idChallenge) {
+  console.log('actionCreators USER:', userId, 'TASCA: ', idChallenge);
+  return async function dispatchUpdatedChallenge(dispatch) {
+    await axios.put(`${url}/${userId}`,
+      {
+        _id: idChallenge,
+        completed: true,
+      });
+
+    dispatch({
+      type: actionTypes.UPDATE_CHALLENGE,
     });
   };
 }

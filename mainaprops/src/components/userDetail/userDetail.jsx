@@ -4,7 +4,7 @@ import { PropTypes } from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { Modal, Button } from '@material-ui/core';
 import './userDetail.css';
-import { userByParam } from '../../redux/actions/actionCreators';
+import { userByParam, updateChallenge } from '../../redux/actions/actionCreators';
 import useStylesDetail from '../../constants/useStylesDetail';
 import { emptyStar, fillStar } from '../../constants/starImages';
 
@@ -50,7 +50,6 @@ export function UserDetailComponent({ users, actions }) {
       const tasksCopy = [...challengeSelected.tasks];
       tasksCopy.splice(index, 1, { ...taskSelected, times: withTrueArray });
 
-      debugger;
       setChallengeSelected({
         ...challengeSelected,
         tasks: tasksCopy,
@@ -58,7 +57,20 @@ export function UserDetailComponent({ users, actions }) {
       setTaskSelected({ ...taskSelected, times: withTrueArray });
     } else if (selectedElement) {
       selectedElement.src = emptyStar;
-      taskSelected.times.slice(1);
+      debugger;
+      const shortArray = taskSelected.times.slice(1, taskSelected.times.length);
+
+      const deleteTrueArray = [...shortArray, false];
+      const indexEmpty = challengeSelected.tasks.findIndex((task) => task._id === taskSelected._id);
+      const emptyTasksCopy = [...challengeSelected.tasks];
+
+      emptyTasksCopy.splice(indexEmpty, 1, { ...taskSelected, times: deleteTrueArray });
+
+      setChallengeSelected({
+        ...challengeSelected,
+        tasks: emptyTasksCopy,
+      });
+      setTaskSelected({ ...taskSelected, times: deleteTrueArray });
     }
   }, [selectedElement]);
 
@@ -74,12 +86,18 @@ export function UserDetailComponent({ users, actions }) {
   function clickSaveChallenge() {
     const finish = taskSelected.times.every((item) => item === true);
 
-    if (finish === true) {
+    if (finish) {
       openCloseModalChallenge();
       openCloseModalAchieved();
     } else {
       openCloseModalChallenge();
     }
+  }
+
+  function markCompletedChallenge() {
+    actions.updateChallenge(idUser, challengeSelected._id);
+    console.log('ID tasca: ', challengeSelected._id, 'ID user: ', idUser);
+    openCloseModalAchieved();
   }
 
   const challengeBody = (
@@ -163,7 +181,7 @@ export function UserDetailComponent({ users, actions }) {
 
         <Button
           className={styles.button_turquoise}
-          onClick={(openCloseModalAchieved)}
+          onClick={() => markCompletedChallenge()}
         >
           Tornar als reptes
         </Button>
@@ -289,6 +307,7 @@ UserDetailComponent.propTypes = {
   ).isRequired,
   actions: PropTypes.shape({
     userByParam: PropTypes.func,
+    updateChallenge: PropTypes.func,
   }).isRequired,
 };
 
@@ -299,7 +318,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators({
-      userByParam,
+      userByParam, updateChallenge,
     }, dispatch),
   };
 }
