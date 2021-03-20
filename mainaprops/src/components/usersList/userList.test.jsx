@@ -2,9 +2,7 @@ import React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
 import { act } from 'react-dom/test-utils';
 import { BrowserRouter } from 'react-router-dom';
-import Button from '@material-ui/core';
 import {
-  cleanup,
   fireEvent,
 } from '@testing-library/react';
 import { UsersListComponent } from './usersList';
@@ -52,8 +50,8 @@ describe('Given a component UserListComponent', () => {
     });
   });
 
-  describe('When cliccked EditRoundedIcon', () => {
-    test('Then it invoke selectUser', () => {
+  describe('When cliccked button + usuaris', () => {
+    test('Then it invoke clickAddUser', () => {
       const users = [{ user_profile: { name: '' } }];
 
       const actions = {
@@ -74,24 +72,10 @@ describe('Given a component UserListComponent', () => {
         );
       });
 
-      const iconButton = document.querySelector('#prova');
-      fireEvent.click(iconButton);
-      const selectUser = jest.fn();
-      expect(selectUser).toHaveBeenCalled();
+      const button = document.querySelector('#add');
+      fireEvent.click(button);
+      const clickAddUser = jest.fn();
+      expect(clickAddUser).toHaveBeenCalled();
     });
   });
-
-  describe('When cliccked button', () => {
-    test('Then it invoke ', (done) => {
-      function clickAddUser() {
-        done();
-      }
-      const { getByText } = render(
-        <Button onClick={clickAddUser}>Afegeix</Button>,
-      );
-      const node = getByText('Afegeix');
-      fireEvent.click(node);
-    });
-  });
-  afterEach(cleanup);
 });

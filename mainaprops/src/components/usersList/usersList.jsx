@@ -252,6 +252,7 @@ export function UsersListComponent({ users, actions }) {
         variant="contained"
         className="button--outlined-big"
         onClick={openCloseModalInsert}
+        id="add"
       >
         + usuaris
       </Button>
