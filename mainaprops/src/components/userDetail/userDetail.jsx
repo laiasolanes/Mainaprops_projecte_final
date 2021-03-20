@@ -4,6 +4,8 @@ import { PropTypes } from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { Modal, Button } from '@material-ui/core';
 import './userDetail.css';
+import Confetti from 'react-confetti';
+import useWindowSize from '@rooks/use-window-size';
 import { userByParam, updateChallenge } from '../../redux/actions/actionCreators';
 import useStylesDetail from '../../constants/useStylesDetail';
 import { emptyStar, fillStar } from '../../constants/starImages';
@@ -164,8 +166,14 @@ export function UserDetailComponent({ users, dataChallenge, actions }) {
     </div>
   );
 
+  const { width, height } = useWindowSize();
+
   const achievedBody = (
     <div className={styles.modalAchieved}>
+      <Confetti
+        width={width}
+        height={height}
+      />
       <h2>
         Repte
         <br />
