@@ -107,6 +107,25 @@ async function createChallenge(req, res) {
   }
 }
 
+async function updateChallenge(req, res) {
+  const id = req.body._id;
+
+  const update = {
+
+    completed: req.body.completed,
+
+  };
+  try {
+    const updatedChallenge = await Challenge
+      .findByIdAndUpdate(id, update, { new: true });
+
+    res.json(updatedChallenge);
+  } catch (error) {
+    res.status(500);
+    res.send('There was an error updating challenge');
+  }
+}
+
 module.exports = {
   createUser,
   getUsers,
@@ -115,4 +134,5 @@ module.exports = {
   getUserByParam,
   getDataChallenge,
   createChallenge,
+  updateChallenge,
 };

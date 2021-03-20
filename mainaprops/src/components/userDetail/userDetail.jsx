@@ -10,7 +10,7 @@ import { emptyStar, fillStar } from '../../constants/starImages';
 
 const pageURL = window.location.href;
 const idUser = pageURL.substr(pageURL.lastIndexOf('/') + 1);
-export function UserDetailComponent({ users, actions }) {
+export function UserDetailComponent({ users, dataChallenge, actions }) {
   const styles = useStylesDetail();
 
   const [modalChallenge, setModalChallenge] = useState(false);
@@ -22,10 +22,10 @@ export function UserDetailComponent({ users, actions }) {
   });
 
   useEffect(() => {
-    if (!users || !users.length) {
+    if (!users || !users.length || dataChallenge === {}) {
       actions.userByParam(idUser);
     }
-  }, [users]);
+  }, [users, dataChallenge]);
 
   function openCloseModalChallenge() {
     setModalChallenge(!modalChallenge);
@@ -57,7 +57,7 @@ export function UserDetailComponent({ users, actions }) {
       setTaskSelected({ ...taskSelected, times: withTrueArray });
     } else if (selectedElement) {
       selectedElement.src = emptyStar;
-      debugger;
+
       const shortArray = taskSelected.times.slice(1, taskSelected.times.length);
 
       const deleteTrueArray = [...shortArray, false];
@@ -96,7 +96,6 @@ export function UserDetailComponent({ users, actions }) {
 
   function markCompletedChallenge() {
     actions.updateChallenge(idUser, challengeSelected._id);
-    console.log('ID tasca: ', challengeSelected._id, 'ID user: ', idUser);
     openCloseModalAchieved();
   }
 
@@ -305,6 +304,16 @@ UserDetailComponent.propTypes = {
       },
     ),
   ).isRequired,
+  dataChallenge: PropTypes.shape(
+    {
+      allTasks: PropTypes.arrayOf(
+        PropTypes.shape({}),
+      ),
+      allRewards: PropTypes.arrayOf(
+        PropTypes.shape({}),
+      ),
+    },
+  ).isRequired,
   actions: PropTypes.shape({
     userByParam: PropTypes.func,
     updateChallenge: PropTypes.func,
@@ -312,7 +321,10 @@ UserDetailComponent.propTypes = {
 };
 
 function mapStateToProps(state) {
-  return { users: state.users };
+  return {
+    users: state.users,
+    dataChallenge: state.dataChallenge,
+  };
 }
 
 function mapDispatchToProps(dispatch) {

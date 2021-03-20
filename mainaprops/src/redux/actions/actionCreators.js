@@ -47,7 +47,15 @@ export function deleteUser(user) {
 export function updateUser(nameInput, ageInput, imageInput, userId) {
   return async function dispatchUpdatedUser(dispatch) {
     const updatedUserData = await axios.put(url,
-      { user_profile: { name: nameInput, age: ageInput, image: imageInput }, _id: userId });
+      {
+        user_profile:
+        {
+          name: nameInput,
+          age: ageInput,
+          image: imageInput,
+        },
+        _id: userId,
+      });
 
     dispatch({
       type: actionTypes.UPDATE_USER,
@@ -95,9 +103,8 @@ export function createChallenge(userId, challengeTasks, challengeReward) {
 }
 
 export function updateChallenge(userId, idChallenge) {
-  console.log('actionCreators USER:', userId, 'TASCA: ', idChallenge);
   return async function dispatchUpdatedChallenge(dispatch) {
-    await axios.put(`${url}/${userId}`,
+    const challengeData = await axios.put(`${url}/${userId}`,
       {
         _id: idChallenge,
         completed: true,
@@ -105,6 +112,7 @@ export function updateChallenge(userId, idChallenge) {
 
     dispatch({
       type: actionTypes.UPDATE_CHALLENGE,
+      payload: challengeData.data,
     });
   };
 }
