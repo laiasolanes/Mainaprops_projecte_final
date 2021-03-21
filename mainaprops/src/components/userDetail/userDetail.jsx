@@ -77,7 +77,6 @@ export function UserDetailComponent({ users, dataChallenge, actions }) {
   }, [selectedElement]);
 
   useEffect(() => {
-    console.log(taskSelected.times);
   }, [taskSelected]);
 
   function clickViewChallenge(challenge) {

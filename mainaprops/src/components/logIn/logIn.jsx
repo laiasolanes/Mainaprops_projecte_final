@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
 import { bindActionCreators } from 'redux';
 import './logIn.css';
+import '../../firebase';
 import Button from '@material-ui/core/Button';
 import { loginWithGoogle } from '../../redux/actions/actionCreators';
 
@@ -45,7 +46,7 @@ function LogIn({ admin, actions }) {
 }
 LogIn.propTypes = {
   admin: PropTypes.shape({
-    isLogged: PropTypes.string,
+    isLogged: PropTypes.bool,
     displayName: PropTypes.string,
     email: PropTypes.string,
     photoURL: PropTypes.string,
