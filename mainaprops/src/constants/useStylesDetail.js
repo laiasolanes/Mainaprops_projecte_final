@@ -14,6 +14,7 @@ const useStylesDetail = makeStyles((theme) => ({
     left: '50%',
     transform: 'translate(-50%, -50%)',
     outlineStyle: 'none',
+    maxHeight: '90vh',
   },
 
   modalAchieved: {

@@ -117,7 +117,7 @@ export function NewChallengeComponent({ dataChallenge, actions }) {
       <Button
         className={styles.button_turquoise}
         onClick={() => clickSaveTask(taskSelected._id)}
-        disabled={!(timesTask.length > 0)}
+        disabled={(timesTask.length === 0)}
       >
         Guardar
       </Button>
@@ -214,7 +214,7 @@ export function NewChallengeComponent({ dataChallenge, actions }) {
         variant="contained"
         className="button--violet-big"
         onClick={openCloseModalRewards}
-        disabled={!(tasksChallenge.length > 0)}
+        disabled={(tasksChallenge.length === 0)}
       >
         Guardar
       </Button>

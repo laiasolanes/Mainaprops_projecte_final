@@ -50,6 +50,11 @@ async function updateUser(req, res) {
 async function deleteUser(req, res) {
   const id = req.body.user._id;
 
+  const user = await User.findById(id);
+  user.user_profile.challenges.forEach(async (challengeId) => {
+    await Challenge.findByIdAndDelete(challengeId);
+  });
+
   try {
     await User.findByIdAndDelete(id);
     res.send('Deleted Ok');
@@ -107,6 +112,25 @@ async function createChallenge(req, res) {
   }
 }
 
+async function updateChallenge(req, res) {
+  const id = req.body._id;
+
+  const update = {
+
+    completed: req.body.completed,
+
+  };
+  try {
+    const updatedChallenge = await Challenge
+      .findByIdAndUpdate(id, update, { new: true });
+
+    res.json(updatedChallenge);
+  } catch (error) {
+    res.status(500);
+    res.send('There was an error updating challenge');
+  }
+}
+
 module.exports = {
   createUser,
   getUsers,
@@ -115,4 +139,5 @@ module.exports = {
   getUserByParam,
   getDataChallenge,
   createChallenge,
+  updateChallenge,
 };

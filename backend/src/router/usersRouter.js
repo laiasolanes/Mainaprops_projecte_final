@@ -13,7 +13,8 @@ function UsersRouter() {
 
   router
     .route('/:userId')
-    .get(usersController.getUserByParam);
+    .get(usersController.getUserByParam)
+    .put(usersController.updateChallenge);
 
   router
     .route('/:userId/newchallenge')

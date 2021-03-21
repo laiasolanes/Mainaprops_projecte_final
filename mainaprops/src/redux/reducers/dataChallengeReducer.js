@@ -9,6 +9,10 @@ export default function dataChallengeReducer(state = initialState.dataChallenge,
     case actionTypes.CREATE_CHALLENGE:
       return action.payload;
 
+    case actionTypes.UPDATE_CHALLENGE:
+
+      return { ...state, payload: action.payload };
+
     default:
       return state;
   }

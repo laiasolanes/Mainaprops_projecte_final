@@ -47,7 +47,15 @@ export function deleteUser(user) {
 export function updateUser(nameInput, ageInput, imageInput, userId) {
   return async function dispatchUpdatedUser(dispatch) {
     const updatedUserData = await axios.put(url,
-      { user_profile: { name: nameInput, age: ageInput, image: imageInput }, _id: userId });
+      {
+        user_profile:
+        {
+          name: nameInput,
+          age: ageInput,
+          image: imageInput,
+        },
+        _id: userId,
+      });
 
     dispatch({
       type: actionTypes.UPDATE_USER,
@@ -81,7 +89,6 @@ export function loadDataChallenge(paramId) {
 }
 
 export function createChallenge(userId, challengeTasks, challengeReward) {
-  debugger;
   return async function dispatchChallenge(dispatch) {
     const challengeUser = await axios.post(`${url}/${userId}/newchallenge`,
       {
@@ -91,6 +98,21 @@ export function createChallenge(userId, challengeTasks, challengeReward) {
     dispatch({
       type: actionTypes.CREATE_CHALLENGE,
       payload: challengeUser.data,
+    });
+  };
+}
+
+export function updateChallenge(userId, idChallenge) {
+  return async function dispatchUpdatedChallenge(dispatch) {
+    const challengeData = await axios.put(`${url}/${userId}`,
+      {
+        _id: idChallenge,
+        completed: true,
+      });
+
+    dispatch({
+      type: actionTypes.UPDATE_CHALLENGE,
+      payload: challengeData.data,
     });
   };
 }
