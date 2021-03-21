@@ -85,7 +85,7 @@ describe('Given a function deleteUser', () => {
   });
   describe('When a function is called with falsy arguments', () => {
     test('Then should send message', async () => {
-      User.findByIdAndDelete.mockReturnValueOnce(() => {
+      User.findByIdAndDelete.mockImplementationOnce(() => {
         throw new Error('Error');
       });
 

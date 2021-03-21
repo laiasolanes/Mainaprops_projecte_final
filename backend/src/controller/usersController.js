@@ -50,6 +50,11 @@ async function updateUser(req, res) {
 async function deleteUser(req, res) {
   const id = req.body.user._id;
 
+  const user = await User.findById(id);
+  user.user_profile.challenges.forEach(async (challengeId) => {
+    await Challenge.findByIdAndDelete(challengeId);
+  });
+
   try {
     await User.findByIdAndDelete(id);
     res.send('Deleted Ok');
