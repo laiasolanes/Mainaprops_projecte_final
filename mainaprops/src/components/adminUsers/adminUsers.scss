@@ -1,0 +1,24 @@
+@import '../../styles/colors';
+@import '../../styles/texts';
+@import '../../styles/styles.scss';
+
+.admin__users {
+    padding: 110px 30px 30px 30px;
+
+    .detail__admin{
+        padding: 30px;
+        align-items: center;
+
+        .image__admin {
+            img {
+                border-radius: 50%;
+            }
+        }
+        .text__admin {
+            padding-left: 30px;
+        }
+    }
+
+    
+
+}
