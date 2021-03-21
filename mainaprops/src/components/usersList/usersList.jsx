@@ -83,7 +83,6 @@ export function UsersListComponent({ users, actions }) {
     openCloseModalEdit();
   }
   function setImageInsert(url) {
-    console.log(userSelected.image);
     userSelected.image = url;
   }
 
