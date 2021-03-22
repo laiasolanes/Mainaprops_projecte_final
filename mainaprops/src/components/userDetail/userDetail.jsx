@@ -15,8 +15,11 @@ const idUser = pageURL.substr(pageURL.lastIndexOf('/') + 1);
 export function UserDetailComponent({ users, dataChallenge, actions }) {
   const styles = useStylesDetail();
 
+  const { width, height } = useWindowSize();
+
   const [modalChallenge, setModalChallenge] = useState(false);
   const [modalAchieved, setModalAchieved] = useState(false);
+  const [modalCompleted, setModalCompleted] = useState(false);
   const [challengeSelected, setChallengeSelected] = useState({});
   const [selectedElement, setSelectedElement] = useState(null);
   const [taskSelected, setTaskSelected] = useState({
@@ -35,6 +38,10 @@ export function UserDetailComponent({ users, dataChallenge, actions }) {
 
   function openCloseModalAchieved() {
     setModalAchieved(!modalAchieved);
+  }
+
+  function openCloseModalCompleted() {
+    setModalCompleted(!modalCompleted);
   }
 
   function markCompleted(elementId, tasca) {
@@ -165,8 +172,6 @@ export function UserDetailComponent({ users, dataChallenge, actions }) {
     </div>
   );
 
-  const { width, height } = useWindowSize();
-
   const achievedBody = (
     <div className={styles.modalAchieved}>
       <Confetti
@@ -204,6 +209,45 @@ export function UserDetailComponent({ users, dataChallenge, actions }) {
     (challenge) => challenge.completed === true,
   );
 
+  const completedBody = (
+    <div className={styles.modalChallenge}>
+      <img src={users[0]?.user_profile?.image} alt="Avatar" className="reward__image" />
+      <h3 className="title__completed">
+        Tens
+        {' '}
+        {challengesCompleted?.length}
+        {' '}
+        reptes completats
+        <br />
+        {users[0]?.user_profile?.name}
+        !
+      </h3>
+
+      {
+        challengesCompleted && challengesCompleted?.map((challenge) => (
+          <>
+            <div className=" flex task__completed">
+
+              <div className="image__completed">
+                <img src={challenge?.reward?.image} alt="Tasca completa" />
+              </div>
+
+              <div>
+                <h4 key={challenge?.reward?.name}>
+                  {challenge?.reward?.name}
+                </h4>
+                <p>{challenge?.reward?.end_date}</p>
+              </div>
+            </div>
+
+            <div />
+          </>
+        ))
+      }
+
+    </div>
+  );
+
   return (
 
     <section className="user__detail">
@@ -219,7 +263,13 @@ export function UserDetailComponent({ users, dataChallenge, actions }) {
 
         <div className="flex challenges__resume">
 
-          <div className="resume__detail">
+          <div
+            className="resume__detail"
+            onClick={openCloseModalCompleted}
+            aria-hidden="true"
+            role="button"
+            tabIndex="0"
+          >
             <span>{challengesCompleted?.length}</span>
             <br />
             reptes completats
@@ -291,6 +341,13 @@ export function UserDetailComponent({ users, dataChallenge, actions }) {
         onClose={openCloseModalAchieved}
       >
         {achievedBody}
+      </Modal>
+
+      <Modal
+        open={modalCompleted}
+        onClose={openCloseModalCompleted}
+      >
+        {completedBody}
       </Modal>
     </section>
   );
