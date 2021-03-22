@@ -19,7 +19,7 @@ export function NewChallengeComponent({ dataChallenge, actions }) {
   const [taskSelected, setTaskSelected] = useState({});
   const [tasksChallenge, setTasksChallenge] = useState([]);
   const [rewardSelected, setRewardSelected] = useState('');
-  const [timesTask, setTimesTask] = useState([]);
+  const [timesTask, setTimesTask] = useState(0);
 
   useEffect(() => {
     actions.loadDataChallenge(idUser);
@@ -60,16 +60,21 @@ export function NewChallengeComponent({ dataChallenge, actions }) {
 
   function clickTimes(idTime, button) {
     if (button.parentElement.hasAttribute('selected')) {
-      setTimesTask(timesTask.slice(1));
+      setTimesTask(timesTask - 1);
     } else {
-      setTimesTask([...timesTask, false]);
+      console.log(timesTask);
+      setTimesTask(timesTask + 1);
     }
     addAttribute(idTime);
   }
 
   function clickSaveTask(idTask) {
-    setTasksChallenge([...tasksChallenge, { task_id: idTask, times: timesTask }]);
-    setTimesTask([]);
+    setTasksChallenge(
+      [...tasksChallenge,
+        { description: idTask, times: { total: timesTask, current: 0 } },
+      ],
+    );
+    setTimesTask(0);
     openCloseModalTimes();
   }
 
