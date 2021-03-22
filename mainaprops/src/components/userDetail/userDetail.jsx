@@ -24,6 +24,7 @@ export function UserDetailComponent({ user, challengeSelected, actions }) {
   const [modalCompleted, setModalCompleted] = useState(false);
 
   const [challengesActives, setChallengesActives] = useState([]);
+  const [challengesCompleted, setChallengesCompleted] = useState([]);
 
   function toggleChallengeModal() {
     setChallengeModalVisibility(!isChallengeModalVisible);
@@ -44,6 +45,10 @@ export function UserDetailComponent({ user, challengeSelected, actions }) {
       setChallengesActives(user?.user_profile?.challenges?.filter(
         (challenge) => challenge.completed === false,
       ));
+
+      setChallengesCompleted(user?.user_profile?.challenges?.filter(
+        (challenge) => challenge.completed === true,
+      ));
     }
   }, [user]);
 
@@ -57,18 +62,8 @@ export function UserDetailComponent({ user, challengeSelected, actions }) {
   }
 
   function clickSaveChallenge(challenge) {
-    // TODO get data and save
     actions.updateChallenge(user._id, challenge);
   }
-
-  function markCompletedChallenge() {
-    // actions.updateChallenge(idUser, challengeSelected._id);
-    openCloseModalAchieved();
-  }
-
-  const challengesCompleted = user?.user_profile?.challenges?.filter(
-    (challenge) => challenge.completed === true,
-  );
 
   const achievedBody = (
     <div className={styles.modalAchieved}>
@@ -90,7 +85,7 @@ export function UserDetailComponent({ user, challengeSelected, actions }) {
 
         <Button
           className={styles.button_turquoise}
-          onClick={() => markCompletedChallenge()}
+          onClick={() => openCloseModalAchieved()}
         >
           Tornar als reptes
         </Button>
