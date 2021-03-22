@@ -10,7 +10,7 @@ import { loadUsers } from '../../redux/actions/actionCreators';
 export function HomeComponent({ users, actions }) {
   useEffect(() => {
     actions.loadUsers();
-  }, [users.length]);
+  }, []);
 
   return (
     <section className="home">

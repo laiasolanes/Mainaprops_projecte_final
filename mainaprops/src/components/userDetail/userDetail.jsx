@@ -269,9 +269,9 @@ UserDetailComponent.propTypes = {
   }).isRequired,
 };
 
-function mapStateToProps({ users, challengeSelected }) {
+function mapStateToProps({ user, challengeSelected }) {
   return {
-    user: users,
+    user,
     challengeSelected,
   };
 }

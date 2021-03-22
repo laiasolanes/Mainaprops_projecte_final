@@ -1,5 +1,6 @@
 const initialState = {
-  users: null,
+  users: [],
+  user: null,
   dataChallenge: null,
   challengeSelected: null,
   admin: {

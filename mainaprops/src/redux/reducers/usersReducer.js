@@ -19,22 +19,6 @@ export default function usersReducer(state = initialState.users, action) {
     case actionTypes.DELETE_USER:
       return state.filter((user) => user._id !== action.payload);
 
-    case actionTypes.LOAD_USER:
-      return action.dataUser;
-
-    case actionTypes.UPDATE_CHALLENGE:
-      debugger;
-      return {
-        ...state,
-        user_profile: {
-          ...state.user_profile,
-          challenges: state.user_profile.challenges
-            .map((challenge) => (challenge._id === action.challenge._id
-              ? action.challenge
-              : challenge)),
-        },
-      };
-
     default:
       return state;
   }
