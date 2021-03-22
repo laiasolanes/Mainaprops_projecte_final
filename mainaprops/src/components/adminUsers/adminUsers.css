@@ -1,0 +1,83 @@
+@import url("https://fonts.googleapis.com/css2?family=Itim&family=Unica+One&family=Montserrat:wght@300;600;800&display=swap");
+*, *:after, *:before {
+  margin: 0px;
+  padding: 0px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: "Montserrat", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+}
+
+body {
+  background: #6cc3c6;
+}
+
+#root {
+  background: #6CC3C6;
+}
+
+.flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+h2 {
+  font-family: "Itim", "Helvetica Neue", sans-serif;
+  font-size: 3em;
+  color: #ffffff;
+  font-weight: 300;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+h3 {
+  font-family: "Itim", "Helvetica Neue", sans-serif;
+  font-size: 2.5em;
+  font-weight: 300;
+  text-align: center;
+  letter-spacing: 1px;
+  line-height: 1em;
+}
+
+h4 {
+  font-family: "Montserrat", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  letter-spacing: 1px;
+}
+
+h5 {
+  font-family: "Itim", "Helvetica Neue", sans-serif;
+  font-size: 20px;
+  margin: 10px 0;
+}
+
+a:link, a:visited, a:active {
+  text-decoration: none;
+  color: #000000;
+}
+
+p {
+  color: #575757;
+  font-weight: 300;
+}
+
+.admin__users {
+  padding: 110px 30px 30px 30px;
+}
+
+.admin__users .detail__admin {
+  padding: 30px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.admin__users .detail__admin .image__admin img {
+  border-radius: 50%;
+}
+
+.admin__users .detail__admin .text__admin {
+  padding-left: 30px;
+}
+/*# sourceMappingURL=adminUsers.css.map */

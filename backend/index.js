@@ -13,6 +13,7 @@ const database = process.env.DB;
 
 // IMPORT ROUTES
 const usersRouter = require('./src/router/usersRouter');
+const adminRouter = require('./src/router/adminRouter');
 
 // MIDDLEWARES
 app.use(morgan('dev'));
@@ -28,6 +29,7 @@ connect(database,
 
 // ROUTES
 app.use('/api/users', usersRouter);
+app.use('/api/admin', adminRouter);
 
 // STARTING THE SERVER
 app.listen(port, () => debug(`Server is running in port ${port}`));

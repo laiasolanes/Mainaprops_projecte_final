@@ -10,6 +10,7 @@ import LogIn from './components/logIn/logIn';
 import store from './redux/store/configureStore';
 import './styles/styles.css';
 import NewChallenge from './components/newChallenge/newChallenge';
+import AdminUsers from './components/adminUsers/adminUsers';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -23,6 +24,7 @@ ReactDOM.render(
           <Route path="/login" component={LogIn} />
           <Route path="/users/:id/newchallenge" exact component={NewChallenge} />
           <Route path="/users/:id" component={UserDetail} />
+          <Route path="/admin" component={AdminUsers} />
         </Switch>
 
       </BrowserRouter>

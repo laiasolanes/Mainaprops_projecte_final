@@ -20,7 +20,7 @@ module.exports = {
   ],
   rules: {
     'no-underscore-dangle': 0,
-    'no-debugger': 0,
-    'no-console': 0,
+    'no-debugger': 1,
+    'no-console': 1,
   },
 };

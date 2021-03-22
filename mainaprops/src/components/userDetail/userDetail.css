@@ -136,6 +136,12 @@ p {
           transform: translateY(-3px);
 }
 
+.user__detail .user__header .challenges__resume .resume__detail:focus {
+  outline: none;
+  -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+}
+
 .user__detail .user__challenge {
   margin-top: 20px;
   background: #3D2563;
@@ -182,6 +188,10 @@ p {
           box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
   -webkit-transform: translateY(-3px);
           transform: translateY(-3px);
+}
+
+.user__detail .user__challenge .challenge__resume:focus {
+  outline: none;
 }
 
 .user__detail .user__challenge .button--turquoise-small {
@@ -234,5 +244,26 @@ p {
 
 .image__task {
   width: 50px;
+}
+
+.title__completed {
+  position: relative;
+  z-index: 10;
+}
+
+.task__completed {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 3px;
+  padding: 5px;
+}
+
+.image__completed {
+  padding-right: 20px;
+}
+
+.image__completed img {
+  width: 70px;
 }
 /*# sourceMappingURL=userDetail.css.map */

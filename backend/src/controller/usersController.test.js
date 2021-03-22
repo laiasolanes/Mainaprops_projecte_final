@@ -5,11 +5,14 @@ const {
   deleteUser,
   getUserByParam,
   getDataChallenge,
+  createChallenge,
+  updateChallenge,
 } = require('./usersController');
 
 const User = require('../models/userModel');
 const Task = require('../models/taskModel');
 const Reward = require('../models/rewardModel');
+const Challenge = require('../models/challengeModel');
 
 jest.mock('../models/userModel');
 
@@ -74,15 +77,19 @@ describe('Given a function updateUser', () => {
 
 describe('Given a function deleteUser', () => {
   describe('When a function is called with body', () => {
-    test('Then should call json', async () => {
-      req = { body: { user: { _id: '1' } } };
+    test('Then should send message', async () => {
+      req = { body: { user: { _id: '1', user_profile: { challenges: [] } } } };
 
-      User.findByIdAndDelete.mockReturnValueOnce(req);
+      User.findById.mockReturnValueOnce(req);
+
+      Challenge.findByIdAndDelete(req);
+      User.findByIdAndDelete.mockReturnValueOnce(res);
 
       await deleteUser(req, res);
-      expect(res.send).toHaveBeenCalled();
+      expect(res.send).toBe('Deleted Ok');
     });
   });
+
   describe('When a function is called with falsy arguments', () => {
     test('Then should send message', async () => {
       User.findByIdAndDelete.mockImplementationOnce(() => {
@@ -97,23 +104,23 @@ describe('Given a function deleteUser', () => {
 
 describe('Given a function getUserByParam', () => {
   describe('When getUserByParam function is called with params', () => {
-    test('Then should call json', () => {
+    test('Then should call json', async () => {
       req = { params: { userId: '1' } };
 
-      User.findById.mockImplementationOnce((query, callback) => callback(true));
+      User.findById.mockImplementationOnce({ populate: jest.fn() });
 
-      getUserByParam(req, res);
+      await getUserByParam(req, res);
       expect(res.json).toHaveBeenCalled();
     });
   });
 
   describe('When getUserByParam function is called with falsy params', () => {
-    test('Then should send message', () => {
+    test('Then should send message', async () => {
       req = { params: { userId: '' } };
 
       User.findById.mockImplementationOnce((query, callback) => callback(false));
 
-      getUserByParam(req, res);
+      await getUserByParam(req, res);
       expect(res.send).toHaveBeenCalled();
     });
   });
@@ -127,6 +134,44 @@ describe('Given a function getDataChallenge', () => {
       Reward.find.mockReturnValueOnce(res);
 
       await getDataChallenge(req, res);
+      expect(res.json).toHaveBeenCalled();
+    });
+  });
+});
+
+describe('Given a function createChallenge', () => {
+  describe('When createChallenge function is called with body', () => {
+    test('Then should call updateUser json', async () => {
+      req = { body: { completed: false, end_date: null } };
+
+      User.findByIdAndUpdate.mockReturnValueOnce(req);
+
+      await createChallenge(req, res);
+      expect(res.json).toHaveBeenCalled();
+    });
+  });
+
+  describe('When createChallenge function is called with a falsy argument', () => {
+    test('Then should call status with value 500', async () => {
+      req = { };
+      User.findByIdAndUpdate.mockReturnValueOnce(() => {
+        throw new Error('Error');
+      });
+
+      await createChallenge(req, res);
+      expect(res.send).toHaveBeenCalled();
+    });
+  });
+});
+
+describe('Given a function updateChallenge', () => {
+  describe('When updateChallenge function is called with body', () => {
+    test('Then should call json', async () => {
+      req = { body: { _id: '1', completed: true } };
+
+      Challenge.findByIdAndUpdate.mockReturnValueOnce(req);
+
+      await updateChallenge(req, res);
       expect(res.json).toHaveBeenCalled();
     });
   });

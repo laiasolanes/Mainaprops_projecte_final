@@ -60,6 +60,11 @@
                 box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
                 transform: translateY(-3px);
             }
+            .resume__detail:focus {
+                outline: none;
+                box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+                
+            }
 
         }
     }
@@ -105,6 +110,9 @@
             .challenge__resume:hover {
                 box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
                 transform: translateY(-3px);
+            }
+            .challenge__resume:focus {
+                outline: none;
             }
 
             .button--turquoise-small {
@@ -153,4 +161,22 @@
 
 .image__task {
     width: 50px;
+}
+
+.title__completed {
+    position: relative;
+    z-index: 10;
+}
+
+.task__completed {
+    align-items: center;
+    margin: 3px;
+    padding: 5px;
+}
+
+.image__completed {
+    padding-right: 20px;
+    img {
+        width: 70px;
+    }
 }

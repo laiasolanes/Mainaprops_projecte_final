@@ -116,7 +116,7 @@ async function updateChallenge(req, res) {
   const id = req.body._id;
 
   const update = {
-
+    end_date: new Date(),
     completed: req.body.completed,
 
   };

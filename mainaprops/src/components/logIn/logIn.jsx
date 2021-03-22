@@ -16,7 +16,6 @@ export default function LogIn() {
         href="/"
       >
         Accedir amb google
-
       </Button>
 
       <p>

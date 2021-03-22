@@ -1,7 +1,47 @@
 import axios from 'axios';
+import firebase from 'firebase';
 import actionTypes from './actionTypes';
 
 const url = 'http://localhost:5000/api/users';
+
+export function loginWithGoogle() {
+  return async function dispatchUser(dispatch) {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+    const {
+      admin:
+      {
+        displayName,
+        email,
+        photoURL,
+      },
+    } = await firebase.auth().signInWithPopup(provider);
+    axios.post(url, { name: displayName, email, image: photoURL });
+    dispatch({
+      type: actionTypes.LOGIN_ADMIN,
+      admin: { displayName, email, photoURL },
+    });
+  };
+}
+
+export function deleteAdmin(admin) {
+  return async function dispatchAdmin(dispatch) {
+    axios.delete(url, admin);
+    dispatch({
+      type: actionTypes.DELETE_ADMIN,
+      payload: admin,
+    });
+  };
+}
+
+export function logout() {
+  return async function dispatchLogOut(dispatch) {
+    await firebase.auth().signOut();
+    dispatch({
+      type: actionTypes.LOG_OUT_ADMIN,
+    });
+  };
+}
 
 export function loadUsers() {
   return async function dispatchUsersList(dispatch) {

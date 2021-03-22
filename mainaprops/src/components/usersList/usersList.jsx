@@ -83,7 +83,6 @@ export function UsersListComponent({ users, actions }) {
     openCloseModalEdit();
   }
   function setImageInsert(url) {
-    console.log(userSelected.image);
     userSelected.image = url;
   }
 
@@ -154,7 +153,7 @@ export function UsersListComponent({ users, actions }) {
         label="Nom"
         onChange={(event) => setUserNameInput(event.target.value)}
         value={userNameInput}
-        placeholder={userSelected.user_profile && userSelected.user_profile.name}
+
       />
       <TextField
         name="age"
@@ -163,7 +162,7 @@ export function UsersListComponent({ users, actions }) {
         type="number"
         onChange={(event) => setUserAgeInput(event.target.value)}
         value={userAgeInput}
-        placeholder={userSelected.user_profile && userSelected.user_profile.age}
+
       />
 
       <section className="avatar__section">
@@ -288,7 +287,7 @@ UsersListComponent.propTypes = {
       {
         user_profile: PropTypes.shape(
           {
-            challenges: PropTypes.arrayOf(PropTypes.shape({})),
+            challenges: PropTypes.arrayOf(PropTypes.string),
             name: PropTypes.string,
             image: PropTypes.string,
           },
