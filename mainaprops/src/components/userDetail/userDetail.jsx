@@ -236,7 +236,7 @@ export function UserDetailComponent({ users, dataChallenge, actions }) {
                 <h4 key={challenge?.reward?.name}>
                   {challenge?.reward?.name}
                 </h4>
-                <p>{challenge?.reward?.end_date}</p>
+                <p>{challenge?.end_date}</p>
               </div>
             </div>
 

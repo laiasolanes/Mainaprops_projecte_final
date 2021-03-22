@@ -255,9 +255,6 @@ p {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  border-radius: 10px;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#f2f2f2));
-  background-image: linear-gradient(#ffffff, #f2f2f2);
   margin: 3px;
   padding: 5px;
 }
