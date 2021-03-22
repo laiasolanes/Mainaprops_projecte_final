@@ -84,6 +84,7 @@ export function UserDetailComponent({ users, dataChallenge, actions }) {
   }, [selectedElement]);
 
   useEffect(() => {
+    console.log(taskSelected.times);
   }, [taskSelected]);
 
   function clickViewChallenge(challenge) {
@@ -106,6 +107,14 @@ export function UserDetailComponent({ users, dataChallenge, actions }) {
     actions.updateChallenge(idUser, challengeSelected._id);
     openCloseModalAchieved();
   }
+
+  const challengesActives = users[0]?.user_profile.challenges?.filter(
+    (challenge) => challenge.completed === false,
+  );
+
+  const challengesCompleted = users[0]?.user_profile.challenges?.filter(
+    (challenge) => challenge.completed === true,
+  );
 
   const challengeBody = (
     <div className={styles.modalChallenge}>
@@ -199,14 +208,6 @@ export function UserDetailComponent({ users, dataChallenge, actions }) {
       </div>
 
     </div>
-  );
-
-  const challengesActives = users[0]?.user_profile.challenges?.filter(
-    (challenge) => challenge.completed === false,
-  );
-
-  const challengesCompleted = users[0]?.user_profile.challenges?.filter(
-    (challenge) => challenge.completed === true,
   );
 
   const completedBody = (
