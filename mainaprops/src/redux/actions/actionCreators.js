@@ -142,17 +142,13 @@ export function createChallenge(userId, challengeTasks, challengeReward) {
   };
 }
 
-export function updateChallenge(userId, idChallenge) {
+export function updateChallenge(userId, challenge) {
   return async function dispatchUpdatedChallenge(dispatch) {
-    const challengeData = await axios.put(`${url}/${userId}`,
-      {
-        _id: idChallenge,
-        completed: true,
-      });
+    const { data } = await axios.put(`${url}/${userId}`, challenge);
 
     dispatch({
       type: actionTypes.UPDATE_CHALLENGE,
-      payload: challengeData.data,
+      challenge: data,
     });
   };
 }

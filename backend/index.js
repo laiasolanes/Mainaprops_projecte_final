@@ -2,6 +2,7 @@ const express = require('express');
 const debug = require('debug')('app');
 const morgan = require('morgan');
 const { connect } = require('mongoose');
+const cors = require('cors');
 require('dotenv').config();
 
 // INIT APP
@@ -19,6 +20,7 @@ const adminRouter = require('./src/router/adminRouter');
 app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(cors());
 
 // CONNECTING TO DB
 connect(database,

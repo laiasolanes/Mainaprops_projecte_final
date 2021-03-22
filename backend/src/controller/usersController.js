@@ -70,7 +70,7 @@ async function getUserByParam(req, res) {
   try {
     let userChallenges = await User.findById(userId);
     userChallenges = await userChallenges.populate({ path: 'user_profile.challenges' }).execPopulate();
-    userChallenges = await userChallenges.populate({ path: 'user_profile.challenges.tasks.task_id' }).execPopulate();
+    userChallenges = await userChallenges.populate({ path: 'user_profile.challenges.tasks.description' }).execPopulate();
     userChallenges = await userChallenges.populate({ path: 'user_profile.challenges.reward' }).execPopulate();
     res.status(200);
     res.json(userChallenges);
@@ -115,14 +115,19 @@ async function createChallenge(req, res) {
 async function updateChallenge(req, res) {
   const id = req.body._id;
 
-  const update = {
-    end_date: new Date(),
-    completed: req.body.completed,
+  const isIncomple = req.body.tasks.find(({ times }) => times.current !== times.total);
 
+  const update = {
+    ...req.body,
+    // TODO add end_date when is complete
+    completed: !isIncomple,
   };
+
   try {
-    const updatedChallenge = await Challenge
+    let updatedChallenge = await Challenge
       .findByIdAndUpdate(id, update, { new: true });
+    updatedChallenge = await updatedChallenge.populate({ path: 'tasks.description' }).execPopulate();
+    updatedChallenge = await updatedChallenge.populate({ path: 'reward' }).execPopulate();
 
     res.json(updatedChallenge);
   } catch (error) {

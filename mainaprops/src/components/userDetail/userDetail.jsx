@@ -6,34 +6,27 @@ import { Modal, Button } from '@material-ui/core';
 import './userDetail.css';
 import Confetti from 'react-confetti';
 import useWindowSize from '@rooks/use-window-size';
+import { updateSelectedChallenge } from '../../redux/actions/challengeActionCreators';
 import { userByParam, updateChallenge } from '../../redux/actions/actionCreators';
 import useStylesDetail from '../../constants/useStylesDetail';
-import { emptyStar, fillStar } from '../../constants/starImages';
+import ChallengeBody from './ChallengeBody';
 
 const pageURL = window.location.href;
 const idUser = pageURL.substr(pageURL.lastIndexOf('/') + 1);
-export function UserDetailComponent({ users, dataChallenge, actions }) {
+
+export function UserDetailComponent({ user, challengeSelected, actions }) {
   const styles = useStylesDetail();
 
   const { width, height } = useWindowSize();
 
-  const [modalChallenge, setModalChallenge] = useState(false);
+  const [isChallengeModalVisible, setChallengeModalVisibility] = useState(false);
   const [modalAchieved, setModalAchieved] = useState(false);
   const [modalCompleted, setModalCompleted] = useState(false);
-  const [challengeSelected, setChallengeSelected] = useState({});
-  const [selectedElement, setSelectedElement] = useState(null);
-  const [taskSelected, setTaskSelected] = useState({
-    times: [],
-  });
 
-  useEffect(() => {
-    if (!users || !users.length || dataChallenge === {}) {
-      actions.userByParam(idUser);
-    }
-  }, [users, dataChallenge]);
+  const [challengesActives, setChallengesActives] = useState([]);
 
-  function openCloseModalChallenge() {
-    setModalChallenge(!modalChallenge);
+  function toggleChallengeModal() {
+    setChallengeModalVisibility(!isChallengeModalVisible);
   }
 
   function openCloseModalAchieved() {
@@ -44,141 +37,37 @@ export function UserDetailComponent({ users, dataChallenge, actions }) {
     setModalCompleted(!modalCompleted);
   }
 
-  function markCompleted(elementId, tasca) {
-    setTaskSelected(tasca);
-    setSelectedElement(document.getElementById(elementId));
-  }
-
   useEffect(() => {
-    if (selectedElement?.src === emptyStar) {
-      selectedElement.src = fillStar;
-      const newArray = taskSelected.times.slice(0, taskSelected.times.length - 1);
-
-      const withTrueArray = [true, ...newArray];
-      const index = challengeSelected.tasks.findIndex((task) => task._id === taskSelected._id);
-      const tasksCopy = [...challengeSelected.tasks];
-      tasksCopy.splice(index, 1, { ...taskSelected, times: withTrueArray });
-
-      setChallengeSelected({
-        ...challengeSelected,
-        tasks: tasksCopy,
-      });
-      setTaskSelected({ ...taskSelected, times: withTrueArray });
-    } else if (selectedElement) {
-      selectedElement.src = emptyStar;
-
-      const shortArray = taskSelected.times.slice(1, taskSelected.times.length);
-
-      const deleteTrueArray = [...shortArray, false];
-      const indexEmpty = challengeSelected.tasks.findIndex((task) => task._id === taskSelected._id);
-      const emptyTasksCopy = [...challengeSelected.tasks];
-
-      emptyTasksCopy.splice(indexEmpty, 1, { ...taskSelected, times: deleteTrueArray });
-
-      setChallengeSelected({
-        ...challengeSelected,
-        tasks: emptyTasksCopy,
-      });
-      setTaskSelected({ ...taskSelected, times: deleteTrueArray });
+    if (!user) {
+      actions.userByParam(idUser);
+    } else {
+      setChallengesActives(user?.user_profile?.challenges?.filter(
+        (challenge) => challenge.completed === false,
+      ));
     }
-  }, [selectedElement]);
+  }, [user]);
 
   useEffect(() => {
-    console.log(taskSelected.times);
-  }, [taskSelected]);
+    if (challengeSelected?.completed) openCloseModalAchieved();
+  }, [challengeSelected]);
 
   function clickViewChallenge(challenge) {
-    setChallengeSelected(challenge);
-    openCloseModalChallenge();
+    actions.updateSelectedChallenge(challenge);
+    toggleChallengeModal();
   }
 
-  function clickSaveChallenge() {
-    const finish = taskSelected.times.every((item) => item === true);
-
-    if (finish) {
-      openCloseModalChallenge();
-      openCloseModalAchieved();
-    } else {
-      openCloseModalChallenge();
-    }
+  function clickSaveChallenge(challenge) {
+    // TODO get data and save
+    actions.updateChallenge(user._id, challenge);
   }
 
   function markCompletedChallenge() {
-    actions.updateChallenge(idUser, challengeSelected._id);
+    // actions.updateChallenge(idUser, challengeSelected._id);
     openCloseModalAchieved();
   }
 
-  const challengesActives = users[0]?.user_profile.challenges?.filter(
-    (challenge) => challenge.completed === false,
-  );
-
-  const challengesCompleted = users[0]?.user_profile.challenges?.filter(
+  const challengesCompleted = user?.user_profile?.challenges?.filter(
     (challenge) => challenge.completed === true,
-  );
-
-  const challengeBody = (
-    <div className={styles.modalChallenge}>
-      <img src={challengeSelected?.reward?.image} alt="Avatar" className="reward__image" />
-      <h3 className="reward__title">{challengeSelected?.reward?.name}</h3>
-      <p className="reward__text">
-        {users[0]?.user_profile.name}
-        {' '}
-        marca les tasques que hagis fet i aconsegueix la merescuda recompensa!
-      </p>
-
-      {
-
-        challengeSelected && challengeSelected?.tasks?.map((task) => (
-          <>
-
-            <h5 key={task?.task_id?.name}>
-              <img className="image__task" src={task?.task_id?.image} alt="Tasca" />
-
-              {task?.task_id?.name}
-
-            </h5>
-
-            <div className="flex check__tasks">
-              {
-                  task.times && task.times.map((time, index) => (
-
-                    <div>
-                      <img
-                        src={time ? fillStar : emptyStar}
-                        alt="Estrella"
-                        onClick={() => markCompleted(task.task_id._id + index, task)}
-                        aria-hidden="true"
-                        id={task.task_id._id + index}
-                      />
-
-                    </div>
-
-                  ))
-                }
-              <div />
-            </div>
-            <div />
-          </>
-        ))
-      }
-
-      <div>
-        <Button
-          className={styles.button_violet}
-          onClick={() => clickSaveChallenge()}
-        >
-          Guardar
-        </Button>
-
-        <Button
-          className={styles.button_turquoise}
-          onClick={openCloseModalChallenge}
-        >
-          Cancelar
-        </Button>
-      </div>
-
-    </div>
   );
 
   const achievedBody = (
@@ -212,7 +101,7 @@ export function UserDetailComponent({ users, dataChallenge, actions }) {
 
   const completedBody = (
     <div className={styles.modalChallenge}>
-      <img src={users[0]?.user_profile?.image} alt="Avatar" className="reward__image" />
+      <img src={user?.user_profile?.image} alt="Avatar" className="reward__image" />
       <h3 className="title__completed">
         Tens
         {' '}
@@ -220,44 +109,38 @@ export function UserDetailComponent({ users, dataChallenge, actions }) {
         {' '}
         reptes completats
         <br />
-        {users[0]?.user_profile?.name}
+        {user?.user_profile?.name}
         !
       </h3>
 
       {
-        challengesCompleted && challengesCompleted?.map((challenge) => (
-          <>
-            <div className=" flex task__completed">
+         challengesCompleted?.map((challenge) => (
+           <div className=" flex task__completed" key={challenge._id}>
+             <div className="image__completed">
+               <img src={challenge?.reward?.image} alt="Tasca completa" />
+             </div>
 
-              <div className="image__completed">
-                <img src={challenge?.reward?.image} alt="Tasca completa" />
-              </div>
-
-              <div>
-                <h4 key={challenge?.reward?.name}>
-                  {challenge?.reward?.name}
-                </h4>
-                <p>{challenge?.end_date}</p>
-              </div>
-            </div>
-
-            <div />
-          </>
-        ))
+             <div>
+               <h4 key={challenge?.reward?.name}>
+                 {challenge?.reward?.name}
+               </h4>
+               <p>{challenge?.end_date}</p>
+             </div>
+           </div>
+         ))
       }
 
     </div>
   );
 
   return (
-
     <section className="user__detail">
       <article className="user__header">
-        <img src={users[0]?.user_profile?.image} alt="Avatar" />
+        <img src={user?.user_profile?.image} alt="Avatar" />
         <h3>
           Hola
           <br />
-          {users[0]?.user_profile?.name}
+          {user?.user_profile?.name}
         </h3>
 
         <p>Estàs apunt d’aconseguir els teus propòsits</p>
@@ -290,7 +173,7 @@ export function UserDetailComponent({ users, dataChallenge, actions }) {
         <Button
           variant="contained"
           className="button--violet-small"
-          href={`/users/${users[0]?._id}/newchallenge`}
+          href={`/users/${user?._id}/newchallenge`}
         >
           Crear repte
         </Button>
@@ -331,10 +214,13 @@ export function UserDetailComponent({ users, dataChallenge, actions }) {
       }
 
       <Modal
-        open={modalChallenge}
-        onClose={openCloseModalChallenge}
+        open={isChallengeModalVisible}
+        onClose={toggleChallengeModal}
       >
-        {challengeBody}
+        <ChallengeBody
+          close={toggleChallengeModal}
+          save={clickSaveChallenge}
+        />
       </Modal>
 
       <Modal
@@ -355,47 +241,47 @@ export function UserDetailComponent({ users, dataChallenge, actions }) {
 }
 
 UserDetailComponent.propTypes = {
-  users: PropTypes.arrayOf(
-    PropTypes.shape(
-      {
-        user_profile: PropTypes.shape(
-          {
-            challenges: PropTypes.arrayOf(PropTypes.shape({})),
-            name: PropTypes.string,
-            image: PropTypes.string,
-          },
-        ),
-        _id: PropTypes.string,
-      },
-    ),
-  ).isRequired,
-  dataChallenge: PropTypes.shape(
+  // eslint-disable-next-line react/require-default-props
+  user: PropTypes.shape(
     {
-      allTasks: PropTypes.arrayOf(
-        PropTypes.shape({}),
+      user_profile: PropTypes.shape(
+        {
+          challenges: PropTypes.arrayOf(PropTypes.shape({})),
+          name: PropTypes.string,
+          image: PropTypes.string,
+        },
       ),
-      allRewards: PropTypes.arrayOf(
-        PropTypes.shape({}),
-      ),
+      _id: PropTypes.string,
     },
-  ).isRequired,
+  ),
+  challengeSelected: PropTypes.shape({
+    reward: PropTypes.shape({
+      name: String,
+      image: String,
+    }).isRequired,
+    tasks: PropTypes.shape([]),
+    completed: PropTypes.bool.isRequired,
+  }).isRequired,
   actions: PropTypes.shape({
     userByParam: PropTypes.func,
     updateChallenge: PropTypes.func,
+    updateSelectedChallenge: PropTypes.func,
   }).isRequired,
 };
 
-function mapStateToProps(state) {
+function mapStateToProps({ users, challengeSelected }) {
   return {
-    users: state.users,
-    dataChallenge: state.dataChallenge,
+    user: users,
+    challengeSelected,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators({
-      userByParam, updateChallenge,
+      userByParam,
+      updateChallenge,
+      updateSelectedChallenge,
     }, dispatch),
   };
 }
