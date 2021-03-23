@@ -6,16 +6,14 @@ import { Modal, Button } from '@material-ui/core';
 import './userDetail.css';
 import { updateSelectedChallenge } from '../../redux/actions/challengeActionCreators';
 import { userByParam, updateChallenge } from '../../redux/actions/actionCreators';
-import useStylesDetail from '../../constants/useStylesDetail';
 import ChallengeBody from './ChallengeBody';
 import AchievedBody from './AchievedBody';
+import CompletedBody from './CompletedBody';
 
 const pageURL = window.location.href;
 const idUser = pageURL.substr(pageURL.lastIndexOf('/') + 1);
 
 export function UserDetailComponent({ user, challengeSelected, actions }) {
-  const styles = useStylesDetail();
-
   const [isChallengeModalVisible, setChallengeModalVisibility] = useState(false);
   const [modalAchieved, setModalAchieved] = useState(false);
   const [modalCompleted, setModalCompleted] = useState(false);
@@ -61,40 +59,6 @@ export function UserDetailComponent({ user, challengeSelected, actions }) {
   function clickSaveChallenge(challenge) {
     actions.updateChallenge(user._id, challenge);
   }
-
-  const completedBody = (
-    <div className={styles.modalChallenge}>
-      <img src={user?.user_profile?.image} alt="Avatar" className="reward__image" />
-      <h3 className="title__completed">
-        Tens
-        {' '}
-        {challengesCompleted?.length}
-        {' '}
-        reptes completats
-        <br />
-        {user?.user_profile?.name}
-        !
-      </h3>
-
-      {
-         challengesCompleted?.map((challenge) => (
-           <div className=" flex task__completed" key={challenge._id}>
-             <div className="image__completed">
-               <img src={challenge?.reward?.image} alt="Tasca completa" />
-             </div>
-
-             <div>
-               <h4 key={challenge?.reward?.name}>
-                 {challenge?.reward?.name}
-               </h4>
-               <p>{challenge?.end_date}</p>
-             </div>
-           </div>
-         ))
-      }
-
-    </div>
-  );
 
   return (
     <section className="user__detail">
@@ -199,7 +163,9 @@ export function UserDetailComponent({ user, challengeSelected, actions }) {
         open={modalCompleted}
         onClose={openCloseModalCompleted}
       >
-        {completedBody}
+        <CompletedBody
+          close={openCloseModalCompleted}
+        />
       </Modal>
     </section>
   );
