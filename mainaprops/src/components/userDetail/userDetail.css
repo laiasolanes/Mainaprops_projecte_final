@@ -16,6 +16,10 @@ body {
   background: #6CC3C6;
 }
 
+.hidden {
+  display: none;
+}
+
 .flex {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -213,7 +217,7 @@ p {
 .reward__image {
   position: absolute;
   width: 100px;
-  top: 70px;
+  top: 30px;
   left: 20px;
   z-index: 0;
 }
@@ -250,6 +254,8 @@ p {
 .title__completed {
   position: relative;
   z-index: 10;
+  width: 70%;
+  margin: auto;
 }
 
 .task__completed {
