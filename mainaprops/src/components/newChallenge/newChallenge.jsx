@@ -6,10 +6,10 @@ import './newChallenge.css';
 import { Modal, Button } from '@material-ui/core';
 import { loadDataChallenge, createChallenge } from '../../redux/actions/actionCreators';
 import useStylesNewChallenge from '../../constants/useStylesNewChallenge';
+import RewardsBody from './RewardsBody';
 
 const pageURL = window.location.href.split('/');
 const idUser = pageURL[4];
-
 export function NewChallengeComponent({ dataChallenge, actions }) {
   const styles = useStylesNewChallenge();
 
@@ -17,7 +17,7 @@ export function NewChallengeComponent({ dataChallenge, actions }) {
   const [modalRewards, setModalRewards] = useState(false);
   const [taskSelected, setTaskSelected] = useState({});
   const [tasksChallenge, setTasksChallenge] = useState([]);
-  const [rewardSelected, setRewardSelected] = useState('');
+  // const [rewardSelected, setRewardSelected] = useState('');
   const [timesTask, setTimesTask] = useState(0);
 
   useEffect(() => {
@@ -76,13 +76,8 @@ export function NewChallengeComponent({ dataChallenge, actions }) {
     openCloseModalTimes();
   }
 
-  function clickSaveChallenge() {
+  function clickSaveChallenge(rewardSelected) {
     actions.createChallenge(idUser, tasksChallenge, rewardSelected);
-  }
-
-  function clickCancelChallenge() {
-    setRewardSelected('');
-    openCloseModalRewards();
   }
 
   const weekDays = ['dilluns', 'dimarts', 'dimecres', 'dijous', 'divendres', 'dissabte', 'diumenge'];
@@ -127,54 +122,6 @@ export function NewChallengeComponent({ dataChallenge, actions }) {
       <Button
         className={styles.button_outlined}
         onClick={openCloseModalTimes}
-      >
-        Cancelar
-      </Button>
-
-    </div>
-  );
-
-  const rewardsBody = (
-    <div className={styles.modalChallenge}>
-
-      <h3>La recompensa</h3>
-
-      <p className={styles.text}>
-        Selecciona la recompensa que
-        rebras quan facis totes les tasques i aconsegueixis el repte.
-      </p>
-
-      <div className={styles.rowRewards}>
-
-        {
-          dataChallenge && dataChallenge?.allRewards?.map((reward) => (
-            <article className="reward" id={reward._id} key={reward._id}>
-              <Button
-                className={styles.rewardButton}
-                onClick={() => setRewardSelected(reward._id)}
-              >
-                <div>
-                  <img className={styles.imgButton} src={reward.image} alt="Recompensa" />
-                  <p className={styles.pButton}>{reward.name}</p>
-                </div>
-
-              </Button>
-            </article>
-          ))
-        }
-      </div>
-      <Button
-        className={styles.button_turquoise}
-        onClick={() => clickSaveChallenge()}
-        href={`/users/${idUser}`}
-        disabled={!rewardSelected}
-      >
-        Guardar
-      </Button>
-
-      <Button
-        className={styles.button_outlined}
-        onClick={() => clickCancelChallenge()}
       >
         Cancelar
       </Button>
@@ -240,7 +187,10 @@ export function NewChallengeComponent({ dataChallenge, actions }) {
         open={modalRewards}
         onClose={openCloseModalRewards}
       >
-        {rewardsBody}
+        <RewardsBody
+          save={clickSaveChallenge}
+          close={openCloseModalRewards}
+        />
       </Modal>
 
     </section>
