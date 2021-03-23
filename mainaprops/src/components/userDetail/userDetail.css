@@ -93,7 +93,7 @@ p {
 .user__detail .user__header img {
   position: absolute;
   width: 100px;
-  top: 120px;
+  top: 140px;
   left: 40px;
   z-index: 0;
 }

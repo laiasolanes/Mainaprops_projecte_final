@@ -63,7 +63,9 @@ export function UserDetailComponent({ user, challengeSelected, actions }) {
   return (
     <section className="user__detail">
       <article className="user__header">
+
         <img src={user?.user_profile?.image} alt="Avatar" />
+
         <h3>
           Hola
           <br />
@@ -92,7 +94,6 @@ export function UserDetailComponent({ user, challengeSelected, actions }) {
               <br />
               reptes actius
             </div>
-
           </a>
 
         </div>
@@ -105,6 +106,7 @@ export function UserDetailComponent({ user, challengeSelected, actions }) {
           Crear repte
         </Button>
       </article>
+
       <div id="startChallenges" />
       {
           challengesActives?.map((challenge) => (
@@ -136,7 +138,6 @@ export function UserDetailComponent({ user, challengeSelected, actions }) {
                 Veure repte
               </Button>
             </article>
-
           ))
       }
 

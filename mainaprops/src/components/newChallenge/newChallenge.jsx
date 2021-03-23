@@ -15,7 +15,6 @@ export function NewChallengeComponent({ dataChallenge, actions }) {
 
   const [modalTimes, setModalTimes] = useState(false);
   const [modalRewards, setModalRewards] = useState(false);
-
   const [taskSelected, setTaskSelected] = useState({});
   const [tasksChallenge, setTasksChallenge] = useState([]);
   const [rewardSelected, setRewardSelected] = useState('');
@@ -186,6 +185,7 @@ export function NewChallengeComponent({ dataChallenge, actions }) {
   return (
     <section className="create__challenge">
       <h2>Crear repte</h2>
+
       <p className="create__title">El repte durarà una setmana</p>
       <p className="create__text">
         Selecciona les tasques que hauràs de fer

@@ -17,18 +17,19 @@ function AchievedBody({ challengeSelected, close }) {
         width={width}
         height={height}
       />
+
       <h2>
         Repte
         <br />
         aconseguit!
       </h2>
+
       <img src={challengeSelected?.reward?.image} alt="Avatar" className="reward__achieved" />
 
       <h3 className="reward__title">{challengeSelected?.reward?.name}</h3>
       <br />
 
       <div>
-
         <Button
           className={styles.button_turquoise}
           onClick={() => close()}
@@ -36,7 +37,6 @@ function AchievedBody({ challengeSelected, close }) {
           Tornar als reptes
         </Button>
       </div>
-
     </div>
   );
 }

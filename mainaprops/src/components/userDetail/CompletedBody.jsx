@@ -17,15 +17,9 @@ function CompletedBody({ user }) {
   return (
     <div className={styles.modalChallenge}>
       <img src={user?.user_profile?.image} alt="Avatar" className="reward__image" />
+
       <h3 className="title__completed">
-        Tens
-        {' '}
-        {challengesCompleted?.length}
-        {' '}
-        reptes completats
-        <br />
-        {user?.user_profile?.name}
-        !
+        {`Has completat ${challengesCompleted?.length} reptes ${user?.user_profile?.name}`}
       </h3>
 
       {
@@ -44,7 +38,6 @@ function CompletedBody({ user }) {
                </div>
              ))
           }
-
     </div>
   );
 }
