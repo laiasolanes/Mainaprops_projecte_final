@@ -138,7 +138,6 @@ export function NewChallengeComponent({ dataChallenge, actions }) {
   );
 
   const rewardsBody = (
-
     <div className={styles.modalChallenge}>
 
       <h3>La recompensa</h3>

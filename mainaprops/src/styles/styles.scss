@@ -11,12 +11,16 @@
 
 body {
     background: rgba(108, 195, 198, 1);
+    max-width: 600px;
 }
 
 #root{
     background: $color_turquoise;
 }
 
+.hidden {
+    display: none;
+}
 .flex {
     display: flex;
 }

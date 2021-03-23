@@ -9,10 +9,15 @@
 
 body {
   background: #6cc3c6;
+  max-width: 600px;
 }
 
 #root {
   background: #6CC3C6;
+}
+
+.hidden {
+  display: none;
 }
 
 .flex {
@@ -87,8 +92,8 @@ p {
 
 .create__challenge .all__tasks .task__button {
   margin: 10px;
-  width: 150px;
-  height: 150px;
+  width: 140px;
+  height: 140px;
   padding: 0 10px 10px 10px;
   opacity: 0.8;
   border: 3px solid rgba(255, 255, 255, 0);

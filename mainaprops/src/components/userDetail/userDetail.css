@@ -9,6 +9,7 @@
 
 body {
   background: #6cc3c6;
+  max-width: 600px;
 }
 
 #root {
@@ -265,5 +266,10 @@ p {
 
 .image__completed img {
   width: 70px;
+}
+
+.completed {
+  opacity: 0.8;
+  cursor: default !important;
 }
 /*# sourceMappingURL=userDetail.css.map */
