@@ -54,7 +54,7 @@ export function NewChallengeComponent({ dataChallenge, actions }) {
     if (item.classList.contains('selected')) {
       openCloseModalTimes();
     } else {
-      setTasksChallenge(tasksChallenge.filter((taskSaved) => taskSaved.task_id !== task._id));
+      setTasksChallenge(tasksChallenge.filter((taskSaved) => taskSaved.description !== task._id));
     }
   }
 
@@ -62,7 +62,6 @@ export function NewChallengeComponent({ dataChallenge, actions }) {
     if (button.parentElement.hasAttribute('selected')) {
       setTimesTask(timesTask - 1);
     } else {
-      console.log(timesTask);
       setTimesTask(timesTask + 1);
     }
     addAttribute(idTime);
