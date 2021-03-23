@@ -115,12 +115,13 @@ async function createChallenge(req, res) {
 async function updateChallenge(req, res) {
   const id = req.body._id;
 
-  const isIncomple = req.body.tasks.find(({ times }) => times.current !== times.total);
+  const isIncomplete = req.body.tasks.find(({ times }) => times.current !== times.total);
 
   const update = {
     ...req.body,
-    // TODO add end_date when is complete
-    completed: !isIncomple,
+
+    completed: !isIncomplete,
+    end_date: isIncomplete ? null : new Date(),
   };
 
   try {
