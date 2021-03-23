@@ -17,7 +17,6 @@ export function NewChallengeComponent({ dataChallenge, actions }) {
   const [modalRewards, setModalRewards] = useState(false);
   const [taskSelected, setTaskSelected] = useState({});
   const [tasksChallenge, setTasksChallenge] = useState([]);
-  // const [rewardSelected, setRewardSelected] = useState('');
   const [timesTask, setTimesTask] = useState(0);
 
   useEffect(() => {

@@ -1,7 +1,9 @@
 import actionTypes from '../actions/actionTypes';
 import initialState from '../store/initialState';
 
-export default function dataChallengeReducer(challenge = initialState.challengeSelected, action) {
+export default function selectedChallengeReducer(
+  challenge = initialState.challengeSelected, action,
+) {
   switch (action.type) {
     case actionTypes.UPDATE_SELECTED_CHALLENGE:
       return action.challenge;
