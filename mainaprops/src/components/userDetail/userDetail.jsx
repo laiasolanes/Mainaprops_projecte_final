@@ -4,20 +4,17 @@ import { PropTypes } from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { Modal, Button } from '@material-ui/core';
 import './userDetail.css';
-import Confetti from 'react-confetti';
-import useWindowSize from '@rooks/use-window-size';
 import { updateSelectedChallenge } from '../../redux/actions/challengeActionCreators';
 import { userByParam, updateChallenge } from '../../redux/actions/actionCreators';
 import useStylesDetail from '../../constants/useStylesDetail';
 import ChallengeBody from './ChallengeBody';
+import AchievedBody from './AchievedBody';
 
 const pageURL = window.location.href;
 const idUser = pageURL.substr(pageURL.lastIndexOf('/') + 1);
 
 export function UserDetailComponent({ user, challengeSelected, actions }) {
   const styles = useStylesDetail();
-
-  const { width, height } = useWindowSize();
 
   const [isChallengeModalVisible, setChallengeModalVisibility] = useState(false);
   const [modalAchieved, setModalAchieved] = useState(false);
@@ -64,35 +61,6 @@ export function UserDetailComponent({ user, challengeSelected, actions }) {
   function clickSaveChallenge(challenge) {
     actions.updateChallenge(user._id, challenge);
   }
-
-  const achievedBody = (
-    <div className={styles.modalAchieved}>
-      <Confetti
-        width={width}
-        height={height}
-      />
-      <h2>
-        Repte
-        <br />
-        aconseguit!
-      </h2>
-      <img src={challengeSelected?.reward?.image} alt="Avatar" className="reward__achieved" />
-
-      <h3 className="reward__title">{challengeSelected?.reward?.name}</h3>
-      <br />
-
-      <div>
-
-        <Button
-          className={styles.button_turquoise}
-          onClick={() => openCloseModalAchieved()}
-        >
-          Tornar als reptes
-        </Button>
-      </div>
-
-    </div>
-  );
 
   const completedBody = (
     <div className={styles.modalChallenge}>
@@ -222,7 +190,9 @@ export function UserDetailComponent({ user, challengeSelected, actions }) {
         open={modalAchieved}
         onClose={openCloseModalAchieved}
       >
-        {achievedBody}
+        <AchievedBody
+          close={openCloseModalAchieved}
+        />
       </Modal>
 
       <Modal
