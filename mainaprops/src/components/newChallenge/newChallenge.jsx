@@ -78,7 +78,6 @@ export function NewChallengeComponent({ dataChallenge, actions }) {
   }
 
   function clickSaveChallenge() {
-    console.log(rewardSelected);
     actions.createChallenge(idUser, tasksChallenge, rewardSelected);
   }
 
