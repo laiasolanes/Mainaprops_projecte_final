@@ -60,7 +60,8 @@ export function logout(history) {
 export function loadUsers() {
   return async function dispatchUsersList(dispatch) {
     const response = await axios.get(url);
-    const dataUsers = response.data;
+
+    const dataUsers = response;
 
     dispatch({
       type: actionTypes.LOAD_USERS,
@@ -69,9 +70,10 @@ export function loadUsers() {
   };
 }
 
-export function insertUser(newUser) {
+export function insertUser(newUser, adminId) {
   return async function dispatchNewUser(dispatch) {
-    const response = await axios.post(url, { user_profile: newUser });
+    const response = await axios.post(url, { user_profile: newUser, adminId });
+    debugger;
     const newUserData = response.data;
 
     dispatch({

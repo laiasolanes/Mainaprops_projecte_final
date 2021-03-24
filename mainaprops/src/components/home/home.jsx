@@ -24,23 +24,30 @@ export function HomeComponent({
 
       {
           users && users.map((user) => (
-            <Button
-              variant="contained"
-              className="button--violet-big"
-              key={user.user_profile.name}
-              href={`/users/${user._id}`}
+            <Link
+              to={`/users/${user._id}`}
             >
-              {user.user_profile.name}
-            </Button>
+              <Button
+                variant="contained"
+                className="button--violet-big"
+                key={user.user_profile.name}
+              >
+                {user?.user_profile?.name}
+              </Button>
+            </Link>
           ))
       }
 
       <Link
-        variant="contained"
-        className="button--outlined-big"
         to="/users"
       >
-        + usuaris
+        <Button
+          variant="contained"
+          className="button--outlined-big"
+        >
+          + usuaris
+        </Button>
+
       </Link>
 
       <p>Crea un perfil per a cada usuari per poder gestionar els seus reptes.</p>

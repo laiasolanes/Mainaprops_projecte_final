@@ -4,6 +4,7 @@ import { PropTypes } from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { Modal, Button } from '@material-ui/core';
 import './userDetail.css';
+import { Link } from 'react-router-dom';
 import { updateSelectedChallenge } from '../../redux/actions/challengeActionCreators';
 import { userByParam, updateChallenge } from '../../redux/actions/actionCreators';
 import ChallengeBody from './ChallengeBody';
@@ -88,23 +89,28 @@ export function UserDetailComponent({ user, challengeSelected, actions }) {
             reptes completats
           </div>
 
-          <a href="#startChallenges">
+          <Link to="#startChallenges">
             <div className="resume__detail">
               <span>{challengesActives?.length}</span>
               <br />
               reptes actius
             </div>
-          </a>
+          </Link>
 
         </div>
 
-        <Button
-          variant="contained"
-          className="button--violet-small"
-          href={`/users/${user?._id}/newchallenge`}
+        <Link
+          to={`/users/${user?._id}/newchallenge`}
         >
-          Crear repte
-        </Button>
+          <Button
+            variant="contained"
+            className="button--violet-small"
+
+          >
+            Crear repte
+          </Button>
+        </Link>
+
       </article>
 
       <div id="startChallenges" />
