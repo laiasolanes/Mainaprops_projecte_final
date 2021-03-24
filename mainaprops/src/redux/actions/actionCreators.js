@@ -1,29 +1,38 @@
 import axios from 'axios';
+import '../../firebase';
 import firebase from 'firebase';
 import actionTypes from './actionTypes';
 
 const url = 'http://localhost:5000/api/users';
 
-export function loginWithGoogle() {
+export function loginWithGoogle(history) {
   return async function dispatchUser(dispatch) {
     const provider = new firebase.auth.GoogleAuthProvider();
     provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
-    const response = await firebase.auth().signInWithPopup(provider);
-    // eslint-disable-next-line no-debugger
-    debugger;
-    const {
-      admin:
-      {
-        displayName,
-        email,
-        photoURL,
-      },
-    } = response;
-    axios.post(url, { name: displayName, email, image: photoURL });
-    dispatch({
-      type: actionTypes.LOGIN_ADMIN,
-      admin: { displayName, email, photoURL },
-    });
+
+    try {
+      const {
+        user:
+        {
+          displayName,
+          email,
+          photoURL,
+        },
+      } = await firebase.auth().signInWithPopup(provider);
+      // eslint-disable-next-line no-debugger
+      // debugger;
+      // await axios.post(url, { name: displayName, email, image: photoURL });
+
+      dispatch({
+        type: actionTypes.LOGIN_ADMIN,
+        admin: { displayName, email, photoURL },
+      });
+
+      history.push('/');
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.log(error);
+    }
   };
 }
 
@@ -37,12 +46,14 @@ export function deleteAdmin(admin) {
   };
 }
 
-export function logout() {
+export function logout(history) {
   return async function dispatchLogOut(dispatch) {
     await firebase.auth().signOut();
     dispatch({
       type: actionTypes.LOG_OUT_ADMIN,
     });
+
+    history.push('/login');
   };
 }
 

@@ -4,7 +4,8 @@ import Button from '@material-ui/core/Button';
 import store from '../../redux/store/configureStore';
 import { loginWithGoogle } from '../../redux/actions/actionCreators';
 
-export default function LogIn() {
+// eslint-disable-next-line react/prop-types
+export default function LogIn({ history }) {
   return (
     <section className="login">
       <img src="https://firebasestorage.googleapis.com/v0/b/mainaprops.appspot.com/o/logo_reptes.png?alt=media&token=52774db4-c4f5-4f61-9e34-e5461f862e19" alt="Logo" />
@@ -14,7 +15,7 @@ export default function LogIn() {
       <Button
         variant="contained"
         className="button--violet-big"
-        onClick={() => store.dispatch(loginWithGoogle())}
+        onClick={() => store.dispatch(loginWithGoogle(history))}
       >
         Accedir amb google
       </Button>

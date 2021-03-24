@@ -7,10 +7,18 @@ import './home.css';
 import Button from '@material-ui/core/Button';
 import { loadUsers } from '../../redux/actions/actionCreators';
 
-export function HomeComponent({ users, actions }) {
+export function HomeComponent({
+// eslint-disable-next-line react/prop-types
+  users, actions, history, admin,
+}) {
   useEffect(() => {
     actions.loadUsers();
   }, []);
+
+  useEffect(() => {
+    // eslint-disable-next-line react/prop-types
+    if (!admin.isLogged) history.push('/login');
+  }, [admin]);
 
   return (
     <section className="home">
@@ -63,8 +71,8 @@ HomeComponent.propTypes = {
     loadUsers: PropTypes.func,
   }).isRequired,
 };
-function mapStateToProps(state) {
-  return { users: state.users };
+function mapStateToProps({ users, admin }) {
+  return { users, admin };
 }
 
 function mapDispatchToProps(dispatch) {
