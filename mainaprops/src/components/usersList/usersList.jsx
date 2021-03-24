@@ -101,6 +101,7 @@ export function UsersListComponent({ users, actions }) {
         onChange={handelChange}
         autoComplete="off"
       />
+
       <TextField
         name="age"
         type="number"
@@ -116,7 +117,6 @@ export function UsersListComponent({ users, actions }) {
           <Button onClick={() => setImageInsert(avatar.avatarCohet)} className="avatar__button" id="primer" />
           <Button onClick={() => setImageInsert(avatar.avatarBici)} className="avatar__button" />
           <Button onClick={() => setImageInsert(avatar.avatarDiana)} className="avatar__button" />
-
           <Button onClick={() => setImageInsert(avatar.avatarNena)} className="avatar__button" />
           <Button onClick={() => setImageInsert(avatar.avatarNen)} className="avatar__button" />
           <Button onClick={() => setImageInsert(avatar.avatarUnicorn)} className="avatar__button" />
@@ -133,7 +133,12 @@ export function UsersListComponent({ users, actions }) {
 
       <br />
 
-      <Button className={styles.button_outlined} onClick={openCloseModalInsert}>Cancelar</Button>
+      <Button
+        className={styles.button_outlined}
+        onClick={openCloseModalInsert}
+      >
+        Cancelar
+      </Button>
     </div>
   );
 
@@ -145,8 +150,8 @@ export function UsersListComponent({ users, actions }) {
         {userSelected.user_profile && userSelected.user_profile.name}
         <br />
         <img src={userSelected.user_profile && userSelected.user_profile.image} alt="Avatar" />
-
       </h2>
+
       <TextField
         name="name"
         className={styles.inputMaterial}
@@ -155,6 +160,7 @@ export function UsersListComponent({ users, actions }) {
         value={userNameInput}
 
       />
+
       <TextField
         name="age"
         className={styles.inputMaterial}
@@ -162,7 +168,6 @@ export function UsersListComponent({ users, actions }) {
         type="number"
         onChange={(event) => setUserAgeInput(event.target.value)}
         value={userAgeInput}
-
       />
 
       <section className="avatar__section">
@@ -170,7 +175,6 @@ export function UsersListComponent({ users, actions }) {
           <Button onClick={() => setImage(avatar.avatarCohet)} className="avatar__button" />
           <Button onClick={() => setImage(avatar.avatarBici)} className="avatar__button" />
           <Button onClick={() => setImage(avatar.avatarDiana)} className="avatar__button" />
-
           <Button onClick={() => setImage(avatar.avatarNena)} className="avatar__button" />
           <Button onClick={() => setImage(avatar.avatarNen)} className="avatar__button" />
           <Button onClick={() => setImage(avatar.avatarUnicorn)} className="avatar__button" />
@@ -193,10 +197,7 @@ export function UsersListComponent({ users, actions }) {
   const bodyDelete = (
     <div className={styles.modal}>
       <h2>
-        Vols eliminar el compte de
-        {' '}
-        {userSelected.user_profile && userSelected.user_profile.name}
-        ?
+        {`Vols eliminar el compte de ${userSelected.user_profile && userSelected.user_profile.name}?`}
         <br />
         <img src={userSelected.user_profile && userSelected.user_profile.image} alt="Avatar" />
       </h2>

@@ -34,10 +34,10 @@ async function deleteAdmin(req, res) {
   const adminMail = req.body;
   Admin.deleteOne(adminMail, (error, result) => {
     if (error) {
-      res.status(404),
+      res.status(404);
       res.send(`Error searching Admin with mail ${error}`);
     } else {
-      res.status(302),
+      res.status(302);
       res.json(result);
     }
   });
