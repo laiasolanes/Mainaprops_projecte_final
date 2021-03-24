@@ -7,13 +7,14 @@ import DeleteRoundedIcon from '@material-ui/icons/DeleteRounded';
 import EditRoundedIcon from '@material-ui/icons/EditRounded';
 import Button from '@material-ui/core/Button';
 import { Modal, TextField } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 import {
   loadUsers, insertUser, deleteUser, updateUser,
 } from '../../redux/actions/actionCreators';
 import useStylesList from '../../constants/useStylesList';
 import avatar from '../../constants/avatarImages';
 
-export function UsersListComponent({ users, actions }) {
+export function UsersListComponent({ users, actions, admin }) {
   const styles = useStylesList();
 
   const [modalInsert, setModalInsert] = useState(false);
@@ -55,13 +56,19 @@ export function UsersListComponent({ users, actions }) {
   };
 
   useEffect(() => {
+    if (!users) {
+      actions.loadUsers();
+    }
+  }, [users.length]);
+
+  useEffect(() => {
     setUserNameInput(userSelected?.user_profile?.name);
     setUserAgeInput(userSelected?.user_profile?.age);
     setUserImageInput(userSelected?.user_profile?.image);
   }, [userSelected]);
 
   function clickAddUser() {
-    actions.insertUser(userSelected);
+    actions.insertUser(userSelected, admin._id);
     openCloseModalInsert();
   }
 
@@ -217,10 +224,10 @@ export function UsersListComponent({ users, actions }) {
           users && users.map((user) => (
             <div className="flex list__row" key={user._id}>
               <div className="list__avatar">
-                <a href={`/users/${user._id}`}><img src={user.user_profile.image} alt="Avatar" /></a>
+                <Link to={`/users/${user._id}`}><img src={user.user_profile.image} alt="Avatar" /></Link>
               </div>
               <div className="list__name">
-                <a href={`/users/${user._id}`}><h4>{user.user_profile.name}</h4></a>
+                <Link to={`/users/${user._id}`}><h4>{user.user_profile.name}</h4></Link>
               </div>
               <div className="flex list__icons">
                 <div>
@@ -290,6 +297,14 @@ UsersListComponent.propTypes = {
       },
     ),
   ).isRequired,
+  admin: PropTypes.shape({
+    _id: PropTypes.string,
+    email: PropTypes.string,
+    image: PropTypes.string,
+    name: PropTypes.string,
+    isLogged: PropTypes.bool,
+    users: PropTypes.arrayOf(PropTypes.string),
+  }).isRequired,
   actions: PropTypes.shape({
     loadUsers: PropTypes.func,
     insertUser: PropTypes.func,
@@ -298,7 +313,7 @@ UsersListComponent.propTypes = {
   }).isRequired,
 };
 function mapStateToProps(state) {
-  return { users: state.users };
+  return { users: state.users, admin: state.admin };
 }
 
 function mapDispatchToProps(dispatch) {

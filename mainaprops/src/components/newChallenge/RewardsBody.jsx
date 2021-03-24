@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
 import { Button } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 import useStylesNewChallenge from '../../constants/useStylesNewChallenge';
 
 const pageURL = window.location.href.split('/');
@@ -41,14 +42,18 @@ function RewardsBody({ dataChallenge, save, close }) {
           ))
         }
       </div>
-      <Button
-        className={styles.button_turquoise}
-        onClick={() => save(rewardSelected)}
-        href={`/users/${idUser}`}
-        disabled={!rewardSelected}
+
+      <Link
+        to={`/users/${idUser}`}
       >
-        Guardar
-      </Button>
+        <Button
+          className={styles.button_turquoise}
+          onClick={() => save(rewardSelected)}
+          disabled={!rewardSelected}
+        >
+          Guardar
+        </Button>
+      </Link>
 
       <Button
         className={styles.button_outlined}

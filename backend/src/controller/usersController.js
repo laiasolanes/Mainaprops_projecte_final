@@ -4,20 +4,45 @@ const User = require('../models/userModel');
 const Task = require('../models/taskModel');
 const Reward = require('../models/rewardModel');
 const Challenge = require('../models/challengeModel');
+const Admin = require('../models/adminModel');
 require('../models/challengeModel');
 require('../models/rewardModel');
 require('../models/taskModel');
+require('../models/adminModel');
 
 async function createUser(req, res) {
-  const filter = { user_profile: { name: req.body.user_profile.name } };
-  const update = req.body;
+  const filter = req.body.user_profile.name;
+
+  const update = {
+    user_profile:
+    {
+      name: req.body.user_profile.name,
+      age: req.body.user_profile.age,
+      image: req.body.user_profile.image,
+    },
+  };
+
   const newUser = await User.findOneAndUpdate(filter, update,
     {
       new: true,
       upsert: true, // Make this update into an upsert
     });
-
-  res.json(newUser);
+  const id = req.body.adminId;
+  const adminUpdate = {
+    $push: {
+      users: newUser,
+    },
+  };
+  console.log('NEWUSER ', newUser);
+  try {
+    await Admin
+      .findByIdAndUpdate(id, adminUpdate, { new: true })
+      .populate({ path: 'users' });
+    res.json(newUser);
+  } catch (error) {
+    res.status(500);
+    res.send('There was an error updating admin with users');
+  }
 }
 
 async function getUsers(req, res) {

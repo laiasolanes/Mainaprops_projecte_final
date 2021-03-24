@@ -4,6 +4,7 @@ import { PropTypes } from 'prop-types';
 import { bindActionCreators } from 'redux';
 import './newChallenge.css';
 import { Modal, Button } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 import { loadDataChallenge, createChallenge } from '../../redux/actions/actionCreators';
 import useStylesNewChallenge from '../../constants/useStylesNewChallenge';
 import RewardsBody from './RewardsBody';
@@ -167,13 +168,16 @@ export function NewChallengeComponent({ dataChallenge, actions }) {
         Guardar
       </Button>
 
-      <Button
-        variant="contained"
-        className="button--outlined-big"
-        href={`/users/${idUser}`}
+      <Link
+        to={`/users/${idUser}`}
       >
-        Cancelar
-      </Button>
+        <Button
+          variant="contained"
+          className="button--outlined-big"
+        >
+          Cancelar
+        </Button>
+      </Link>
 
       <Modal
         open={modalTimes}
