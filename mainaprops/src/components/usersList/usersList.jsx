@@ -55,12 +55,6 @@ export function UsersListComponent({ users, actions }) {
   };
 
   useEffect(() => {
-    if (!users || !users.length || users.length === 1) {
-      actions.loadUsers();
-    }
-  }, [users]);
-
-  useEffect(() => {
     setUserNameInput(userSelected?.user_profile?.name);
     setUserAgeInput(userSelected?.user_profile?.age);
     setUserImageInput(userSelected?.user_profile?.image);

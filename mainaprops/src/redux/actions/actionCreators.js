@@ -4,6 +4,7 @@ import firebase from 'firebase';
 import actionTypes from './actionTypes';
 
 const url = 'http://localhost:5000/api/users';
+const adminApiUrl = 'http://localhost:5000/api/admin';
 
 export function loginWithGoogle(history) {
   return async function dispatchUser(dispatch) {
@@ -19,13 +20,12 @@ export function loginWithGoogle(history) {
           photoURL,
         },
       } = await firebase.auth().signInWithPopup(provider);
-      // eslint-disable-next-line no-debugger
-      // debugger;
-      // await axios.post(url, { name: displayName, email, image: photoURL });
+
+      const { data } = await axios.post(adminApiUrl, { name: displayName, email, image: photoURL });
 
       dispatch({
         type: actionTypes.LOGIN_ADMIN,
-        admin: { displayName, email, photoURL },
+        admin: data,
       });
 
       history.push('/');

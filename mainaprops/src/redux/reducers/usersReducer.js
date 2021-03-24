@@ -5,6 +5,9 @@ export default function usersReducer(state = initialState.users, action) {
   let newState;
 
   switch (action.type) {
+    case actionTypes.LOGIN_ADMIN:
+      return action.admin.users;
+
     case actionTypes.LOAD_USERS:
       return action.dataUsers;
 

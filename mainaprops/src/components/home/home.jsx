@@ -2,19 +2,14 @@ import React, { useEffect } from 'react';
 
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
-import { bindActionCreators } from 'redux';
 import './home.css';
 import Button from '@material-ui/core/Button';
-import { loadUsers } from '../../redux/actions/actionCreators';
+import { Link } from 'react-router-dom';
 
 export function HomeComponent({
 // eslint-disable-next-line react/prop-types
-  users, actions, history, admin,
+  users, history, admin,
 }) {
-  useEffect(() => {
-    actions.loadUsers();
-  }, []);
-
   useEffect(() => {
     // eslint-disable-next-line react/prop-types
     if (!admin.isLogged) history.push('/login');
@@ -40,13 +35,13 @@ export function HomeComponent({
           ))
       }
 
-      <Button
+      <Link
         variant="contained"
         className="button--outlined-big"
-        href="/users"
+        to="/users"
       >
         + usuaris
-      </Button>
+      </Link>
 
       <p>Crea un perfil per a cada usuari per poder gestionar els seus reptes.</p>
     </section>
@@ -67,15 +62,9 @@ HomeComponent.propTypes = {
       },
     ),
   ).isRequired,
-  actions: PropTypes.shape({
-    loadUsers: PropTypes.func,
-  }).isRequired,
 };
 function mapStateToProps({ users, admin }) {
   return { users, admin };
 }
 
-function mapDispatchToProps(dispatch) {
-  return { actions: bindActionCreators({ loadUsers }, dispatch) };
-}
-export default connect(mapStateToProps, mapDispatchToProps)(HomeComponent);
+export default connect(mapStateToProps)(HomeComponent);
