@@ -12,7 +12,8 @@ async function createAdmin(req, res) {
     {
       new: true,
       upsert: true, // Make this update into an upsert
-    });
+    })
+    .populate({ path: 'users' });
 
   res.json(newAdmin);
 }
@@ -25,7 +26,6 @@ async function loginAdmin(req, res) {
 
 async function getAdmins(req, res) {
   const allAdmins = await Admin.find({});
-  // .populate({ path: 'users' }).execPopulate();
 
   res.json(allAdmins);
 }

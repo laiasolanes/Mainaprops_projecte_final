@@ -21,7 +21,7 @@ function ChallengeBody({
       <img src={challengeSelected?.reward?.image} alt="Avatar" className="reward__image" />
       <h3 className="reward__title">{challengeSelected?.reward?.name}</h3>
       <p className="reward__text">
-        {`${user?.user_profile?.name} marca les tasques que hagis fet i aconsegueix la merescuda recompensa!`}
+        {`${user?.name} marca les tasques que hagis fet i aconsegueix la merescuda recompensa!`}
       </p>
 
       {
@@ -86,14 +86,9 @@ function ChallengeBody({
 ChallengeBody.propTypes = {
   user: PropTypes.shape(
     {
-      user_profile: PropTypes.shape(
-        {
-          challenges: PropTypes.arrayOf(PropTypes.shape({})),
-          name: PropTypes.string,
-          image: PropTypes.string,
-        },
-      ),
-      _id: PropTypes.string,
+      challenges: PropTypes.arrayOf(PropTypes.shape({})),
+      name: PropTypes.string,
+      image: PropTypes.string,
     },
   ).isRequired,
   challengeSelected: PropTypes.shape({

@@ -9,13 +9,10 @@ export default function reducer(user = initialState.user, action) {
     case actionTypes.UPDATE_CHALLENGE:
       return {
         ...user,
-        user_profile: {
-          ...user.user_profile,
-          challenges: user.user_profile.challenges
-            .map((challenge) => (challenge._id === action.challenge._id
-              ? action.challenge
-              : challenge)),
-        },
+        challenges: user.challenges
+          .map((challenge) => (challenge._id === action.challenge._id
+            ? action.challenge
+            : challenge)),
       };
 
     default:

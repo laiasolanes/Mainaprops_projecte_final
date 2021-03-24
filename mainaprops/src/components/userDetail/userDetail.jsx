@@ -38,11 +38,11 @@ export function UserDetailComponent({ user, challengeSelected, actions }) {
     if (!user) {
       actions.userByParam(idUser);
     } else {
-      setChallengesActives(user?.user_profile?.challenges?.filter(
+      setChallengesActives(user?.challenges?.filter(
         (challenge) => challenge.completed === false,
       ));
 
-      setChallengesCompleted(user?.user_profile?.challenges?.filter(
+      setChallengesCompleted(user?.challenges?.filter(
         (challenge) => challenge.completed === true,
       ));
     }
@@ -65,12 +65,12 @@ export function UserDetailComponent({ user, challengeSelected, actions }) {
     <section className="user__detail">
       <article className="user__header">
 
-        <img src={user?.user_profile?.image} alt="Avatar" />
+        <img src={user?.image} alt="Avatar" />
 
         <h3>
           Hola
           <br />
-          {user?.user_profile?.name}
+          {user?.name}
         </h3>
 
         <p>Estàs apunt d’aconseguir els teus propòsits</p>
@@ -182,13 +182,9 @@ UserDetailComponent.propTypes = {
   // eslint-disable-next-line react/require-default-props
   user: PropTypes.shape(
     {
-      user_profile: PropTypes.shape(
-        {
-          challenges: PropTypes.arrayOf(PropTypes.shape({})),
-          name: PropTypes.string,
-          image: PropTypes.string,
-        },
-      ),
+      challenges: PropTypes.arrayOf(PropTypes.shape({})),
+      name: PropTypes.string,
+      image: PropTypes.string,
       _id: PropTypes.string,
     },
   ),

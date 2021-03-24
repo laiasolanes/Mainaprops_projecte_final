@@ -72,45 +72,36 @@ export function loadUsers() {
 
 export function insertUser(newUser, adminId) {
   return async function dispatchNewUser(dispatch) {
-    const response = await axios.post(url, { user_profile: newUser, adminId });
-    debugger;
-    const newUserData = response.data;
+    const { data } = await axios.post(url, { newUser, adminId });
 
     dispatch({
       type: actionTypes.INSERT_USER,
-      newUserData,
+      newUserData: data,
     });
   };
 }
 
 export function deleteUser(user) {
   return async function dispatchdeletedUser(dispatch) {
-    const confirmMessage = await axios.delete(url, {
-      data: {
-        user,
-      },
-    });
+    const confirmMessage = await axios.delete(url, { data: user });
 
     if (confirmMessage.data === 'Deleted Ok') {
       dispatch({
         type: actionTypes.DELETE_USER,
-        payload: user._id,
+        userId: user._id,
       });
     }
   };
 }
 
-export function updateUser(nameInput, ageInput, imageInput, userId) {
+export function updateUser(name, age, image, _id) {
   return async function dispatchUpdatedUser(dispatch) {
     const updatedUserData = await axios.put(url,
       {
-        user_profile:
-        {
-          name: nameInput,
-          age: ageInput,
-          image: imageInput,
-        },
-        _id: userId,
+        name,
+        age,
+        image,
+        _id,
       });
 
     dispatch({

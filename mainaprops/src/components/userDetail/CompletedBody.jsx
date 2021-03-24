@@ -9,17 +9,17 @@ function CompletedBody({ user }) {
   const [challengesCompleted, setChallengesCompleted] = useState([]);
 
   useEffect(() => {
-    setChallengesCompleted(user?.user_profile?.challenges?.filter(
+    setChallengesCompleted(user?.challenges?.filter(
       (challenge) => challenge.completed === true,
     ));
   }, []);
 
   return (
     <div className={styles.modalChallenge}>
-      <img src={user?.user_profile?.image} alt="Avatar" className="reward__image" />
+      <img src={user?.image} alt="Avatar" className="reward__image" />
 
       <h3 className="title__completed">
-        {`Has completat ${challengesCompleted?.length} reptes ${user?.user_profile?.name}`}
+        {`Has completat ${challengesCompleted?.length} reptes ${user?.name}`}
       </h3>
 
       {
@@ -45,13 +45,9 @@ function CompletedBody({ user }) {
 CompletedBody.propTypes = {
   user: PropTypes.shape(
     {
-      user_profile: PropTypes.shape(
-        {
-          challenges: PropTypes.arrayOf(PropTypes.shape({})),
-          name: PropTypes.string,
-          image: PropTypes.string,
-        },
-      ),
+      challenges: PropTypes.arrayOf(PropTypes.shape({})),
+      name: PropTypes.string,
+      image: PropTypes.string,
       _id: PropTypes.string,
     },
   ).isRequired,

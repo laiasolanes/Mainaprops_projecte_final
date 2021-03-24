@@ -14,7 +14,10 @@ import {
 import useStylesList from '../../constants/useStylesList';
 import avatar from '../../constants/avatarImages';
 
-export function UsersListComponent({ users, actions, admin }) {
+export function UsersListComponent({
+  // eslint-disable-next-line react/prop-types
+  users, actions, admin, history,
+}) {
   const styles = useStylesList();
 
   const [modalInsert, setModalInsert] = useState(false);
@@ -56,15 +59,14 @@ export function UsersListComponent({ users, actions, admin }) {
   };
 
   useEffect(() => {
-    if (!users) {
-      actions.loadUsers();
-    }
-  }, [users.length]);
+    // eslint-disable-next-line react/prop-types
+    if (!admin.isLogged) history.push('/login');
+  });
 
   useEffect(() => {
-    setUserNameInput(userSelected?.user_profile?.name);
-    setUserAgeInput(userSelected?.user_profile?.age);
-    setUserImageInput(userSelected?.user_profile?.image);
+    setUserNameInput(userSelected?.name);
+    setUserAgeInput(userSelected?.age);
+    setUserImageInput(userSelected?.image);
   }, [userSelected]);
 
   function clickAddUser() {
@@ -148,9 +150,9 @@ export function UsersListComponent({ users, actions, admin }) {
       <h2>
         Editar usuari
         <br />
-        {userSelected.user_profile && userSelected.user_profile.name}
+        {userSelected && userSelected.name}
         <br />
-        <img src={userSelected.user_profile && userSelected.user_profile.image} alt="Avatar" />
+        <img src={userSelected && userSelected.image} alt="Avatar" />
       </h2>
 
       <TextField
@@ -198,9 +200,9 @@ export function UsersListComponent({ users, actions, admin }) {
   const bodyDelete = (
     <div className={styles.modal}>
       <h2>
-        {`Vols eliminar el compte de ${userSelected.user_profile && userSelected.user_profile.name}?`}
+        {`Vols eliminar el compte de ${userSelected && userSelected.name}?`}
         <br />
-        <img src={userSelected.user_profile && userSelected.user_profile.image} alt="Avatar" />
+        <img src={userSelected && userSelected.image} alt="Avatar" />
       </h2>
 
       <Button
@@ -224,10 +226,10 @@ export function UsersListComponent({ users, actions, admin }) {
           users && users.map((user) => (
             <div className="flex list__row" key={user._id}>
               <div className="list__avatar">
-                <Link to={`/users/${user._id}`}><img src={user.user_profile.image} alt="Avatar" /></Link>
+                <Link to={`/users/${user._id}`}><img src={user.image} alt="Avatar" /></Link>
               </div>
               <div className="list__name">
-                <Link to={`/users/${user._id}`}><h4>{user.user_profile.name}</h4></Link>
+                <Link to={`/users/${user._id}`}><h4>{user.name}</h4></Link>
               </div>
               <div className="flex list__icons">
                 <div>
@@ -287,13 +289,9 @@ UsersListComponent.propTypes = {
   users: PropTypes.arrayOf(
     PropTypes.shape(
       {
-        user_profile: PropTypes.shape(
-          {
-            challenges: PropTypes.arrayOf(PropTypes.string),
-            name: PropTypes.string,
-            image: PropTypes.string,
-          },
-        ),
+        challenges: PropTypes.arrayOf(PropTypes.string),
+        name: PropTypes.string,
+        image: PropTypes.string,
       },
     ),
   ).isRequired,
@@ -312,8 +310,12 @@ UsersListComponent.propTypes = {
     updateUser: PropTypes.func,
   }).isRequired,
 };
-function mapStateToProps(state) {
-  return { users: state.users, admin: state.admin };
+
+function mapStateToProps({ admin }) {
+  return {
+    users: admin.users || [],
+    admin,
+  };
 }
 
 function mapDispatchToProps(dispatch) {

@@ -30,9 +30,9 @@ export function HomeComponent({
               <Button
                 variant="contained"
                 className="button--violet-big"
-                key={user.user_profile.name}
+                key={user.name}
               >
-                {user?.user_profile?.name}
+                {user?.name}
               </Button>
             </Link>
           ))
@@ -59,13 +59,9 @@ HomeComponent.propTypes = {
   users: PropTypes.arrayOf(
     PropTypes.shape(
       {
-        user_profile: PropTypes.shape(
-          {
-            challenges: PropTypes.arrayOf(PropTypes.string),
-            name: PropTypes.string,
-            image: PropTypes.string,
-          },
-        ),
+        challenges: PropTypes.arrayOf(PropTypes.string),
+        name: PropTypes.string,
+        image: PropTypes.string,
       },
     ),
   ).isRequired,
