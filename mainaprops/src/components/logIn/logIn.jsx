@@ -1,6 +1,8 @@
 import React from 'react';
 import './logIn.css';
 import Button from '@material-ui/core/Button';
+import store from '../../redux/store/configureStore';
+import { loginWithGoogle } from '../../redux/actions/actionCreators';
 
 export default function LogIn() {
   return (
@@ -13,7 +15,7 @@ export default function LogIn() {
       <Button
         variant="contained"
         className="button--violet-big"
-        href="/"
+        onClick={() => store.dispatch(loginWithGoogle())}
       >
         Accedir amb google
       </Button>

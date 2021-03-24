@@ -62,7 +62,6 @@ export function NewChallengeComponent({ dataChallenge, actions }) {
     if (button.parentElement.hasAttribute('selected')) {
       setTimesTask(timesTask - 1);
     } else {
-      console.log(timesTask);
       setTimesTask(timesTask + 1);
     }
     addAttribute(idTime);
@@ -79,7 +78,6 @@ export function NewChallengeComponent({ dataChallenge, actions }) {
   }
 
   function clickSaveChallenge() {
-    console.log(rewardSelected);
     actions.createChallenge(idUser, tasksChallenge, rewardSelected);
   }
 

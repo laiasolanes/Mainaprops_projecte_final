@@ -8,6 +8,9 @@ export function loginWithGoogle() {
   return async function dispatchUser(dispatch) {
     const provider = new firebase.auth.GoogleAuthProvider();
     provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+    const response = await firebase.auth().signInWithPopup(provider);
+    // eslint-disable-next-line no-debugger
+    debugger;
     const {
       admin:
       {
@@ -15,7 +18,7 @@ export function loginWithGoogle() {
         email,
         photoURL,
       },
-    } = await firebase.auth().signInWithPopup(provider);
+    } = response;
     axios.post(url, { name: displayName, email, image: photoURL });
     dispatch({
       type: actionTypes.LOGIN_ADMIN,
