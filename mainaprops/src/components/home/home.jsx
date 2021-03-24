@@ -38,11 +38,9 @@ export function HomeComponent({ users, actions }) {
         href="/users"
       >
         + usuaris
-
       </Button>
 
       <p>Crea un perfil per a cada usuari per poder gestionar els seus reptes.</p>
-
     </section>
   );
 }

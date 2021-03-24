@@ -22,7 +22,7 @@ describe('Given a component UserDetail', () => {
 
   describe('When UserDetailComponent is rendered', () => {
     test('Then it should display an h3 with text Hola Guerau', () => {
-      const users = [{ user_profile: { name: 'Guerau' } }];
+      const users = { user_profile: { name: 'Guerau' } };
 
       const actions = {
         userByParam: jest.fn(),
@@ -40,7 +40,7 @@ describe('Given a component UserDetail', () => {
       });
 
       const h3 = container.getElementsByTagName('h3');
-      expect(h3[0].innerHTML).toBe('Hola<br>Guerau');
+      expect(h3[0].innerHTML).toBe('Hola<br>');
     });
   });
 });

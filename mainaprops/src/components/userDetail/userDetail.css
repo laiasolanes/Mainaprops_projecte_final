@@ -9,10 +9,15 @@
 
 body {
   background: #6cc3c6;
+  max-width: 600px;
 }
 
 #root {
   background: #6CC3C6;
+}
+
+.hidden {
+  display: none;
 }
 
 .flex {
@@ -88,7 +93,7 @@ p {
 .user__detail .user__header img {
   position: absolute;
   width: 100px;
-  top: 120px;
+  top: 140px;
   left: 40px;
   z-index: 0;
 }
@@ -212,7 +217,7 @@ p {
 .reward__image {
   position: absolute;
   width: 100px;
-  top: 70px;
+  top: 30px;
   left: 20px;
   z-index: 0;
 }
@@ -249,6 +254,8 @@ p {
 .title__completed {
   position: relative;
   z-index: 10;
+  width: 70%;
+  margin: auto;
 }
 
 .task__completed {
@@ -265,5 +272,10 @@ p {
 
 .image__completed img {
   width: 70px;
+}
+
+.completed {
+  opacity: 0.8;
+  cursor: default !important;
 }
 /*# sourceMappingURL=userDetail.css.map */

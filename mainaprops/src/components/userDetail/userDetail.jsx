@@ -4,21 +4,16 @@ import { PropTypes } from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { Modal, Button } from '@material-ui/core';
 import './userDetail.css';
-import Confetti from 'react-confetti';
-import useWindowSize from '@rooks/use-window-size';
 import { updateSelectedChallenge } from '../../redux/actions/challengeActionCreators';
 import { userByParam, updateChallenge } from '../../redux/actions/actionCreators';
-import useStylesDetail from '../../constants/useStylesDetail';
 import ChallengeBody from './ChallengeBody';
+import AchievedBody from './AchievedBody';
+import CompletedBody from './CompletedBody';
 
 const pageURL = window.location.href;
 const idUser = pageURL.substr(pageURL.lastIndexOf('/') + 1);
 
 export function UserDetailComponent({ user, challengeSelected, actions }) {
-  const styles = useStylesDetail();
-
-  const { width, height } = useWindowSize();
-
   const [isChallengeModalVisible, setChallengeModalVisibility] = useState(false);
   const [modalAchieved, setModalAchieved] = useState(false);
   const [modalCompleted, setModalCompleted] = useState(false);
@@ -65,73 +60,12 @@ export function UserDetailComponent({ user, challengeSelected, actions }) {
     actions.updateChallenge(user._id, challenge);
   }
 
-  const achievedBody = (
-    <div className={styles.modalAchieved}>
-      <Confetti
-        width={width}
-        height={height}
-      />
-      <h2>
-        Repte
-        <br />
-        aconseguit!
-      </h2>
-      <img src={challengeSelected?.reward?.image} alt="Avatar" className="reward__achieved" />
-
-      <h3 className="reward__title">{challengeSelected?.reward?.name}</h3>
-      <br />
-
-      <div>
-
-        <Button
-          className={styles.button_turquoise}
-          onClick={() => openCloseModalAchieved()}
-        >
-          Tornar als reptes
-        </Button>
-      </div>
-
-    </div>
-  );
-
-  const completedBody = (
-    <div className={styles.modalChallenge}>
-      <img src={user?.user_profile?.image} alt="Avatar" className="reward__image" />
-      <h3 className="title__completed">
-        Tens
-        {' '}
-        {challengesCompleted?.length}
-        {' '}
-        reptes completats
-        <br />
-        {user?.user_profile?.name}
-        !
-      </h3>
-
-      {
-         challengesCompleted?.map((challenge) => (
-           <div className=" flex task__completed" key={challenge._id}>
-             <div className="image__completed">
-               <img src={challenge?.reward?.image} alt="Tasca completa" />
-             </div>
-
-             <div>
-               <h4 key={challenge?.reward?.name}>
-                 {challenge?.reward?.name}
-               </h4>
-               <p>{challenge?.end_date}</p>
-             </div>
-           </div>
-         ))
-      }
-
-    </div>
-  );
-
   return (
     <section className="user__detail">
       <article className="user__header">
+
         <img src={user?.user_profile?.image} alt="Avatar" />
+
         <h3>
           Hola
           <br />
@@ -160,7 +94,6 @@ export function UserDetailComponent({ user, challengeSelected, actions }) {
               <br />
               reptes actius
             </div>
-
           </a>
 
         </div>
@@ -173,6 +106,7 @@ export function UserDetailComponent({ user, challengeSelected, actions }) {
           Crear repte
         </Button>
       </article>
+
       <div id="startChallenges" />
       {
           challengesActives?.map((challenge) => (
@@ -204,7 +138,6 @@ export function UserDetailComponent({ user, challengeSelected, actions }) {
                 Veure repte
               </Button>
             </article>
-
           ))
       }
 
@@ -222,14 +155,18 @@ export function UserDetailComponent({ user, challengeSelected, actions }) {
         open={modalAchieved}
         onClose={openCloseModalAchieved}
       >
-        {achievedBody}
+        <AchievedBody
+          close={openCloseModalAchieved}
+        />
       </Modal>
 
       <Modal
         open={modalCompleted}
         onClose={openCloseModalCompleted}
       >
-        {completedBody}
+        <CompletedBody
+          close={openCloseModalCompleted}
+        />
       </Modal>
     </section>
   );

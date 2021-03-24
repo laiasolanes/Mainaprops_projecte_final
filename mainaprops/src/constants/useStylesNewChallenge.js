@@ -4,6 +4,7 @@ const useStylesNewChallenge = makeStyles((theme) => ({
   modalChallenge: {
     position: 'absolute',
     width: '98%',
+    maxWidth: '588px',
     backgroundColor: '#3D2563',
     border: '3px solid #ffffff',
     color: '#ffffff',
@@ -51,7 +52,7 @@ const useStylesNewChallenge = makeStyles((theme) => ({
 
   rowRewards: {
     display: 'flex',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     flexWrap: 'wrap',
   },
 
@@ -129,13 +130,6 @@ const useStylesNewChallenge = makeStyles((theme) => ({
     textTransform: 'none',
     opacity: 1,
     border: '1px solid #ffffff',
-  },
-
-  check: {
-    color: '#58a2a5',
-    '&$checked': {
-      color: '#58a2a5',
-    },
   },
 
 }));
