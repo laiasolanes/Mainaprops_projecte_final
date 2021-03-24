@@ -24,8 +24,8 @@ async function loginAdmin(req, res) {
 }
 
 async function getAdmins(req, res) {
-  const allAdmins = await Admin.find({})
-    .populate({ path: 'users' }).execPopulate();
+  const allAdmins = await Admin.find({});
+  // .populate({ path: 'users' }).execPopulate();
 
   res.json(allAdmins);
 }
