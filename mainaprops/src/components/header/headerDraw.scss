@@ -1,0 +1,43 @@
+@import '../../styles/colors';
+
+
+.header {
+    background: $color_turquoise;
+    position: fixed;
+    width: 100%;
+    max-width: 600px;
+    padding: 26px 30px 10px 30px;
+    box-shadow: 0px 4px 6px -2px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+
+    .nav{
+        justify-content: space-between;
+        align-items: flex-end;
+        
+    }
+    .logo__nav {
+        width: 70px
+    }
+    .ul__nav {
+        list-style: none;
+        align-items: flex-end;
+        
+        a {
+            margin: 0 10px;
+            
+            li {
+                img {
+                    height: 50px;
+                    opacity: 0.8;
+                    transition: 300ms;
+                }
+                img:hover {
+                    transform: scale(1.3);
+                    opacity: 1;
+                }
+            }
+            
+        }
+
+    }
+}

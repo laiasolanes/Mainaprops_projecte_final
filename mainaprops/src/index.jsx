@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import Header from './components/header/header';
+import Header from './components/header/headerDraws';
 import UsersList from './components/usersList/usersList';
 import Home from './components/home/home';
 import UserDetail from './components/userDetail/userDetail';
