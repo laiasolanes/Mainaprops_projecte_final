@@ -1,4 +1,12 @@
 # Mainaprops, propòsits per la mainada
+>
+Projecte final del Bootcamp a Skylab Coders Academy:
+*FrontEnd, React JS amb arquitectura Redux
+*BackEnd, Node, Express i Mongoose
+*UX/UI disseny amb Figma
+
+_Març 2021_
+
 
 _Mainaprops és una aplicació on pares i fills, junts, creen un repte i escullen una recompensa, que rebrà el nen si aconsegueix realitzar el repte que s'hagi proposat_
 
