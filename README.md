@@ -3,8 +3,10 @@
 _Mainaprops és una aplicació on pares i fills, junts, creen un repte i escullen una recompensa, que rebrà el nen si aconsegueix realitzar el repte que s'hagi proposat_
 
 [Vídeo de presentació](https://drive.google.com/file/d/1ZLKQqNPrGYm8mVTBA8MuV0kgKeLaG8XF/view?usp=sharing)
+
 [Disseny previ amb Figma](https://www.figma.com/file/0Elpv3dZRFVxCGKXNZv2MR/Mobile-Reptes-nens?node-id=0%3A1)
-![Screens aplicació](https://drive.google.com/file/d/1D-SvDpEn9S4Xugse-00BgErxhYrKPhQz/view?usp=sharing)
+
+![Screens aplicació](https://firebasestorage.googleapis.com/v0/b/mainaprops.appspot.com/o/Screens_mainaprops.png?alt=media&token=7cc244f3-6653-45b4-a61d-53ddff97ef30)
 
 
 ### Pre-requirements 📋
