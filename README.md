@@ -6,7 +6,7 @@ _Mainaprops és una aplicació on pares i fills, junts, creen un repte i esculle
 
 [Disseny previ amb Figma](https://www.figma.com/file/0Elpv3dZRFVxCGKXNZv2MR/Mobile-Reptes-nens?node-id=0%3A1)
 
-![Screens aplicació](https://firebasestorage.googleapis.com/v0/b/mainaprops.appspot.com/o/Screens_mainaprops.png?alt=media&token=7cc244f3-6653-45b4-a61d-53ddff97ef30)
+![Screens aplicació](https://firebasestorage.googleapis.com/v0/b/mainaprops.appspot.com/o/screens_mainaprops.png?alt=media&token=e3265bc5-e718-4548-9d2e-5e4f350c90d3)
 
 
 ### Pre-requirements 📋
